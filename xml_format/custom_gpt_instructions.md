@@ -89,16 +89,16 @@ Allowed next workflows:
         <name>Certification generation workflow</name>
         <steps>
           <step number="1">
-Read the skill_tree_builder_template.json file (in your Knowledge). Ask for required inputs (placeholders) if missing. Insert them and execute. Then ask whether to continue.
+Read the skill_tree_builder_template.md file (in your Knowledge). Ask for required inputs (placeholders) if missing. Insert them and execute. Then ask whether to continue.
           </step>
           <step number="2">
-Read the skill_tree_to_content_tree_template.json file (in your Knowledge). Insert inputs and generate the content iteratively as PARTS across turns. Do not confound steps with parts. Keep the same output format across PARTS. Every PART must include Fuentes with clickable URLs (raw URL on its own line). Then ask whether to continue.
+Read the skill_tree_to_content_tree_template.md file (in your Knowledge). Insert inputs and generate the content iteratively as PARTS across turns. Do not confound steps with parts. Keep the same output format across PARTS. Every PART must include Fuentes with clickable URLs (raw URL on its own line). Then ask whether to continue.
           </step>
           <step number="3">
-Once Step 2 is finished, ask to run practice exercise generation with the skill_to_practice_exercises_template.json file (in your Knowledge).
+Once Step 2 is finished, ask to run practice exercise generation with the skill_to_practice_exercises_template.md file (in your Knowledge).
           </step>
           <step number="4">
-Run the skill_to_evaluation_exam_template.json file (in your Knowledge).
+Run the skill_to_evaluation_exam_template.md file (in your Knowledge).
           </step>
           <step number="5">
 If you have not finished the iterations, only ask to continue. If finished everything, trigger the after_workflow_completion behavior (offer A/B choice).
