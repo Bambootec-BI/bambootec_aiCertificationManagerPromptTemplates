@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+  <meta>
+    <name>skill_tree_builder</name>
+    <version>v1.0.0</version>
+    <notes>
+      <note>Fill ONLY inputs.skill, inputs.level, inputs.context.</note>
+      <note>Ordering is learning progression; Impact (%) is informational and must sum to 100.</note>
+      <note>This template is skill-agnostic (no domain-specific references).</note>
+    </notes>
+  </meta>
+
+  <inputs>
+    <skill>[SKILL_NAME]</skill>
+    <level>[ABILITY_LEVEL_REQUIRED]</level>
+    <context>[CONTEXT: where/how the skill is used in real work]</context>
+  </inputs>
+
+  <prompt>
+    <language_policy>
+      Translate user input into English. Think in English. Only translate to Spanish for the output.
+
+      Instruction language: English
+      Output language: Spanish
+      Exceptions: proper names, commonly used names, code blocks
+    </language_policy>
+
+    <task>
+      Build a learning skill tree for {inputs.skill} at {inputs.level} for {inputs.context}.
+
+      Audience: first-time learners entering this kind of work
+      Style: textbook index (short section titles + short skill titles)
+    </task>
+
+    <constraints>
+      <hard_rules>
+        <rule>Order MUST follow a learning progression (what to learn first → later)</rule>
+        <rule>Each concrete skill MUST include an Impact (%) integer, but Impact MUST NOT affect ordering</rule>
+        <rule>The sum of Impact (%) across ALL concrete skills MUST equal exactly 100</rule>
+        <rule>Exactly two levels: Level 1 = Section titles (capability areas), Level 2 = Skill titles</rule>
+        <rule>Each section MUST contain at least two skills</rule>
+        <rule>Skill titles must be short, beginner-friendly, and action-oriented</rule>
+        <rule>Each skill must include representative 'how to do it' examples in parentheses (examples only, not extra skills)</rule>
+        <rule>Use placeholders like [INPUT_A], [RISK_X], [QUALITY_CHECK], [SLA], [ENV]</rule>
+        <rule>Keep skill count within a practical range for the requested level (e.g., 18–35), unless the context clearly demands fewer</rule>
+      </hard_rules>
+    </constraints>
+
+    <baseline_sustainability>
+      Baseline sustainability (minimum) means the learner can:
+      - perform the core workflow end-to-end in {inputs.context}
+      - avoid the most common correctness mistakes
+      - apply basic safety/governance rules relevant to {inputs.context}
+      - detect issues early using basic validation checks
+      - troubleshoot common failures and recover
+      - produce work that is understandable and maintainable by someone else
+    </baseline_sustainability>
+
+    <level_scaling>
+      Principle: Always cover the baseline sustainability definition. Then expand depth and scope according to inputs.level.
+
+      - If inputs.level implies beginner/entry-level: focus on the essential/common workflow; exclude expert-only optimizations and rare edge cases
+      - If inputs.level implies intermediate: include common robustness and performance patterns; include a small set of context-relevant edge cases
+      - If inputs.level implies expert: include expert-level optimizations, deeper debugging/diagnostics, and context-relevant edge cases and tradeoffs
+      - If inputs.level is ambiguous: default to 'entry-level production' scope unless the level explicitly requests advanced/expert coverage
+    </level_scaling>
+
+    <coverage_requirements>
+      <must_include>
+        <item>Workflow basics (where work happens, how changes apply, how outputs are produced)</item>
+        <item>Inputs and access (setup, permissions/credentials if applicable)</item>
+        <item>Core operations (the main actions people do in this skill)</item>
+        <item>Combining or integrating parts (if applicable)</item>
+        <item>Quality checks (common errors, validation, sanity checks)</item>
+        <item>Safety/governance (privacy, security, compliance, safe defaults)</item>
+        <item>Performance/reliability basics (avoid obvious slow/brittle patterns)</item>
+        <item>Handoff readiness (naming, structure, minimal documentation)</item>
+        <item>Production use (run/deploy behavior in {inputs.context}, if applicable)</item>
+      </must_include>
+
+      <exclude>
+        <item>Expert-only optimizations when inputs.level is entry-level</item>
+        <item>Deep theory not required for {inputs.level}</item>
+        <item>Rare edge cases unless inputs.level is expert or the context makes them common</item>
+      </exclude>
+    </coverage_requirements>
+
+    <output_format>
+      <output_1>
+        <type>Markdown table</type>
+        <title>Skill Index (Textbook Style)</title>
+        <columns>
+          <column>Learning Order</column>
+          <column>Section</column>
+          <column>Skill Title</column>
+          <column>Impact (%)</column>
+          <column>Why this matters (short, simple)</column>
+        </columns>
+      </output_1>
+
+      <output_2>
+        <type>Hierarchical skill tree</type>
+        <format>Nested markdown list</format>
+        <requirements>
+          <requirement>Two levels only</requirement>
+          <requirement>Ordered by learning progression</requirement>
+          <requirement>Looks like a textbook index</requirement>
+          <requirement>Impact shown per skill</requirement>
+          <requirement>Matches the table</requirement>
+        </requirements>
+      </output_2>
+    </output_format>
+  </prompt>
+</template>
