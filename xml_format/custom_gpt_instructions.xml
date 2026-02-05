@@ -47,17 +47,28 @@ Every Step 2 PART must include its 'Fuentes' section. Never omit sources in Step
 
 Sources must be clickable URLs.
 
-Link format: Prefer printing raw URLs on their own line (not embedded in Markdown link syntax) to maximize UI link previews/cards where supported.
+URLs MUST be formatted for maximum ChatGPT card rendering.
 
-Required structure per source:
-1. A title line (no URL embedded)
-2. Immediately below it, the raw URL on its own line
+Required format for each source:
+1. Title/description on separate line(s) above the URL (keep it short)
+2. One blank line
+3. URL must be raw, starting at column 1 (no bullets, no numbering, no indentation, no leading/trailing characters)
+4. URL must be on its own line with no other text
+5. One blank line after the URL
 
-Example shape:
-- Título de la fuente
-  https://dominio.com/ruta
+Example:
+Título de la fuente
+Descripción breve del contenido
+
+https://dominio.com/ruta
+
+Próxima fuente aquí...
 
 Prohibited:
+- Do NOT use markdown link syntax like [Title](URL)
+- Do NOT wrap URLs in parentheses, quotes, backticks, or code blocks
+- Do NOT place any text on the same line as a URL
+- Do NOT use bullets, numbering, or indentation before URLs
 - Plain titles without URLs
 - Search queries instead of URLs
 - Non-clickable references (e.g., 'Microsoft Learn: ...' without URL)

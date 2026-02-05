@@ -55,11 +55,28 @@ Generate an iterative practice exercise hierarchy for {inputs.skill} based solel
       </agnosticity_guards>
 
       <dataset_constraints>
-URLs must be raw URLs on their own line (not markdown link syntax). ChatGPT renders raw URLs with clickable previews.
+URLs MUST be formatted for maximum ChatGPT card rendering.
 
-Negative clauses:
+Required format for each dataset URL:
+1. Title/description on separate line(s) above the URL (keep it short)
+2. One blank line
+3. URL must be raw, starting at column 1 (no bullets, no numbering, no indentation, no leading/trailing characters)
+4. URL must be on its own line with no other text
+5. One blank line after the URL
+
+Example:
+Kaggle Wine Quality Dataset
+UCI Machine Learning Repository
+
+https://www.kaggle.com/datasets/example
+
+Next item here...
+
+Prohibited:
 - Do NOT use markdown link syntax like [Title](URL)
-- Do NOT output plain text titles without URLs
+- Do NOT wrap URLs in parentheses, quotes, backticks, or code blocks
+- Do NOT place any text on the same line as a URL
+- Do NOT use bullets, numbering, or indentation before URLs
 - Do NOT output search queries or 'look up...' instructions
 - Do NOT output 'Search query:' or query placeholders
 

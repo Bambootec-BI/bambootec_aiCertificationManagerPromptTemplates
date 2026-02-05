@@ -66,11 +66,28 @@ mixed: MCQ 20-35%, Short answer 10-20%, Code completion 10-20%, Use cases 15-30%
       </scoring>
 
       <dataset_constraints>
-URLs must be raw URLs on their own line (not markdown link syntax).
+URLs MUST be formatted for maximum ChatGPT card rendering.
 
-Negative clauses:
+Required format for each dataset URL:
+1. Title/description on separate line(s) above the URL (keep it short)
+2. One blank line
+3. URL must be raw, starting at column 1 (no bullets, no numbering, no indentation, no leading/trailing characters)
+4. URL must be on its own line with no other text
+5. One blank line after the URL
+
+Example:
+Titanic Dataset for ML Practice
+Kaggle competition dataset
+
+https://www.kaggle.com/c/titanic/data
+
+Next item here...
+
+Prohibited:
 - Do NOT use markdown link syntax like [Title](URL)
-- Do NOT output plain text titles without URLs
+- Do NOT wrap URLs in parentheses, quotes, backticks, or code blocks
+- Do NOT place any text on the same line as a URL
+- Do NOT use bullets, numbering, or indentation before URLs
 - Do NOT output search queries
 - Do NOT invent URLs
 
