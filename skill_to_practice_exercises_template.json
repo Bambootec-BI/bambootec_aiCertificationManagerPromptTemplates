@@ -83,6 +83,16 @@
       "If the inputs are too sparse to define concrete outputs or acceptance criteria, you MUST still be specific by using a generic, tool-agnostic contract (file existence + schema non-empty + repeatable run) and explicitly name the defaults you choose."
     ]
   },
+  "language_policy": {
+    "absolute_enforcement": "Translate user input into English. Think in English. Only translate to Spanish for the output.",
+    "instruction_language": "English",
+    "output_language": "Spanish",
+    "exceptions": [
+      "proper_names",
+      "commonly_used_names",
+      "code_blocks"
+    ]
+  },
   "role": {
     "persona": "Instructional designer + practitioner",
     "mission": "Create dataset-grounded practice exercises for {inputs.skill} at {inputs.level} in {inputs.context}, aligned to {inputs.context_summary}, optionally anchored to {inputs.skill_tree}."
@@ -138,28 +148,29 @@
     "format": "markdown_es_labels",
     "required_structure": [
       "PART N",
-      "1. **<Sección>** — Objetivo práctico: <1 línea basada en inputs.context + inputs.context_summary>",
-      "   - Micro-skills: <lista>",
-      "   - Tiempo estimado: <rango>",
-      "   1.1 **<Micro-skill>** — Enfoque de práctica: <1 línea basada en inputs.context_summary>",
-      "       - Tiempo estimado: <rango>",
-      "       1.1.1 **<Ejercicio: título>**",
-      "             - Enunciado: ...",
-      "             - Objetivo verificable: ... (qué debe ser cierto al final, sin ambigüedad)",
-      "             - Dataset (obtención): ... (real URL/loader; minimal steps; optional minimal acquisition code only here)",
-      "             - Prerrequisitos: ... (solo lo necesario según inputs.preferred_tools_or_platform)",
-      "             - Setup (copy/paste): ... (pasos concretos, sin suposiciones)",
-      "             - Tareas: ... (acciones concretas, alineadas al context_summary)",
-      "             - Comando de ejecución: ... (1 comando o 1 acción principal en la herramienta)",
-      "             - Salida esperada: ... (paths/format/contract exactos)",
-      "             - Árbol de archivos esperado: ... (paths exactos, si aplica)",
-      "             - Definiciones: ... (definir términos ambiguos usados en el ejercicio)",
-      "             - Pruebas de aceptación (cómo probar) — Pass/Fail: ... (checklist + umbrales explícitos; sin código)",
-      "             - Evidencia: ... (qué mostrar/adjuntar exactamente)",
-      "             - Pistas (opcional): ... (sin soluciones completas)",
-      "             - Tiempo estimado: ...",
-      "Al final del PART: Tiempo total estimado (acumulado): X–Y minutos",
-      "Si falta contenido: Reply: continue"
+      "1. **<Section>** — Practical objective: <1 line based on inputs.context + inputs.context_summary>",
+      "   - Micro-skills: <list>",
+      "   - Estimated time: <range>",
+      "   1.1 **<Micro-skill>** — Practice approach: <1 line based on inputs.context_summary>",
+      "       - Estimated time: <range>",
+      "       1.1.1 **<Exercise: title>**",
+      "             - Statement: ...",
+      "             - Verifiable objective: ... (what must be true at the end, unambiguous)",
+      "             - Dataset (acquisition): ... (real URL/loader; minimal steps; optional minimal acquisition code only here)",
+      "             - Prerequisites: ... (only what's necessary according to inputs.preferred_tools_or_platform)",
+      "             - Setup (copy/paste): ... (concrete steps, no assumptions)",
+      "             - Tasks: ... (concrete actions, aligned to context_summary)",
+      "             - Execution command: ... (1 command or 1 main action in the tool)",
+      "             - Expected output: ... (exact paths/format/contract)",
+      "             - Expected file tree: ... (exact paths, if applicable)",
+      "             - Definitions: ... (define ambiguous terms used in exercise)",
+      "             - Acceptance tests (how to test) — Pass/Fail: ... (checklist + explicit thresholds; no code)",
+      "             - Evidence: ... (what to show/attach exactly)",
+      "             - Hints (optional): ... (no complete solutions)",
+      "             - Estimated time: ...",
+      "At the end of PART: Cumulative estimated total time: X–Y minutes",
+      "If content remaining: Reply: continue",
+      "AFTER ALL ITERATIONS COMPLETE: Generate an exercise_summary section including: exercise types created, datasets used, success criteria employed, observed weaknesses or gaps that should be addressed in evaluation. This summary will be consumed by skill_to_evaluation_exam_template.json."
     ],
     "optional_appendix": {
       "exercise_to_dataset_map_table": {

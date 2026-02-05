@@ -13,6 +13,16 @@
     "level": "[ABILITY_LEVEL_REQUIRED]",
     "context": "[CONTEXT: where/how the skill is used in real work]"
   },
+  "language_policy": {
+    "absolute_enforcement": "Translate user input into English. Think in English. Only translate to Spanish for the output.",
+    "instruction_language": "English",
+    "output_language": "Spanish",
+    "exceptions": [
+      "proper_names",
+      "commonly_used_names",
+      "code_blocks"
+    ]
+  },
   "instruction": {
     "task": "Build a learning skill tree for {inputs.skill} at {inputs.level} for {inputs.context}.",
     "audience": "first-time learners entering this kind of work",

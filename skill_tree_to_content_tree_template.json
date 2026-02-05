@@ -18,6 +18,16 @@
     "min_english_source_ratio": 0.8,
     "disallow_generic_sources": true
   },
+  "language_policy": {
+    "absolute_enforcement": "Translate user input into English. Think in English. Only translate to Spanish for the output.",
+    "instruction_language": "English",
+    "output_language": "Spanish",
+    "exceptions": [
+      "proper_names",
+      "commonly_used_names",
+      "code_blocks"
+    ]
+  },
   "role": {
     "persona": "Instructional designer and domain practitioner",
     "mission": "Turn the provided skill tree into a learner-friendly content tree with curated sources so a learner can reach {level} in {context} for {skill}."
@@ -96,7 +106,7 @@
       "If you cannot provide an alignment note, replace the source with a better-aligned one."
     ]
   },
-  "instruction": "Using the provided skill tree, produce a simplified actionable content tree in organic Markdown while preserving hierarchy (Section -> Micro-skills). Output in PARTS per the parts rules. Keep the prompt/internals in English, but ensure all output labels are in Spanish and match the required structure. Every node must include: Resultados de aprendizaje esperados, Cubre (detalle), Fuentes (detalle con URLs reales y altamente alineadas al micro-skill; preferentemente en inglés), Tiempo estimado.",
+  "instruction": "Using the provided skill tree, produce a simplified actionable content tree in organic Markdown while preserving hierarchy (Section -> Micro-skills). Output in PARTS per the parts rules. Every node must include: expected learning outcomes, coverage details, sources with real URLs highly aligned to the micro-skill (preferably in English), and time estimates. All output labels and user-facing text must be in Spanish.",
   "content_requirements": {
     "for_each_section": [
       "Write a 1-line section goal grounded in {context}.",
@@ -133,7 +143,8 @@
         "       - Fuentes (detalle): <2–6 ítems con link + nota (Pago/Idioma si aplica) + 'Alineación:' (heading/timecode)>",
         "       - Tiempo estimado: <rango entero en minutos>",
         "Al final de cada PART: Tiempo total estimado (acumulado): <rango entero en minutos>",
-        "Al completar todo: Tiempo total estimado (final): <rango entero en minutos>"
+        "Al completar todo: Tiempo total estimado (final): <rango entero en minutos>",
+        "AFTER ALL ITERATIONS COMPLETE: Generate a content_summary section including: concepts covered, pitfalls mentioned in sources, constraints from context, expected artifacts/deliverables, terminology introduced, and scope boundaries. This summary will be consumed by skill_to_practice_exercises_template.json."
       ]
     },
     "optional": {
