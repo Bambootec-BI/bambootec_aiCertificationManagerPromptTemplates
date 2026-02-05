@@ -29,11 +29,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Running `ajv validate` on any template catches structural errors before upload
   3. format_standards.json exists with single definitions for indentation, list style, language policy
   4. Version markers in schemas detect when handoff formats between templates drift
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md — Create JSON Schemas for all 5 templates with shared format standards
+- [ ] 01-02-PLAN.md — Create validation scripts for pre-commit workflow and version checking
+- [ ] 01-03-PLAN.md — Update templates with version markers and embed format_standards in router
 
 ### Phase 2: Template Encapsulation
 **Goal**: Each template is a self-contained module with explicit input/output contracts; summary generation moves from router into templates
@@ -105,7 +106,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Contract Infrastructure | 0/2 | Not started | - |
+| 1. Contract Infrastructure | 0/3 | Planned | - |
 | 2. Template Encapsulation | 0/3 | Not started | - |
 | 3. Anti-Drift Rules | 0/2 | Not started | - |
 | 4. Observation Infrastructure | 0/2 | Not started | - |
