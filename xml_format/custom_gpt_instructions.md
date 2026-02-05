@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <certifications_manager_router>
   <instructions>
     <language_policy>

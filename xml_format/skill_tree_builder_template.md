@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <template>
   <meta>
     <name>skill_tree_builder</name>

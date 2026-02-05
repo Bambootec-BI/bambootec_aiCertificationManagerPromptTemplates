@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <template>
   <meta>
     <version>v1.0.0</version>
