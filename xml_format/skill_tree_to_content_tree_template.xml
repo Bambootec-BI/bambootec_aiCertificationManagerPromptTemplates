@@ -56,12 +56,17 @@ Using the provided skill tree, produce a simplified actionable content tree in o
 NON-NEGOTIABLE: Every source MUST include a raw, working URL.
 
 URL requirements:
-- Output raw URLs (plain text: https://example.com)
+- Just output the plain URL: https://example.com
 - Separate URLs from other text with blank lines
 - Do NOT use markdown [text](url) syntax
 - Do NOT wrap URLs in parentheses, quotes, or code blocks
 - Do NOT invent URLs - only real, accessible resources
 - Sources must be immediately usable for learning (YouTube videos/playlists, targeted documentation pages, practical articles, labs, notebooks)
+
+Prohibited patterns:
+- "Nota:", "Query:", or language tags before sources
+- Code blocks (mathematica, python, etc.) around URLs or descriptions
+- Parenthetical explanations on the same line as URL
       </sources_non_negotiable>
 
       <source_quality_and_cost>

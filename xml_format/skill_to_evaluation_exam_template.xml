@@ -69,11 +69,16 @@ mixed: MCQ 20-35%, Short answer 10-20%, Code completion 10-20%, Use cases 15-30%
 NON-NEGOTIABLE: Every dataset MUST include a raw, working URL.
 
 URL requirements:
-- Output raw URLs (plain text: https://example.com)
+- Just output the plain URL: https://example.com
 - Separate URLs from other text with blank lines
 - Do NOT use markdown [text](url) syntax
 - Do NOT wrap URLs in parentheses, quotes, or code blocks
 - Do NOT invent URLs - only real, accessible resources
+
+Prohibited patterns:
+- "Nota:", "Query:", or language tags before sources
+- Code blocks (mathematica, python, etc.) around URLs or descriptions
+- Parenthetical explanations on the same line as URL
 
 Dataset requirements: Free, legal, no login walls, max 200MB
 Acquisition methods: framework loader, registry loader, direct URL, public repo file, API export
