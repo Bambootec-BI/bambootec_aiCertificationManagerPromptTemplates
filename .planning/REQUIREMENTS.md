@@ -146,21 +146,29 @@
 
 ## Traceability
 
-### Template Foundation → Roadmap Phases
-- TMPL-01, TMPL-02, TMPL-03, TMPL-04, TMPL-05 → Phase: Contract Infrastructure & Template Encapsulation
-
-### Format & Consistency → Roadmap Phases
-- FMT-01, FMT-02, FMT-03, FMT-04 → Phase: Anti-Drift Rules & Link Format Standardization
-
-### Version Control → Roadmap Phases
-- VER-01, VER-02, VER-03, VER-04 → Phase: Behavioral Versioning Protocol
-
-### Observation → Roadmap Phases
-- OBS-01, OBS-02, OBS-03, OBS-04 → Phase: Observation Infrastructure
-
-### Schema Validation → Roadmap Phases
-- SCH-01, SCH-02, SCH-03 → Phase: Contract Infrastructure
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| TMPL-01 | Phase 2 | Pending |
+| TMPL-02 | Phase 2 | Pending |
+| TMPL-03 | Phase 1 | Pending |
+| TMPL-04 | Phase 2 | Pending |
+| TMPL-05 | Phase 2 | Pending |
+| FMT-01 | Phase 3 | Pending |
+| FMT-02 | Phase 3 | Pending |
+| FMT-03 | Phase 3 | Pending |
+| FMT-04 | Phase 3 | Pending |
+| VER-01 | Phase 5 | Pending |
+| VER-02 | Phase 5 | Pending |
+| VER-03 | Phase 5 | Pending |
+| VER-04 | Phase 5 | Pending |
+| OBS-01 | Phase 4 | Pending |
+| OBS-02 | Phase 4 | Pending |
+| OBS-03 | Phase 4 | Pending |
+| OBS-04 | Phase 5 | Pending |
+| SCH-01 | Phase 1 | Pending |
+| SCH-02 | Phase 1 | Pending |
+| SCH-03 | Phase 1 | Pending |
 
 ---
 *Requirements for: AI Certifications Manager Template Improvement System*
-*Last updated: 2026-02-05*
+*Last updated: 2025-02-05*
