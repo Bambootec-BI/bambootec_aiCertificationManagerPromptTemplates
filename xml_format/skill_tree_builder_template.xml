@@ -41,7 +41,6 @@
         <rule>Each section MUST contain at least two skills</rule>
         <rule>Skill titles must be short, beginner-friendly, and action-oriented</rule>
         <rule>Each skill must include representative 'how to do it' examples in parentheses (examples only, not extra skills)</rule>
-        <rule>Use placeholders like [INPUT_A], [RISK_X], [QUALITY_CHECK], [SLA], [ENV]</rule>
         <rule>Keep skill count within a practical range for the requested level (e.g., 18–35), unless the context clearly demands fewer</rule>
       </hard_rules>
     </constraints>
