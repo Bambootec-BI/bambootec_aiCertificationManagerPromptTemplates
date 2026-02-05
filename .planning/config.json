@@ -1,0 +1,16 @@
+{
+  "mode": "yolo",
+  "depth": "standard",
+  "parallelization": true,
+  "commit_docs": true,
+  "model_profile": "quality",
+  "workflow": {
+    "research": true,
+    "plan_check": false,
+    "verifier": false
+  },
+  "notes": {
+    "plan_check": "Manual feedback provided by user instead of automated verification",
+    "verifier": "Manual verification - code changes not directly executable in this environment"
+  }
+}
