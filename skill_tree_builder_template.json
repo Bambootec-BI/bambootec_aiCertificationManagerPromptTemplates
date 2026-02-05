@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "name": "skill_tree_builder",
+    "version": "1.2",
+    "notes": [
+      "Fill ONLY inputs.skill, inputs.level, inputs.context.",
+      "Ordering is learning progression; Impact (%) is informational and must sum to 100.",
+      "This template is skill-agnostic (no domain-specific references)."
+    ]
+  },
+  "inputs": {
+    "skill": "[SKILL_NAME]",
+    "level": "[ABILITY_LEVEL_REQUIRED]",
+    "context": "[CONTEXT: where/how the skill is used in real work]"
+  },
+  "instruction": {
+    "task": "Build a learning skill tree for {inputs.skill} at {inputs.level} for {inputs.context}.",
+    "audience": "first-time learners entering this kind of work",
+    "style": "textbook index (short section titles + short skill titles)",
+    "hard_rules": [
+      "Order MUST follow a learning progression (what to learn first → later).",
+      "Each concrete skill MUST include an Impact (%) integer, but Impact MUST NOT affect ordering.",
+      "The sum of Impact (%) across ALL concrete skills MUST equal exactly 100.",
+      "Exactly two levels: Level 1 = Section titles (capability areas), Level 2 = Skill titles.",
+      "Each section MUST contain at least two skills.",
+      "Skill titles must be short, beginner-friendly, and action-oriented.",
+      "Each skill must include representative 'how to do it' examples in parentheses (examples only, not extra skills).",
+      "Use placeholders like [INPUT_A], [RISK_X], [QUALITY_CHECK], [SLA], [ENV].",
+      "Keep skill count within a practical range for the requested level (e.g., 18–35), unless the context clearly demands fewer."
+    ]
+  },
+  "baseline_sustainability_definition": {
+    "meaning": "Baseline sustainability (minimum) means the learner can:",
+    "criteria": [
+      "perform the core workflow end-to-end in {inputs.context}",
+      "avoid the most common correctness mistakes",
+      "apply basic safety/governance rules relevant to {inputs.context}",
+      "detect issues early using basic validation checks",
+      "troubleshoot common failures and recover",
+      "produce work that is understandable and maintainable by someone else"
+    ]
+  },
+  "level_scaling": {
+    "principle": "Always cover the baseline sustainability definition. Then expand depth and scope according to inputs.level.",
+    "rules": [
+      "If inputs.level implies beginner/entry-level: focus on the essential/common workflow; exclude expert-only optimizations and rare edge cases.",
+      "If inputs.level implies intermediate: include common robustness and performance patterns; include a small set of context-relevant edge cases.",
+      "If inputs.level implies expert: include expert-level optimizations, deeper debugging/diagnostics, and context-relevant edge cases and tradeoffs.",
+      "If inputs.level is ambiguous: default to 'entry-level production' scope unless the level explicitly requests advanced/expert coverage."
+    ]
+  },
+  "coverage_constraints": {
+    "must_include_capabilities": [
+      "Workflow basics (where work happens, how changes apply, how outputs are produced)",
+      "Inputs and access (setup, permissions/credentials if applicable)",
+      "Core operations (the main actions people do in this skill)",
+      "Combining or integrating parts (if applicable)",
+      "Quality checks (common errors, validation, sanity checks)",
+      "Safety/governance (privacy, security, compliance, safe defaults)",
+      "Performance/reliability basics (avoid obvious slow/brittle patterns)",
+      "Handoff readiness (naming, structure, minimal documentation)",
+      "Production use (run/deploy behavior in {inputs.context}, if applicable)"
+    ],
+    "exclude_defaults": [
+      "Expert-only optimizations when inputs.level is entry-level",
+      "Deep theory not required for {inputs.level}",
+      "Rare edge cases unless inputs.level is expert or the context makes them common"
+    ]
+  },
+  "output": {
+    "output_1": {
+      "type": "markdown_table",
+      "title": "Skill Index (Textbook Style)",
+      "columns": [
+        "Learning Order",
+        "Section",
+        "Skill Title",
+        "Impact (%)",
+        "Why this matters (short, simple)"
+      ]
+    },
+    "output_2": {
+      "type": "hierarchical_skill_tree",
+      "format": "nested markdown list",
+      "requirements": [
+        "Two levels only",
+        "Ordered by learning progression",
+        "Looks like a textbook index",
+        "Impact shown per skill",
+        "Matches the table"
+      ]
+    }
+  }
+}

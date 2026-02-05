@@ -1,0 +1,343 @@
+{
+  "template_version": "1.4-evaluation-real-datasets-only-fully-agnostic+code_or_usecases+submission_manifest+en_instructions_es_output",
+  "name": "skill_to_evaluation_exam.real_datasets_only.fully_agnostic.eslabels.parts",
+  "description": "Generates a certification-style exam + evaluator guide for ANY skill/level/context. All generation instructions are in ENGLISH. ALL user-visible output must be in SPANISH. Technical skills include code completions; non-technical include use cases. Hands-on tasks use real datasets only. Complex deliverables include a tool-agnostic submission manifest specifying exactly which files the candidate must upload.",
+  "parameters_required_minimal": [
+    "skill",
+    "content_summary",
+    "exercise_summary",
+    "level",
+    "context"
+  ],
+  "inputs": {
+    "skill": "[SKILL_NAME]",
+    "level": "[LEVEL_TARGET]",
+    "context": "[WHO/WHERE/WHY + constraints + target outcomes]",
+    "content_summary": "[CONCEPTS + pitfalls + constraints + expected artifacts + scope boundaries]",
+    "exercise_summary": "[PRACTICE COVERAGE: exercise types + datasets used + success criteria + observed weaknesses]",
+    "skill_tree": {
+      "provided": false,
+      "format": "hierarchical_text_or_json",
+      "value": "[OPTIONAL: SKILL_TREE_FROM_PREVIOUS_STEP]"
+    },
+    "preferred_implementation_language": "[Python|SQL|JavaScript|R|No-code|Mixed|Other]",
+    "preferred_tools_or_platform": "[TOOLS/PLATFORMS USED IN THIS CONTEXT]",
+    "exam_density": "[auto|light|standard|heavy]",
+    "max_items_per_part": 24,
+    "time_unit": "minutos",
+    "defaults": {
+      "score_total_points": 100,
+      "passing_threshold_percent": 70,
+      "skill_type_inference": {
+        "allowed_values": [
+          "tecnico",
+          "no_tecnico",
+          "mixto"
+        ],
+        "rule": "Infer skill_type from inputs.skill + inputs.content_summary + inputs.exercise_summary: if it requires implementation/coding/engineering → tecnico; if mostly decision-making/communication/process → no_tecnico; if both → mixto."
+      },
+      "question_mix_by_skill_type": {
+        "tecnico": {
+          "mcq_percent": "[25-40]",
+          "short_answer_percent": "[10-20]",
+          "code_completion_percent": "[15-30]",
+          "hands_on_percent": "[25-45]",
+          "use_cases_percent": "[0-10]"
+        },
+        "no_tecnico": {
+          "mcq_percent": "[20-35]",
+          "short_answer_percent": "[15-25]",
+          "use_cases_percent": "[35-55]",
+          "hands_on_percent": "[0-20]",
+          "code_completion_percent": 0
+        },
+        "mixto": {
+          "mcq_percent": "[20-35]",
+          "short_answer_percent": "[10-20]",
+          "code_completion_percent": "[10-20]",
+          "use_cases_percent": "[15-30]",
+          "hands_on_percent": "[20-40]"
+        }
+      },
+      "hands_on_rubric_dimensions_es": [
+        "Corrección funcional",
+        "Reproducibilidad (run limpio)",
+        "Calidad/claridad del proceso",
+        "Mantenibilidad (estructura/nombres)",
+        "Gestión de edge-cases relevantes",
+        "Validaciones y controles de calidad",
+        "Alineación a constraints del contexto"
+      ],
+      "code_completion_rubric_dimensions_es": [
+        "Compila/Ejecuta",
+        "Correctitud (salida/efecto)",
+        "Estilo mínimo (legibilidad/nombres)",
+        "Robustez (errores comunes/edge cases)",
+        "Alineación a constraints (performance/seguridad/privacidad si aplica)"
+      ]
+    },
+    "dataset_constraints": {
+      "must_be_free": true,
+      "must_be_legal_to_use": true,
+      "avoid_login_walls": true,
+      "max_download_size_mb_target": 200,
+      "no_search_queries": true,
+      "no_invented_urls": true,
+      "no_inline_datasets": true,
+      "acquisition_preference_order": [
+        "framework_builtin_dataset_loader",
+        "registry_loader (dataset id/name + loader steps)",
+        "direct_download_url (exact file URL)",
+        "public_repository_file_url (raw/release asset/archival record exact file URL)",
+        "public_api_bulk_export_url (exact export endpoint URL)"
+      ],
+      "allowed_acquisition_methods": [
+        "framework_builtin_dataset_loader",
+        "registry_loader_openml",
+        "registry_loader_huggingface_datasets",
+        "direct_download_url",
+        "public_repository_file_url",
+        "public_archive_record_file_url",
+        "public_api_bulk_export_url"
+      ],
+      "synthetic_generation_policy": {
+        "allowed": false,
+        "note": "Do NOT generate synthetic datasets. Use only real sources with immediate acquisition."
+      },
+      "blocking_behavior": "If an item requires a dataset and you cannot provide at least ONE real acquisition method (exact URL OR exact dataset id/name + loader steps), output BLOQUEADO and omit that item."
+    },
+    "code_policy": {
+      "candidate_solution_code_allowed": true,
+      "candidate_code_must_be_evaluable": true,
+      "evaluator_code_allowed_only_in": [
+        "Dataset (obtención)",
+        "Cómo ejecutar la entrega",
+        "Solución oficial (solo en completar código)"
+      ],
+      "evaluator_code_limit": "For hands-on tasks: do NOT include a full evaluator solution. For code completions: DO include the full official solution for the snippet."
+    },
+    "submission_policy": {
+      "evaluation_mode": "[human_only|llm_only|hybrid]",
+      "preferred_delivery_format": "[zip|folder]",
+      "allowed_submission_formats": [
+        "zip_generic",
+        "folder_generic",
+        "source_exports_zip",
+        "binary_artifact_plus_text_exports_zip"
+      ],
+      "naming_convention": "submission_{skill}_{candidate}_{yyyy-mm-dd}",
+      "required_common_files": [
+        "README.md",
+        "manifest.json",
+        "evidence/"
+      ],
+      "manifest_schema_minimum": {
+        "manifest.json_required_fields": [
+          "candidate_id",
+          "skill",
+          "tooling_used",
+          "how_to_run",
+          "artifacts",
+          "data_sources",
+          "assumptions",
+          "known_limits"
+        ],
+        "artifacts_item_minimum_fields": [
+          "name",
+          "type",
+          "path",
+          "description",
+          "how_to_open_or_execute"
+        ],
+        "data_sources_item_minimum_fields": [
+          "name",
+          "acquisition_method",
+          "url_or_id",
+          "local_path",
+          "license_or_terms_note"
+        ]
+      },
+      "llm_review_requires_text_artifacts": true,
+      "llm_text_artifacts_minimum_set": [
+        "README.md",
+        "manifest.json",
+        "evidence/summary.md"
+      ],
+      "binary_artifact_rule": {
+        "when_binary_outputs_exist_and_evaluation_mode_is_not_human_only": "Require additional text-based exports describing logic/configuration (e.g., exported definitions, query scripts, calculation logic, schema description, or settings) under exports/.",
+        "required_exports_folder": "exports/",
+        "exports_minimum_files": [
+          "exports/logic_or_rules.txt",
+          "exports/schema_or_structure.json"
+        ],
+        "note": "Do NOT assume any specific export format; specify what to export based on tools in inputs.preferred_tools_or_platform."
+      }
+    }
+  },
+  "agnosticity_guards": {
+    "hard_rules": [
+      "Do NOT assume any specific industry, KPIs, columns, schemas, or tools unless explicitly implied by inputs.context / inputs.content_summary / inputs.exercise_summary.",
+      "Interpret level ONLY from inputs.level plus risks/constraints listed in inputs.content_summary.",
+      "Any data-based item MUST include Dataset (obtención) with an exact URL or an exact loader/id + steps.",
+      "Never include search queries or placeholders like 'look up'.",
+      "If a hands-on item is a complex deliverable (dashboard/ETL/model/app/report), it MUST include a tool-agnostic 'Paquete de entrega (archivos a subir)' aligned to inputs.submission_policy.",
+      "ALL user-visible output MUST be in Spanish. Do not output any English except inside code blocks when needed."
+    ],
+    "fallback_behavior": [
+      "If inputs are sparse, still be specific using tool-agnostic evaluable contracts: reproducibility, minimal outputs, naming conventions, evidence, and a file validation checklist."
+    ]
+  },
+  "role": {
+    "persona": "Instructional designer + certification examiner",
+    "mission": "Design an evaluable certification-style exam for {inputs.skill} at {inputs.level} in {inputs.context}, aligned to {inputs.content_summary} and {inputs.exercise_summary}."
+  },
+  "rules": {
+    "alignment": [
+      "Every item must explicitly map to (a) at least one concept/pitfall/constraint from content_summary AND (b) at least one coverage point from exercise_summary."
+    ],
+    "skill_type_handling": [
+      "Infer skill_type ∈ {tecnico, no_tecnico, mixto}.",
+      "If tecnico: include a 'Completar código' section.",
+      "If no_tecnico: include a 'Use cases' section.",
+      "If mixto: include both with moderate weight."
+    ],
+    "official_exam_style": [
+      "Include candidate instructions, allowed resources, duration, total points, and pass threshold.",
+      "Include sections with suggested time and per-item points.",
+      "Use realistic scenarios consistent with context."
+    ],
+    "llm_and_human_evaluable": [
+      "For each item: provide concrete grading steps plus PASS/FAIL or scoring.",
+      "For non-practical questions: provide the exact correct answer.",
+      "For hands-on tasks: provide a detailed rubric + invariants + expected process + required evidence."
+    ],
+    "submission_manifest_rules": [
+      "If a hands-on task produces a complex artifact, include an explicit submission manifest: format, naming convention, required files, optional files, and a PASS/FAIL file-structure checklist.",
+      "Always require: README.md + manifest.json + evidence/ (tool-agnostic).",
+      "If evaluation_mode ∈ {llm_only, hybrid}, require at least the minimum text artifacts and (when outputs are binary) require exports/ with text descriptions of logic and structure.",
+      "Do NOT mention any tool-specific file types unless provided in inputs.preferred_tools_or_platform or implied by inputs.context."
+    ],
+    "no_hidden_decisions": [
+      "Any chosen thresholds, formats, naming, or conventions must be declared as defaults and justified by inputs or minimum reproducibility."
+    ],
+    "parts": {
+      "enabled": true,
+      "max_numbered_items_per_part": "{inputs.max_items_per_part}",
+      "counting_rule": "Only numbered items count (1., 1.1, 1.2...). Bullets do NOT count.",
+      "stop_conditions": [
+        "Stop immediately when the max is reached.",
+        "Stop early if overflow is likely."
+      ],
+      "end_text": "Reply: continue",
+      "continuity": [
+        "Maintain stable numbering across PARTS.",
+        "Continue exactly where you left off; do not repeat items."
+      ]
+    },
+    "language": [
+      "IMPORTANT: Output labels and all candidate-facing/evaluator-facing text MUST be in Spanish."
+    ]
+  },
+  "instruction": "Generate a certification-style EXAM + EVALUATOR GUIDE for {inputs.skill} at {inputs.level} in {inputs.context}, using ONLY inputs.content_summary + inputs.exercise_summary (+ optional skill_tree). First infer skill_type (tecnico/no_tecnico/mixto). If tecnico: include 'Completar código' with full official solutions for snippets. If no_tecnico: include 'Use cases' with rubrics and expected answers. For any dataset-based tasks, use real datasets only with immediate acquisition (exact URL or exact loader/id + steps). For complex deliverables, include a strict tool-agnostic submission manifest specifying exactly which files the candidate must upload (README.md + manifest.json + evidence/ at minimum; require exports/ text artifacts when evaluation is llm_only/hybrid and outputs are binary). Output in PARTS with Spanish-only user-visible content.",
+  "output_spec": {
+    "format": "markdown_es_labels",
+    "required_structure": [
+      "PART N",
+      "A. **EXAMEN (para candidato)**",
+      "   - Información general: Skill, Nivel, Contexto, Duración total, Puntaje total, Umbral de aprobación",
+      "   - Reglas y recursos permitidos (derivados del contexto)",
+      "   - Secciones del examen (con tiempo sugerido y puntos)",
+      "B. **GUÍA DE EVALUACIÓN (para evaluador humano o LLM)**",
+      "   - Cómo corregir (pasos enumerados)",
+      "   - Clave de respuestas (no práctico)",
+      "   - Rúbricas (hands-on / use cases / completar código)",
+      "   - Resumen de scoring + PASS/FAIL"
+    ],
+    "sections": {
+      "common": [
+        "1. Sección: Opción múltiple",
+        "2. Sección: Respuesta corta / conceptual",
+        "3. Sección: Escenario (análisis y decisión)"
+      ],
+      "if_tecnico_or_mixto_add": [
+        "4. Sección: Completar código",
+        "5. Sección: Hands-on con dataset real"
+      ],
+      "if_no_tecnico_or_mixto_add": [
+        "4. Sección: Use cases"
+      ]
+    },
+    "per_item_requirements": {
+      "mcq": [
+        "Enunciado",
+        "Opciones A-D/E",
+        "Respuesta del candidato: ____",
+        "Tiempo sugerido",
+        "Puntos"
+      ],
+      "short_answer": [
+        "Enunciado",
+        "Respuesta del candidato: ____",
+        "Tiempo sugerido",
+        "Puntos"
+      ],
+      "scenario": [
+        "Contexto del caso",
+        "Preguntas",
+        "Respuesta del candidato: ____",
+        "Tiempo sugerido",
+        "Puntos"
+      ],
+      "code_completion": [
+        "Contexto del snippet",
+        "Snippet con huecos (____)",
+        "Restricciones (imports/estilo/complexidad)",
+        "Cómo ejecutar (1 comando o paso)",
+        "Salida esperada/criterios",
+        "Puntos"
+      ],
+      "hands_on": [
+        "Escenario realista",
+        "Dataset (obtención): método real (URL exacta o loader/id exacto + pasos; comandos mínimos permitidos)",
+        "Entregables",
+        "Requisitos/constraints",
+        "Instrucciones de ejecución (1 comando/acción principal)",
+        "Paquete de entrega (archivos a subir): formato + naming + obligatorios + opcionales",
+        "Checklist de validación de archivos (PASS/FAIL): existencia + estructura mínima",
+        "Criterios mínimos de aceptación (PASS/FAIL)",
+        "Evidencia requerida (qué adjuntar/mostrar exactamente)",
+        "Tiempo sugerido",
+        "Puntos"
+      ],
+      "use_case": [
+        "Situación",
+        "Objetivo",
+        "Restricciones",
+        "Entregable (plan/decisión/mensaje/backlog/guía)",
+        "Criterios de evaluación",
+        "Tiempo sugerido",
+        "Puntos"
+      ]
+    },
+    "answer_key_requirements": {
+      "mcq_short_scenario": "Respuesta correcta + justificación breve (≤5 bullets) + cómo puntuar",
+      "code_completion": "Solución oficial completa del snippet + criterios de corrección + errores típicos",
+      "hands_on": "Rúbrica (tabla) + invariantes + proceso esperado + checks de calidad + verificación de paquete de entrega",
+      "use_case": "Respuesta esperada (estructura) + rúbrica + ejemplo de respuesta excelente vs mínima"
+    },
+    "optional_appendix": {
+      "blueprint_table": {
+        "include_if_fits": true,
+        "columns": [
+          "Ítem (ID)",
+          "Sección",
+          "Competencia (desde content_summary)",
+          "Tipo",
+          "Puntos",
+          "Dataset (si aplica)",
+          "Paquete de entrega (si aplica)"
+        ]
+      }
+    }
+  }
+}
