@@ -192,7 +192,7 @@ Skill tree: {skill_tree_source}
 At the end of each PART: Cumulative estimated total time: &lt;integer range in minutes&gt;
 Upon completing everything: Final estimated total time: &lt;integer range in minutes&gt;
 
-AFTER ALL ITERATIONS COMPLETE: Generate a content_summary section including: concepts covered, pitfalls mentioned in sources, constraints from context, expected artifacts/deliverables, terminology introduced, and scope boundaries. This summary will be consumed by skill_to_practice_exercises_template.json.
+AFTER ALL ITERATIONS COMPLETE: Generate a content_summary section including: concepts covered, pitfalls mentioned in sources, constraints from context, terminology introduced, and scope boundaries. This summary will be consumed by skill_to_practice_exercises_template.json.
       </required_structure>
 
       <optional>
