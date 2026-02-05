@@ -45,33 +45,18 @@ Consistency: Keep the exact same list structure, field names, and ordering acros
       <step2_sources_mandatory>
 Every Step 2 PART must include its 'Fuentes' section. Never omit sources in Step 2.
 
-Sources must be clickable URLs.
-
-URLs MUST be formatted for maximum ChatGPT card rendering.
-
-Required format for each source:
-1. Title/description on separate line(s) above the URL (keep it short)
-2. One blank line
-3. URL must be raw, starting at column 1 (no bullets, no numbering, no indentation, no leading/trailing characters)
-4. URL must be on its own line with no other text
-5. One blank line after the URL
+URL requirements:
+- Output raw URLs (plain text: https://dominio.com/ruta)
+- Separate URLs from other text with blank lines
+- Do NOT use markdown [text](url) syntax
+- Do NOT wrap URLs in parentheses, quotes, or code blocks
 
 Example:
 Título de la fuente
-Descripción breve del contenido
 
 https://dominio.com/ruta
 
-Próxima fuente aquí...
-
-Prohibited:
-- Do NOT use markdown link syntax like [Title](URL)
-- Do NOT wrap URLs in parentheses, quotes, backticks, or code blocks
-- Do NOT place any text on the same line as a URL
-- Do NOT use bullets, numbering, or indentation before URLs
-- Plain titles without URLs
-- Search queries instead of URLs
-- Non-clickable references (e.g., 'Microsoft Learn: ...' without URL)
+Siguiente fuente...
 
 Failure mode: If you cannot provide valid clickable URLs, keep the 'Fuentes' section present but mark it as pending and request the minimum needed (e.g., enable browsing or provide preferred URLs).
       </step2_sources_mandatory>

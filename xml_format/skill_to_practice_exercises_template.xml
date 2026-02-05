@@ -55,32 +55,16 @@ Generate an iterative practice exercise hierarchy for {inputs.skill} based solel
       </agnosticity_guards>
 
       <dataset_constraints>
-URLs MUST be formatted for maximum ChatGPT card rendering.
+NON-NEGOTIABLE: Every dataset MUST include a raw, working URL.
 
-Required format for each dataset URL:
-1. Title/description on separate line(s) above the URL (keep it short)
-2. One blank line
-3. URL must be raw, starting at column 1 (no bullets, no numbering, no indentation, no leading/trailing characters)
-4. URL must be on its own line with no other text
-5. One blank line after the URL
+URL requirements:
+- Output raw URLs (plain text: https://example.com)
+- Separate URLs from other text with blank lines
+- Do NOT use markdown [text](url) syntax
+- Do NOT wrap URLs in parentheses, quotes, or code blocks
+- Do NOT invent URLs - only real, accessible resources
 
-Example:
-Kaggle Wine Quality Dataset
-UCI Machine Learning Repository
-
-https://www.kaggle.com/datasets/example
-
-Next item here...
-
-Prohibited:
-- Do NOT use markdown link syntax like [Title](URL)
-- Do NOT wrap URLs in parentheses, quotes, backticks, or code blocks
-- Do NOT place any text on the same line as a URL
-- Do NOT use bullets, numbering, or indentation before URLs
-- Do NOT output search queries or 'look up...' instructions
-- Do NOT output 'Search query:' or query placeholders
-
-Must be:
+Dataset requirements:
 - Free, legal to use, avoid login walls
 - Max 200MB download target
 - Real acquisition method: framework loader, registry loader (OpenML/HuggingFace), direct download URL, public repo file URL, or API bulk export URL
@@ -141,7 +125,7 @@ PART N
        1.1.1 **&lt;Exercise: title&gt;**
              - Statement: ...
              - Verifiable objective: ... (what must be true at the end, unambiguous)
-             - Dataset (acquisition): ... (real URL/loader; minimal steps; optional minimal acquisition code only here)
+             - Dataset (acquisition): ... (title, raw URL separated by blank lines, note; or loader with exact dataset id/name)
              - Prerequisites: ... (only what's necessary according to inputs.preferred_tools_or_platform)
              - Setup (copy/paste): ... (concrete steps, no assumptions)
              - Tasks: ... (concrete actions, aligned to context_summary)

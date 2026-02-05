@@ -53,30 +53,14 @@ Using the provided skill tree, produce a simplified actionable content tree in o
       </no_full_teaching_content>
 
       <sources_non_negotiable>
-NON-NEGOTIABLE: URLs MUST be formatted for maximum ChatGPT card rendering.
+NON-NEGOTIABLE: Every source MUST include a raw, working URL.
 
-Required format for each source:
-1. Title/description on separate line(s) above the URL (keep it short)
-2. One blank line
-3. URL must be raw, starting at column 1 (no bullets, no numbering, no indentation, no leading/trailing characters)
-4. URL must be on its own line with no other text
-5. One blank line after the URL
-
-Example:
-Introduction to Python
-Learn basic syntax and data types
-
-https://example.com/intro
-
-Next source here...
-
-Prohibited:
-- Do NOT use markdown link syntax like [Title](URL)
-- Do NOT wrap URLs in parentheses, quotes, backticks, or code blocks
-- Do NOT place any text on the same line as a URL
-- Do NOT use bullets, numbering, or indentation before URLs
-- Do NOT output search queries or 'look up...' instructions
-- Do NOT invent URLs. Only include sources you are confident exist and are directly accessible
+URL requirements:
+- Output raw URLs (plain text: https://example.com)
+- Separate URLs from other text with blank lines
+- Do NOT use markdown [text](url) syntax
+- Do NOT wrap URLs in parentheses, quotes, or code blocks
+- Do NOT invent URLs - only real, accessible resources
 - Sources must be immediately usable for learning (YouTube videos/playlists, targeted documentation pages, practical articles, labs, notebooks)
       </sources_non_negotiable>
 
@@ -181,12 +165,12 @@ Skill tree: {skill_tree_source}
    - Coverage (details):
      - Micro-skills: &lt;list of micro-skills verbatim as bullets&gt;
      - Scope: &lt;3–6 bullets of sub-areas/topics&gt;
-   - Sources (details): &lt;2–6 items, each with title line, blank line, raw URL on its own line starting at column 1, blank line, + note (Paid/Language if applicable) + 'Alignment:' (heading/timecode)&gt;
+   - Sources (details): &lt;2–6 items (title, raw URL separated by blank lines, note with 'Alignment:' reference). Label 'Paid' or 'Language: ES' if applicable&gt;
    - Estimated time: &lt;integer range in minutes&gt;
    1.1 **&lt;Micro-skill (verbatim)&gt;**
        - Expected learning outcomes: &lt;2–5 bullets&gt;
        - Coverage (details): &lt;3–7 bullets/headings&gt;
-       - Sources (details): &lt;2–6 items, each with title line, blank line, raw URL on its own line starting at column 1, blank line, + note (Paid/Language if applicable) + 'Alignment:' (heading/timecode)&gt;
+       - Sources (details): &lt;2–6 items (title, raw URL separated by blank lines, note with 'Alignment:' reference). Label 'Paid' or 'Language: ES' if applicable&gt;
        - Estimated time: &lt;integer range in minutes&gt;
 
 At the end of each PART: Cumulative estimated total time: &lt;integer range in minutes&gt;
