@@ -7,7 +7,7 @@
     "level": "[LEVEL_TARGET]",
     "context": "[WHO/WHERE/WHY + constraints + target outcomes]",
     "max_items_per_part": 40,
-    "time_unit": "minutos",
+    "time_unit": "minutes",
     "default_time_per_section_range": "[60-180]",
     "default_time_per_micro_skill_range": "[20-60]",
     "skill_tree_source": "PASTE_THE_HIERARCHICAL_SKILL_TREE_HERE__KEEP_NAMES_VERBATIM",
@@ -42,15 +42,19 @@
       "Do provide compact headings and curated learning resources; keep it easy to read."
     ],
     "sources_non_negotiable": [
-      "NON-NEGOTIABLE: Every source MUST be a clickable Markdown link to existing content: [Título](URL).",
-      "Do NOT output any search query text (no 'Consulta de búsqueda:' and no query placeholders).",
+      "NON-NEGOTIABLE: Every source MUST be a raw URL on its own line (not markdown link syntax). ChatGPT renders raw URLs with clickable previews.",
+      "Format: Title on one line, then raw URL on the next line (e.g., 'Introduction to Python\\nhttps://example.com/intro').",
+      "Do NOT use markdown link syntax like [Title](URL).",
+      "Do NOT output plain text titles without URLs.",
+      "Do NOT output any search query text (no 'Search query:' and no query placeholders).",
+      "Do NOT output 'search for...' or 'look up...' instructions.",
       "Do NOT invent URLs. Only include sources you are confident exist and are directly accessible.",
       "Sources must be immediately usable for learning (YouTube videos/playlists, targeted documentation pages, practical articles, labs, notebooks)."
     ],
     "source_quality_and_cost": [
       "Prioritize the most practical, high-signal resources for fast learning in this {context}.",
       "Prefer free resources first when quality is comparable.",
-      "Paid MOOCs/courses are allowed but MUST be de-prioritized; include them only when they are clearly superior or uniquely comprehensive, and label them as 'Pago' in the note.",
+      "Paid MOOCs/courses are allowed but MUST be de-prioritized; include them only when they are clearly superior or uniquely comprehensive, and label them as 'Paid' in the note.",
       "Avoid low-quality SEO content; prefer official docs, reputable educators, and established publishers.",
       "Prefer sources with hands-on steps, examples, and demonstrated workflows over purely conceptual overviews."
     ],
@@ -77,22 +81,22 @@
       "Do not print machine tags like [SECTION] or node_type blocks; use natural headings + compact bullets."
     ],
     "remove_difficult_points": [
-      "Do NOT include these labels/sections in the output: 'Práctica', 'Validación', 'Modos de fallo', 'Artefactos'."
+      "Do NOT include these labels/sections in the output: 'Practice', 'Validation', 'Failure modes', 'Artifacts'."
     ],
     "time_estimation": [
-      "Every section and micro-skill MUST include 'Tiempo estimado' as an integer range in {inputs.time_unit}.",
+      "Every section and micro-skill MUST include estimated time as an integer range in {inputs.time_unit}.",
       "Use {inputs.default_time_per_section_range} and {inputs.default_time_per_micro_skill_range} as baselines and adjust based on complexity and prerequisites.",
       "Time must be plausible for a learner at {level} in {context}."
     ],
     "time_total": [
       "You MUST compute and report a total estimated study time range for the entire content plan.",
-      "Because output is split into PARTS, include a running total at the end of EVERY PART: 'Tiempo total estimado (acumulado): X–Y minutos'.",
-      "When you finish the last item of the skill tree, also include: 'Tiempo total estimado (final): X–Y minutos'.",
+      "Because output is split into PARTS, include a running total at the end of EVERY PART showing cumulative estimated total time.",
+      "When you finish the last item of the skill tree, also include final estimated total time.",
       "Total time must equal the sum of the time ranges you provided for all numbered section + micro-skill items."
     ],
     "source_language_preference": [
       "NON-NEGOTIABLE: Prefer sources in English. Aim for at least {inputs.min_english_source_ratio} of sources per PART to be in English.",
-      "If (and only if) a suitable English source cannot be found for a specific node, you may use a non-English source from {inputs.secondary_source_languages_allowed}, but you MUST label it explicitly in the note as 'Idioma: ES' and keep it minimal."
+      "If (and only if) a suitable English source cannot be found for a specific node, you may use a non-English source from {inputs.secondary_source_languages_allowed}, but you MUST label it explicitly in the note as 'Language: ES' and keep it minimal."
     ],
     "no_generic_sources": [
       "NON-NEGOTIABLE: Do NOT use generic/umbrella sources (homepages, category pages, or broad 'getting started' pages) unless the page itself is narrowly focused on the exact micro-skill.",
@@ -100,9 +104,9 @@
       "Every source must be tightly aligned to the node: the title/section/video must clearly match the micro-skill name or its immediate subtopics."
     ],
     "alignment_per_source": [
-      "For every source item, include a short 'Alineación:' note (in Spanish) describing exactly which part of the source covers the micro-skill.",
-      "For videos, include a timestamp range when possible (e.g., 'Alineación: 12:30–18:10 explica X').",
-      "For articles/docs, reference the specific heading/section name (e.g., 'Alineación: sección \"...\" cubre X').",
+      "For every source item, include a short 'Alignment:' note describing exactly which part of the source covers the micro-skill.",
+      "For videos, include a timestamp range when possible (e.g., 'Alignment: 12:30–18:10 explains X').",
+      "For articles/docs, reference the specific heading/section name (e.g., 'Alignment: section \"...\" covers X').",
       "If you cannot provide an alignment note, replace the source with a better-aligned one."
     ]
   },
@@ -110,17 +114,17 @@
   "content_requirements": {
     "for_each_section": [
       "Write a 1-line section goal grounded in {context}.",
-      "Include 'Resultados de aprendizaje esperados' as 3–6 bullets (observable).",
-      "Include 'Cubre (detalle)' with: (a) the micro-skills verbatim, and (b) 3–6 bullets of what the section covers at a higher level (sub-areas/topics).",
-      "Include 'Fuentes (detalle)' with 2–6 items, each with: clickable English-first link + a short note that indicates why it’s useful, what to extract, and an explicit 'Alineación:' reference to the exact part (heading/timecode) that matches the section. If paid, label note with 'Pago'. If not English, label 'Idioma: ES'.",
-      "Include 'Tiempo estimado' as a range in {inputs.time_unit}."
+      "Include 'Expected learning outcomes' as 3–6 bullets (observable).",
+      "Include 'Coverage (details)' with: (a) the micro-skills verbatim, and (b) 3–6 bullets of what the section covers at a higher level (sub-areas/topics).",
+      "Include 'Sources (details)' with 2–6 items, each with: title line, raw URL on next line (English-first sources), + a short note that indicates why it's useful, what to extract, and an explicit 'Alignment:' reference to the exact part (heading/timecode) that matches the section. If paid, label note with 'Paid'. If not English, label 'Language: ES'.",
+      "Include 'Estimated time' as a range in {inputs.time_unit}."
     ],
     "for_each_micro_skill": [
-      "Include 'Resultados de aprendizaje esperados' as 2–5 bullets (concrete).",
-      "Include 'Cubre (detalle)' as 3–7 short headings/bullets (topics only; no long explanations).",
-      "Include 'Fuentes (detalle)' with 2–6 items, each with: clickable English-first deep link + a short note indicating exactly what to learn/do and an explicit 'Alineación:' reference (heading/timecode) showing where the micro-skill is covered. If paid, label 'Pago'. If not English, label 'Idioma: ES'.",
-      "Include 'Tiempo estimado' as a range in {inputs.time_unit}.",
-      "Optionally include 'Prerequisitos' ONLY when necessary to prevent confusion; otherwise omit it."
+      "Include 'Expected learning outcomes' as 2–5 bullets (concrete).",
+      "Include 'Coverage (details)' as 3–7 short headings/bullets (topics only; no long explanations).",
+      "Include 'Sources (details)' with 2–6 items, each with: title line, raw URL on next line (English-first deep links), + a short note indicating exactly what to learn/do and an explicit 'Alignment:' reference (heading/timecode) showing where the micro-skill is covered. If paid, label 'Paid'. If not English, label 'Language: ES'.",
+      "Include 'Estimated time' as a range in {inputs.time_unit}.",
+      "Optionally include 'Prerequisites' ONLY when necessary to prevent confusion; otherwise omit it."
     ]
   },
   "input": {
@@ -130,20 +134,20 @@
     "primary": {
       "type": "organic_markdown_hierarchy_simple_with_outcomes_sources_time",
       "required_structure": [
-        "1. **<Section Title (verbatim)>** — <objetivo en 1 línea>",
-        "   - Resultados de aprendizaje esperados: <3–6 bullets>",
-        "   - Cubre (detalle):",
-        "     - Micro-skills: <lista de micro-skills verbatim en bullets>",
-        "     - Alcance: <3–6 bullets de sub-áreas/temas>",
-        "   - Fuentes (detalle): <2–6 ítems con link + nota (Pago/Idioma si aplica) + 'Alineación:' (heading/timecode)>",
-        "   - Tiempo estimado: <rango entero en minutos>",
+        "1. **<Section Title (verbatim)>** — <1-line objective>",
+        "   - Expected learning outcomes: <3–6 bullets>",
+        "   - Coverage (details):",
+        "     - Micro-skills: <list of micro-skills verbatim as bullets>",
+        "     - Scope: <3–6 bullets of sub-areas/topics>",
+        "   - Sources (details): <2–6 items, each with title line, raw URL on next line, + note (Paid/Language if applicable) + 'Alignment:' (heading/timecode)>",
+        "   - Estimated time: <integer range in minutes>",
         "   1.1 **<Micro-skill (verbatim)>**",
-        "       - Resultados de aprendizaje esperados: <2–5 bullets>",
-        "       - Cubre (detalle): <3–7 bullets/títulos>",
-        "       - Fuentes (detalle): <2–6 ítems con link + nota (Pago/Idioma si aplica) + 'Alineación:' (heading/timecode)>",
-        "       - Tiempo estimado: <rango entero en minutos>",
-        "Al final de cada PART: Tiempo total estimado (acumulado): <rango entero en minutos>",
-        "Al completar todo: Tiempo total estimado (final): <rango entero en minutos>",
+        "       - Expected learning outcomes: <2–5 bullets>",
+        "       - Coverage (details): <3–7 bullets/headings>",
+        "       - Sources (details): <2–6 items, each with title line, raw URL on next line, + note (Paid/Language if applicable) + 'Alignment:' (heading/timecode)>",
+        "       - Estimated time: <integer range in minutes>",
+        "At the end of each PART: Cumulative estimated total time: <integer range in minutes>",
+        "Upon completing everything: Final estimated total time: <integer range in minutes>",
         "AFTER ALL ITERATIONS COMPLETE: Generate a content_summary section including: concepts covered, pitfalls mentioned in sources, constraints from context, expected artifacts/deliverables, terminology introduced, and scope boundaries. This summary will be consumed by skill_to_practice_exercises_template.json."
       ]
     },
@@ -152,8 +156,8 @@
         "type": "compact_markdown_table",
         "columns": [
           "Micro-skill (verbatim)",
-          "IDs de contenido (p.ej., 1.1, 1.2)",
-          "Fuentes primarias (corto)"
+          "Content IDs (e.g., 1.1, 1.2)",
+          "Primary sources (short)"
         ],
         "note": "Only include if it fits without harming readability."
       }

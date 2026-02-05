@@ -1,7 +1,7 @@
 {
   "template_version": "v1.0.0",
   "name": "skill_to_evaluation_exam.real_datasets_only.fully_agnostic.eslabels.parts",
-  "description": "Generates a certification-style exam + evaluator guide for ANY skill/level/context. All generation instructions are in ENGLISH. ALL user-visible output must be in SPANISH. Technical skills include code completions; non-technical include use cases. Hands-on tasks use real datasets only. Complex deliverables include a tool-agnostic submission manifest specifying exactly which files the candidate must upload.",
+  "description": "Generates a certification-style exam + evaluator guide for ANY skill/level/context. All instructions are in English. Output language controlled by language_policy. Technical skills include code completions; non-technical include use cases. Hands-on tasks use real datasets only. Complex deliverables include a tool-agnostic submission manifest specifying exactly which files the candidate must upload.",
   "parameters_required_minimal": [
     "skill",
     "content_summary",
@@ -24,34 +24,34 @@
     "preferred_tools_or_platform": "[TOOLS/PLATFORMS USED IN THIS CONTEXT]",
     "exam_density": "[auto|light|standard|heavy]",
     "max_items_per_part": 24,
-    "time_unit": "minutos",
+    "time_unit": "minutes",
     "defaults": {
       "score_total_points": 100,
       "passing_threshold_percent": 70,
       "skill_type_inference": {
         "allowed_values": [
-          "tecnico",
-          "no_tecnico",
-          "mixto"
+          "technical",
+          "non_technical",
+          "mixed"
         ],
-        "rule": "Infer skill_type from inputs.skill + inputs.content_summary + inputs.exercise_summary: if it requires implementation/coding/engineering → tecnico; if mostly decision-making/communication/process → no_tecnico; if both → mixto."
+        "rule": "Infer skill_type from inputs.skill + inputs.content_summary + inputs.exercise_summary: if it requires implementation/coding/engineering → technical; if mostly decision-making/communication/process → non_technical; if both → mixed."
       },
       "question_mix_by_skill_type": {
-        "tecnico": {
+        "technical": {
           "mcq_percent": "[25-40]",
           "short_answer_percent": "[10-20]",
           "code_completion_percent": "[15-30]",
           "hands_on_percent": "[25-45]",
           "use_cases_percent": "[0-10]"
         },
-        "no_tecnico": {
+        "non_technical": {
           "mcq_percent": "[20-35]",
           "short_answer_percent": "[15-25]",
           "use_cases_percent": "[35-55]",
           "hands_on_percent": "[0-20]",
           "code_completion_percent": 0
         },
-        "mixto": {
+        "mixed": {
           "mcq_percent": "[20-35]",
           "short_answer_percent": "[10-20]",
           "code_completion_percent": "[10-20]",
@@ -59,21 +59,21 @@
           "hands_on_percent": "[20-40]"
         }
       },
-      "hands_on_rubric_dimensions_es": [
-        "Corrección funcional",
-        "Reproducibilidad (run limpio)",
-        "Calidad/claridad del proceso",
-        "Mantenibilidad (estructura/nombres)",
-        "Gestión de edge-cases relevantes",
-        "Validaciones y controles de calidad",
-        "Alineación a constraints del contexto"
+      "hands_on_rubric_dimensions": [
+        "Functional correctness",
+        "Reproducibility (clean run)",
+        "Process quality/clarity",
+        "Maintainability (structure/names)",
+        "Relevant edge-case handling",
+        "Validations and quality controls",
+        "Alignment to context constraints"
       ],
-      "code_completion_rubric_dimensions_es": [
-        "Compila/Ejecuta",
-        "Correctitud (salida/efecto)",
-        "Estilo mínimo (legibilidad/nombres)",
-        "Robustez (errores comunes/edge cases)",
-        "Alineación a constraints (performance/seguridad/privacidad si aplica)"
+      "code_completion_rubric_dimensions": [
+        "Compiles/Executes",
+        "Correctness (output/effect)",
+        "Minimum style (readability/names)",
+        "Robustness (common errors/edge cases)",
+        "Alignment to constraints (performance/security/privacy if applicable)"
       ]
     },
     "dataset_constraints": {
@@ -104,7 +104,7 @@
         "allowed": false,
         "note": "Do NOT generate synthetic datasets. Use only real sources with immediate acquisition."
       },
-      "blocking_behavior": "If an item requires a dataset and you cannot provide at least ONE real acquisition method (exact URL OR exact dataset id/name + loader steps), output BLOQUEADO and omit that item."
+      "blocking_behavior": "If an item requires a dataset and you cannot provide at least ONE real acquisition method (exact URL OR exact dataset id/name + loader steps), output BLOCKED and omit that item."
     },
     "code_policy": {
       "candidate_solution_code_allowed": true,
@@ -206,10 +206,10 @@
       "Every item must explicitly map to (a) at least one concept/pitfall/constraint from content_summary AND (b) at least one coverage point from exercise_summary."
     ],
     "skill_type_handling": [
-      "Infer skill_type ∈ {tecnico, no_tecnico, mixto}.",
-      "If tecnico: include a 'Completar código' section.",
-      "If no_tecnico: include a 'Use cases' section.",
-      "If mixto: include both with moderate weight."
+      "Infer skill_type ∈ {technical, non_technical, mixed}.",
+      "If technical: include a 'Code completion' section.",
+      "If non_technical: include a 'Use cases' section.",
+      "If mixed: include both with moderate weight."
     ],
     "official_exam_style": [
       "Include candidate instructions, allowed resources, duration, total points, and pass threshold.",
@@ -269,11 +269,11 @@
         "2. Sección: Respuesta corta / conceptual",
         "3. Sección: Escenario (análisis y decisión)"
       ],
-      "if_tecnico_or_mixto_add": [
-        "4. Sección: Completar código",
+      "if_technical_or_mixed_add": [
+        "4. Section: Code completion",
         "5. Sección: Hands-on con dataset real"
       ],
-      "if_no_tecnico_or_mixto_add": [
+      "if_non_technical_or_mixed_add": [
         "4. Sección: Use cases"
       ]
     },

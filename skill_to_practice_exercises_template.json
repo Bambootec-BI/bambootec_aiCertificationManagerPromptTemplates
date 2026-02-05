@@ -22,7 +22,7 @@
     "preferred_tools_or_platform": "[TOOLS/PLATFORMS USED IN THIS CONTEXT]",
     "exercise_density": "[auto|light|standard|heavy]",
     "max_items_per_part": 28,
-    "time_unit": "minutos",
+    "time_unit": "minutes",
     "defaults": {
       "section_time_range": "[45-120]",
       "micro_skill_time_range": "[20-60]",
@@ -41,6 +41,13 @@
       "no_search_queries": true,
       "no_invented_urls": true,
       "no_inline_datasets": true,
+      "url_format_requirement": "URLs must be raw URLs on their own line (not markdown link syntax). ChatGPT renders raw URLs with clickable previews.",
+      "negative_clauses": [
+        "Do NOT use markdown link syntax like [Title](URL).",
+        "Do NOT output plain text titles without URLs.",
+        "Do NOT output search queries or 'look up...' instructions.",
+        "Do NOT output 'Search query:' or query placeholders."
+      ],
       "acquisition_preference_order": [
         "framework_builtin_dataset_loader",
         "registry_loader (dataset id/name + loader steps)",
@@ -61,11 +68,11 @@
         "allowed": false,
         "note": "Do NOT generate synthetic datasets. Only use real downloadable sources or standard dataset loaders."
       },
-      "blocking_behavior": "If you cannot provide at least ONE real acquisition method (exact URL OR standard loader with exact dataset id/name), output BLOQUEADO and omit the exercise."
+      "blocking_behavior": "If you cannot provide at least ONE real acquisition method (exact URL OR standard loader with exact dataset id/name), output BLOCKED and omit the exercise."
     },
     "code_policy": {
       "code_allowed_only_in": [
-        "Dataset (obtención)"
+        "Dataset (acquisition)"
       ],
       "code_limit": "Only minimal dataset load/download + save-to-disk (or tool steps). No solution code, no test code.",
       "prefer_no_code": true
@@ -77,7 +84,7 @@
       "Do NOT assume any specific tools unless provided in inputs.preferred_tools_or_platform (or clearly implied by context).",
       "Do NOT assume any specific level requirements; interpret level ONLY from inputs.level and the constraints/pitfalls in inputs.context_summary.",
       "Do NOT include any dataset suggestions unless you can provide a real acquisition method (exact URL or exact dataset id/name + loader steps).",
-      "Never include search queries or placeholders such as 'look up'/'Consulta de búsqueda'."
+      "Never include search queries or placeholders such as 'look up'/'Search query'."
     ],
     "fallback_behavior": [
       "If the inputs are too sparse to define concrete outputs or acceptance criteria, you MUST still be specific by using a generic, tool-agnostic contract (file existence + schema non-empty + repeatable run) and explicitly name the defaults you choose."
@@ -112,11 +119,11 @@
     ],
     "acceptance_tests_no_code": [
       "Do NOT provide code for tests.",
-      "Provide 'Pruebas de aceptación (cómo probar)' as a checklist with explicit PASS/FAIL criteria and concrete thresholds.",
+      "Provide 'Acceptance tests (how to test)' as a checklist with explicit PASS/FAIL criteria and concrete thresholds.",
       "Thresholds must come from context_summary/context when available; otherwise use generic minimums (e.g., file exists; schema non-empty; counts coherent; rerun yields same counts)."
     ],
     "real_datasets_only": [
-      "Every exercise must include 'Dataset (obtención)' with at least one real acquisition method.",
+      "Every exercise must include 'Dataset (acquisition)' with at least one real acquisition method.",
       "Prefer no-code dataset loading instructions when possible (tool UI steps).",
       "If code is needed, keep it minimal and only for dataset acquisition/loading."
     ],
@@ -135,9 +142,9 @@
       ]
     },
     "time_total": [
-      "Every numbered node MUST include 'Tiempo estimado' as an integer range in {inputs.time_unit}.",
-      "End of EVERY PART: 'Tiempo total estimado (acumulado): X–Y minutos'.",
-      "Final PART: also include 'Tiempo total estimado (final): X–Y minutos'."
+      "Every numbered node MUST include estimated time as an integer range in {inputs.time_unit}.",
+      "End of EVERY PART: show cumulative estimated total time.",
+      "Final PART: also include final estimated total time."
     ],
     "language": [
       "All output labels must be in Spanish."
@@ -176,10 +183,10 @@
       "exercise_to_dataset_map_table": {
         "include_if_fits": true,
         "columns": [
-          "Ejercicio (ID)",
+          "Exercise (ID)",
           "Micro-skill",
-          "Método(s) de dataset",
-          "URL/ID (corto)"
+          "Dataset method(s)",
+          "URL/ID (short)"
         ]
       }
     }
