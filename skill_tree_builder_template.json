@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "skill_tree_builder",
-    "version": "1.2",
+    "version": "v1.0.0",
     "notes": [
       "Fill ONLY inputs.skill, inputs.level, inputs.context.",
       "Ordering is learning progression; Impact (%) is informational and must sum to 100.",

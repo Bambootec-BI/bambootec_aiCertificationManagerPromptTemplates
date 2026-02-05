@@ -1,5 +1,5 @@
 {
-  "template_version": "1.7-en_prompt_es_output_with_outcomes_sources_time_total_NO_QUERIES_EN_SOURCES_SPECIFIC",
+  "template_version": "v1.0.0",
   "name": "skill_tree_to_content",
   "description": "English prompt for best model performance; Spanish output labels. Simplified organic hierarchy. NON-NEGOTIABLE: sources must be clickable URLs to real content (no search queries). Strong preference for English sources and deep, micro-skill-specific links (no generic docs/landing pages). Prefer free/practical sources; paid MOOCs may be suggested but de-prioritized and clearly labeled.",
   "inputs": {

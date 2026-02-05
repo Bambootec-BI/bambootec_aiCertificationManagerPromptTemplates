@@ -1,5 +1,5 @@
 {
-  "template_version": "1.4-evaluation-real-datasets-only-fully-agnostic+code_or_usecases+submission_manifest+en_instructions_es_output",
+  "template_version": "v1.0.0",
   "name": "skill_to_evaluation_exam.real_datasets_only.fully_agnostic.eslabels.parts",
   "description": "Generates a certification-style exam + evaluator guide for ANY skill/level/context. All generation instructions are in ENGLISH. ALL user-visible output must be in SPANISH. Technical skills include code completions; non-technical include use cases. Hands-on tasks use real datasets only. Complex deliverables include a tool-agnostic submission manifest specifying exactly which files the candidate must upload.",
   "parameters_required_minimal": [

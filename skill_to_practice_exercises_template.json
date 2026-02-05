@@ -1,5 +1,5 @@
 {
-  "template_version": "1.6-exercises-real-datasets-only-fully-agnostic",
+  "template_version": "v1.0.0",
   "name": "skill_to_practice_exercises.real_datasets_only.fully_agnostic.eslabels.parts",
   "description": "Generates practice exercises for ANY skill, ANY level, ANY context. All domain details (tasks, artifacts, thresholds, dataset choice, schemas) MUST be derived from inputs.skill + inputs.level + inputs.context + inputs.context_summary (+ optional skill_tree). Real datasets only. No search queries. No invented URLs. No test code; only acceptance-test directives/checklists with explicit PASS/FAIL derived from inputs.",
   "parameters_required_minimal": [
