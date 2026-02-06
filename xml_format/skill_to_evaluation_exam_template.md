@@ -1,8 +1,8 @@
 <template>
   <meta>
-    <version>v1.3.0</version>
+    <version>v1.4.0</version>
     <name>skill_to_evaluation_exam.real_datasets_only.fully_agnostic.eslabels.parts</name>
-    <description>Generates certification-style exam + evaluator guide using XML-structured prompts. Instructions in English, output controlled by language_policy.</description>
+    <description>Generates certification-style exam + evaluator guide as 3 separate documents: (1) exam-only PDF for the learner, (2) exam-only MD for the learner, (3) evaluation-guide-only MD for the AI evaluator. Instructions in English, output controlled by language_policy.</description>
     <parameters_required_minimal>
       <parameter>skill</parameter>
       <parameter>content_summary</parameter>
@@ -33,7 +33,13 @@ Mission: Design an evaluable certification-style exam for {inputs.skill} at {inp
     </role>
 
     <task>
-Generate a complete certification exam with evaluator guide. The exam must test real understanding and practical ability in {inputs.skill} at {inputs.level} for {inputs.context}. Every item must map to content_summary and exercise_summary. Use real datasets only. Include submission manifest for hands-on tasks.
+Generate a complete certification exam with evaluator guide, delivered as 3 separate documents:
+
+1. Exam PDF (for the learner): Contains ONLY the exam — instructions, questions, tasks, submission manifest. No answers, no rubrics, no evaluator notes.
+2. Exam MD (for the learner): Same content as the PDF but in Markdown format.
+3. Evaluation Guide MD (for the AI evaluator): Contains ONLY the evaluator guide — answer key, rubrics, scoring criteria, common mistakes, alignment map. No exam questions.
+
+The exam must test real understanding and practical ability in {inputs.skill} at {inputs.level} for {inputs.context}. Every item must map to content_summary and exercise_summary. Use real datasets only. Include submission manifest for hands-on tasks.
     </task>
 
     <constraints>
@@ -132,49 +138,73 @@ Continuity:
     </constraints>
 
     <output_format>
-      <exam_structure>
-# Certification Exam: {inputs.skill}
+      <three_document_delivery>
+NON-NEGOTIABLE: You must produce exactly 3 separate, self-contained documents. Each document must be generated as a downloadable file.
 
-## Instructions for Candidate
-[Exam duration, passing score, submission requirements]
+Document separation rule: The exam documents (1 and 2) must NEVER contain answers, rubrics, scoring criteria, or evaluator notes. The evaluation guide (3) must NEVER repeat the exam questions — it only references them by number.
+      </three_document_delivery>
 
-## Section 1: Multiple Choice (X points)
-[Questions with 4 options each, indicate correct answer in evaluator guide only]
+      <document_1_exam_pdf>
+Format: PDF file for download
+Filename: examen_{inputs.skill_slug}.pdf
+Audience: The learner/candidate (NO evaluator content)
 
-## Section 2: Short Answer (X points)
-[Questions requiring brief written responses, provide evaluation criteria]
+# Examen de Certificación: {inputs.skill}
 
-## Section 3: Code Completion (X points) [if technical/mixed]
-[Incomplete code with clearly marked gaps, provide official solution in evaluator guide]
+## Instrucciones para el Candidato
+[Exam duration, passing score, submission requirements, allowed tools]
 
-## Section 4: Use Cases (X points) [if non_technical/mixed]
-[Realistic scenarios requiring judgment, provide evaluation framework]
+## Sección 1: Opción Múltiple (X puntos)
+[Questions with 4 options each — NO correct answer indicated]
 
-## Section 5: Hands-On Task (X points)
-[Real-world task with dataset, clear deliverables, submission manifest]
+## Sección 2: Respuesta Corta (X puntos)
+[Questions requiring brief written responses — NO evaluation criteria shown]
 
-Total: 100 points
-Passing: 70 points
-      </exam_structure>
+## Sección 3: Completar Código (X puntos) [if technical/mixed]
+[Incomplete code with clearly marked gaps — NO solutions shown]
 
-      <evaluator_guide_structure>
-# Evaluator Guide: {inputs.skill}
+## Sección 4: Casos de Uso (X puntos) [if non_technical/mixed]
+[Realistic scenarios requiring judgment — NO evaluation framework shown]
 
-## Answer Key
-[MCQ answers, short answer evaluation criteria, code completion solutions]
+## Sección 5: Tarea Práctica (X puntos)
+[Real-world task with dataset, clear deliverables]
 
-## Hands-On Task Rubric
+## Manifiesto de Entrega
+[Exact files to submit, folder structure, format requirements]
+
+Total: 100 puntos
+Aprobación: 70 puntos
+      </document_1_exam_pdf>
+
+      <document_2_exam_md>
+Format: Markdown file for download
+Filename: examen_{inputs.skill_slug}.md
+Audience: The learner/candidate (NO evaluator content)
+Content: Identical to Document 1 but in Markdown format instead of PDF.
+      </document_2_exam_md>
+
+      <document_3_evaluator_guide_md>
+Format: Markdown file for download
+Filename: guia_evaluacion_{inputs.skill_slug}.md
+Audience: The AI evaluator or human grader (NO exam questions — reference by number only)
+
+# Guía de Evaluación: {inputs.skill}
+
+## Clave de Respuestas
+[MCQ correct answers by question number, short answer evaluation criteria, code completion official solutions]
+
+## Rúbrica de Tarea Práctica
 [Detailed scoring rubric with point allocations per criterion]
 
-## Common Mistakes to Watch For
+## Errores Comunes a Vigilar
 [Based on exercise_summary weaknesses]
 
-## Alignment Map
-[Each question/task mapped to content_summary + exercise_summary]
-      </evaluator_guide_structure>
+## Mapa de Alineación
+[Each question/task number mapped to content_summary + exercise_summary concepts]
+      </document_3_evaluator_guide_md>
 
       <submission_manifest>
-For hands-on tasks with multiple files:
+For hands-on tasks with multiple files (included in Documents 1 and 2):
 - List required files with exact names
 - Specify folder structure if applicable
 - Define file format requirements

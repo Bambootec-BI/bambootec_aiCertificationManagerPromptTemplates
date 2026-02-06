@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "skill_tree_builder",
-    "version": "v1.3.0",
+    "version": "v1.4.0",
     "notes": [
       "Fill ONLY inputs.skill, inputs.level, inputs.context.",
       "Ordering is learning progression; Impact (%) is informational and must sum to 100.",
@@ -126,27 +126,17 @@
       ]
     },
     "output_format": {
-      "output_1": {
-        "type": "Markdown table",
-        "title": "Skill Index (Textbook Style)",
-        "columns": [
-          "Learning Order",
-          "Section",
-          "Skill Title",
-          "Impact (%)",
-          "Why this matters (short, simple)"
-        ]
-      },
-      "output_2": {
-        "type": "Hierarchical skill tree",
-        "format": "Nested markdown list",
+      "single_output": {
+        "type": "Numbered hierarchical skill tree (book-index style)",
+        "format": "Numbered markdown list",
         "requirements": [
-          "Two levels only",
+          "Two levels only: Level 1 = Section numbers (1, 2, 3…), Level 2 = Skill numbers (1.1, 1.2, 2.1…)",
           "Ordered by learning progression",
-          "Looks like a textbook index",
-          "Impact shown per skill",
-          "Matches the table"
-        ]
+          "Conceptual Overview section uses 0 as its number (0, 0.1, 0.2, 0.3)",
+          "Impact (%) shown per skill — e.g., '1.1 Skill title (examples) — Impacto X%'",
+          "No table, no justifications, no 'Why this matters' column — just the numbered tree"
+        ],
+        "example": "0. **Visión Conceptual**\n   0.1 Entender qué es X y su valor (definición, casos de uso, valor práctico) — Impacto 4%\n   0.2 Interiorizar el flujo mental de trabajo (pasos clave, analogías) — Impacto 4%\n1. **Sección Uno**\n   1.1 Primera habilidad (ejemplo A, ejemplo B) — Impacto 5%\n   1.2 Segunda habilidad (ejemplo C, ejemplo D) — Impacto 4%\n2. **Sección Dos**\n   2.1 Tercera habilidad (ejemplo E, ejemplo F) — Impacto 3%"
       }
     }
   }

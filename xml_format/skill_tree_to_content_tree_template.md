@@ -1,8 +1,8 @@
 <template>
   <meta>
-    <version>v1.3.0</version>
+    <version>v1.4.0</version>
     <name>skill_tree_to_content</name>
-    <description>English prompt for best model performance; Spanish output labels. Simplified organic hierarchy. NON-NEGOTIABLE: sources must be clickable URLs to real content (no search queries). Strong preference for English sources and deep, micro-skill-specific links (no generic docs/landing pages). Prefer free/practical sources; paid MOOCs may be suggested but de-prioritized and clearly labeled.</description>
+    <description>English prompt for best model performance; Spanish output labels. Simplified organic hierarchy. NON-NEGOTIABLE: sources must be clickable URLs to real content (no search queries). Strong preference for English sources and deep, micro-skill-specific links (no generic docs/landing pages). At least 40% of sources must be video content (YouTube, conference talks, screencasts). Prefer free/practical sources; paid MOOCs may be suggested but de-prioritized and clearly labeled.</description>
   </meta>
 
   <inputs>
@@ -53,7 +53,7 @@ URL requirements:
 - Output as regular text, NOT in code blocks
 - Do NOT add labels like 'Nota:', 'Query:', or language tags before URLs
 - Do NOT invent URLs - only real, accessible resources
-- Sources must be immediately usable for learning (YouTube videos/playlists, targeted documentation pages, practical articles, labs, notebooks)
+- Sources must be immediately usable for learning (YouTube videos/playlists, targeted documentation pages, practical articles, labs, notebooks). At least 40% of all sources must be video content.
 
 Prohibited patterns:
 - Source titles, names, or labels before URLs
@@ -65,12 +65,31 @@ Prohibited patterns:
 - Em dashes or descriptions before/after URLs
       </sources_non_negotiable>
 
+      <video_source_priority>
+NON-NEGOTIABLE: At least 40% of all sources across the content tree MUST be video content.
+
+Video source types (in priority order):
+- YouTube tutorials and walkthroughs tightly aligned to the micro-skill
+- YouTube playlists covering the section topic
+- Conference talks and recorded workshops
+- Screencasts and live-coding sessions
+- Platform-hosted video courses (free first; paid only when clearly superior)
+
+Rules:
+- For each node (section or micro-skill) with 2–6 sources, include at least 1 video source; for nodes with 4+ sources, include at least 2 video sources
+- Video sources follow the same bare-URL-only format rule — just the video URL on its own line
+- Video sources must be as tightly aligned to the micro-skill as text sources — no generic "intro to X" playlists unless the node is itself introductory
+- Prefer videos that demonstrate hands-on workflows, live examples, or step-by-step builds over lecture-only formats
+- Video sources count toward the 2–6 source range per node (they do not add extra slots)
+      </video_source_priority>
+
       <source_quality_and_cost>
 - Prioritize the most practical, high-signal resources for fast learning in this {context}
 - Prefer free resources first when quality is comparable
 - Paid MOOCs/courses are allowed but MUST be de-prioritized; include them only when they are clearly superior or uniquely comprehensive
 - Avoid low-quality SEO content; prefer official docs, reputable educators, and established publishers
 - Prefer sources with hands-on steps, examples, and demonstrated workflows over purely conceptual overviews
+- Among equally relevant sources, prefer video content over text-only content
       </source_quality_and_cost>
 
       <ordering>

@@ -1,7 +1,7 @@
 <template>
   <meta>
     <name>skill_tree_builder</name>
-    <version>v1.3.0</version>
+    <version>v1.4.0</version>
     <notes>
       <note>Fill ONLY inputs.skill, inputs.level, inputs.context.</note>
       <note>Ordering is learning progression; Impact (%) is informational and must sum to 100.</note>
@@ -135,29 +135,27 @@
     </coverage_requirements>
 
     <output_format>
-      <output_1>
-        <type>Markdown table</type>
-        <title>Skill Index (Textbook Style)</title>
-        <columns>
-          <column>Learning Order</column>
-          <column>Section</column>
-          <column>Skill Title</column>
-          <column>Impact (%)</column>
-          <column>Why this matters (short, simple)</column>
-        </columns>
-      </output_1>
-
-      <output_2>
-        <type>Hierarchical skill tree</type>
-        <format>Nested markdown list</format>
+      <single_output>
+        <type>Numbered hierarchical skill tree (book-index style)</type>
+        <format>Numbered markdown list</format>
         <requirements>
-          <requirement>Two levels only</requirement>
+          <requirement>Two levels only: Level 1 = Section numbers (1, 2, 3…), Level 2 = Skill numbers (1.1, 1.2, 2.1…)</requirement>
           <requirement>Ordered by learning progression</requirement>
-          <requirement>Looks like a textbook index</requirement>
-          <requirement>Impact shown per skill</requirement>
-          <requirement>Matches the table</requirement>
+          <requirement>Conceptual Overview section uses 0 as its number (0, 0.1, 0.2, 0.3)</requirement>
+          <requirement>Impact (%) shown per skill — e.g., "1.1 Skill title (examples) — Impacto X%"</requirement>
+          <requirement>No table, no justifications, no "Why this matters" column — just the numbered tree</requirement>
         </requirements>
-      </output_2>
+        <example>
+0. **Visión Conceptual**
+   0.1 Entender qué es X y su valor (definición, casos de uso, valor práctico) — Impacto 4%
+   0.2 Interiorizar el flujo mental de trabajo (pasos clave, analogías) — Impacto 4%
+1. **Sección Uno**
+   1.1 Primera habilidad (ejemplo A, ejemplo B) — Impacto 5%
+   1.2 Segunda habilidad (ejemplo C, ejemplo D) — Impacto 4%
+2. **Sección Dos**
+   2.1 Tercera habilidad (ejemplo E, ejemplo F) — Impacto 3%
+        </example>
+      </single_output>
     </output_format>
   </prompt>
 </template>

@@ -29,10 +29,10 @@ Markdown files with XML tags for Custom GPT prompt engineering (better instructi
 
 | Template Name | Purpose | Inputs | Outputs |
 |---|---|---|---|
-| `skill_tree_builder_template` | Generates 2-level skill trees with impact weights | skill, level, context | skill_tree |
+| `skill_tree_builder_template` | Generates numbered 2-level skill trees (book-index style) with impact weights | skill, level, context | skill_tree (numbered hierarchical list) |
 | `skill_tree_to_content_tree_template` | Converts skill trees to learning content plans with sources | skill, skill_tree, level, context | content_summary (+ full content tree to user) |
 | `skill_to_practice_exercises_template` | Creates dataset-grounded practice exercises | skill, content_summary, level, context | exercise_summary (+ full exercise tree to user) |
-| `skill_to_evaluation_exam_template` | Generates certification exams + evaluator guides | skill, content_summary, exercise_summary, level, context | exam, evaluation_guide (to user) |
+| `skill_to_evaluation_exam_template` | Generates certification exams + evaluator guides as 3 separate files | skill, content_summary, exercise_summary, level, context | exam PDF (learner), exam MD (learner), evaluation_guide MD (evaluator) |
 | `custom_gpt_instructions` | Orchestrates the workflow (router/state machine) | N/A | N/A |
 
 **Note:** The Custom GPT references `.md` files from xml_format/ in its workflow steps.
@@ -60,7 +60,12 @@ Markdown files with XML tags for Custom GPT prompt engineering (better instructi
    - Every source must be a clickable URL to existing content
    - Sources are bare URLs only (no titles, no names, no descriptions)
 
-5. **Dataset Policy**: Only real, downloadable datasets
+5. **Video Source Priority** (content tree): At least 40% of sources must be video content
+   - YouTube tutorials, playlists, conference talks, screencasts, live-coding sessions
+   - Each node must have at least 1 video source; nodes with 4+ sources need at least 2
+   - Prefer hands-on/demo videos over lecture-only formats
+
+6. **Dataset Policy**: Only real, downloadable datasets
    - Framework built-in loaders (e.g., `sklearn.datasets`)
    - Registry loaders (OpenML, HuggingFace)
    - Direct download URLs (exact file links)
@@ -73,7 +78,7 @@ Templates pass data forward based on workflow requirements:
 ```
 Step 1: skill_tree_builder
   Inputs: skill, level, context
-  Outputs to user: Full skill tree (table + hierarchical list)
+  Outputs to user: Numbered hierarchical skill tree (book-index style, no table)
   Outputs to next step: skill_tree (summary)
 
 Step 2: skill_tree_to_content_tree
@@ -88,7 +93,10 @@ Step 3: skill_to_practice_exercises
 
 Step 4: skill_to_evaluation_exam
   Inputs: skill, content_summary, exercise_summary, level, context
-  Outputs to user: Exam + evaluation guide
+  Outputs to user: 3 downloadable files:
+    - examen_{skill_slug}.pdf (exam only, for learner)
+    - examen_{skill_slug}.md (exam only, for learner)
+    - guia_evaluacion_{skill_slug}.md (evaluation guide only, for AI evaluator)
   Outputs to next step: None (end of workflow)
 ```
 
@@ -165,6 +173,8 @@ Each template must enforce:
 
 **skill_tree_to_content_tree**:
 - Every source is a real URL
+- At least 40% of all sources must be video content (YouTube, conference talks, screencasts)
+- Each node with 2–6 sources must have at least 1 video; nodes with 4+ sources need at least 2 videos
 - Total time computed and reported
 - Minimum 80% English sources (hardcoded default)
 
@@ -175,6 +185,9 @@ Each template must enforce:
 - Block exercises if no real dataset available
 
 **skill_to_evaluation_exam**:
+- Exactly 3 separate downloadable documents produced (exam PDF, exam MD, evaluation guide MD)
+- Exam documents contain NO answers, rubrics, or evaluator notes
+- Evaluation guide contains NO exam questions (references by number only)
 - Total score normalized to 100 points
 - Submission manifest for complex tasks (required files, folder structure)
 - Code completions only for technical/mixed skills
@@ -212,7 +225,7 @@ The orchestrator defines:
 - `skill_tree`: Hierarchical skill decomposition
 - `content_summary`: Learning resources and coverage (condensed)
 - `exercise_summary`: Practice tasks and datasets (condensed)
-- `exam` + `evaluation_guide`: Assessment materials
+- `exam` (PDF + MD) + `evaluation_guide` (MD): Assessment materials as 3 separate files
 
 ### Routing Rules
 - **One step per turn**: Never output content from multiple steps in one message
@@ -240,6 +253,8 @@ Before considering templates "done":
 2. **Content plan validation**:
    - Check: every "Fuente" is a bare URL only (no titles or descriptions)
    - Check: no search queries present
+   - Check: at least 40% of sources are video URLs (YouTube, conference talks, etc.)
+   - Check: every node has at least 1 video source; nodes with 4+ sources have at least 2
    - Check: total time computed
    - Check: URLs are separated by blank lines
 
@@ -250,6 +265,9 @@ Before considering templates "done":
    - Check: blocked exercises omitted if no dataset available
 
 4. **Exam validation**:
+   - Check: exactly 3 separate downloadable files produced (exam PDF, exam MD, evaluation guide MD)
+   - Check: exam files contain NO answers, rubrics, or evaluator notes
+   - Check: evaluation guide references questions by number only, does NOT repeat exam content
    - Check: Spanish output labels
    - Check: total score = 100 points
    - Check: code completions present for technical skills

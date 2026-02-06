@@ -101,7 +101,11 @@ Read the skill_tree_to_content_tree_template.md file (in your Knowledge). Insert
 Once Step 2 is finished, ask to run practice exercise generation with the skill_to_practice_exercises_template.md file (in your Knowledge).
           </step>
           <step number="4">
-Run the skill_to_evaluation_exam_template.md file (in your Knowledge).
+Run the skill_to_evaluation_exam_template.md file (in your Knowledge). This step MUST produce exactly 3 separate downloadable files:
+1. examen_{skill_slug}.pdf — Exam only (for the learner). No answers, no rubrics.
+2. examen_{skill_slug}.md — Same exam content in Markdown (for the learner).
+3. guia_evaluacion_{skill_slug}.md — Evaluation guide only (for the AI evaluator). No exam questions.
+Generate all 3 files and offer them for download before proceeding.
           </step>
           <step number="5">
 If you have not finished the iterations, only ask to continue. If finished everything, trigger the after_workflow_completion behavior (offer A/B choice).

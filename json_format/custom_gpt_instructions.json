@@ -92,7 +92,7 @@
         },
         {
           "number": 4,
-          "action": "Run the skill_to_evaluation_exam_template.md file (in your Knowledge)."
+          "action": "Run the skill_to_evaluation_exam_template.md file (in your Knowledge). This step MUST produce exactly 3 separate downloadable files: (1) examen_{skill_slug}.pdf — Exam only for the learner, no answers or rubrics; (2) examen_{skill_slug}.md — Same exam content in Markdown for the learner; (3) guia_evaluacion_{skill_slug}.md — Evaluation guide only for the AI evaluator, no exam questions. Generate all 3 files and offer them for download before proceeding."
         },
         {
           "number": 5,

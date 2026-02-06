@@ -1,9 +1,12 @@
 {
   "meta": {
     "name": "skill_to_evaluation_exam.real_datasets_only.fully_agnostic.eslabels.parts",
-    "version": "v1.3.0",
+    "version": "v1.4.0",
     "notes": [
-      "Generates certification-style exam + evaluator guide.",
+      "Generates certification-style exam + evaluator guide as 3 separate downloadable documents.",
+      "Document 1: Exam PDF (learner-facing, no answers/rubrics).",
+      "Document 2: Exam MD (learner-facing, same content as PDF in Markdown).",
+      "Document 3: Evaluation Guide MD (evaluator-facing, no exam questions).",
       "Uses proper JSON structure for better instruction adherence.",
       "Instructions in English, output controlled by language_policy.",
       "Real datasets only - no synthetic data generation."
@@ -29,7 +32,7 @@
       "mission": "Design an evaluable certification-style exam for {inputs.skill} at {inputs.level} in {inputs.context}, aligned to {inputs.content_summary} and {inputs.exercise_summary}."
     },
     "task": {
-      "description": "Generate a complete certification exam with evaluator guide. The exam must test real understanding and practical ability in {inputs.skill} at {inputs.level} for {inputs.context}. Every item must map to content_summary and exercise_summary. Use real datasets only. Include submission manifest for hands-on tasks."
+      "description": "Generate a complete certification exam with evaluator guide, delivered as 3 separate downloadable documents: (1) Exam PDF for the learner — exam only, no answers/rubrics; (2) Exam MD for the learner — same content in Markdown; (3) Evaluation Guide MD for the AI evaluator — answer key, rubrics, alignment map only, no exam questions. The exam must test real understanding and practical ability in {inputs.skill} at {inputs.level} for {inputs.context}. Every item must map to content_summary and exercise_summary. Use real datasets only. Include submission manifest for hands-on tasks."
     },
     "constraints": {
       "skill_type_inference": {
@@ -142,62 +145,82 @@
       ]
     },
     "output_format": {
-      "exam_structure": {
-        "title": "Certification Exam: {inputs.skill}",
+      "three_document_delivery": {
+        "rule": "NON-NEGOTIABLE: You must produce exactly 3 separate, self-contained downloadable documents.",
+        "separation_rule": "The exam documents (1 and 2) must NEVER contain answers, rubrics, scoring criteria, or evaluator notes. The evaluation guide (3) must NEVER repeat the exam questions — it only references them by number."
+      },
+      "document_1_exam_pdf": {
+        "format": "PDF file for download",
+        "filename": "examen_{inputs.skill_slug}.pdf",
+        "audience": "The learner/candidate (NO evaluator content)",
+        "title": "Examen de Certificación: {inputs.skill}",
         "sections": [
           {
-            "name": "Instructions for Candidate",
-            "content": "[Exam duration, passing score, submission requirements]"
+            "name": "Instrucciones para el Candidato",
+            "content": "[Exam duration, passing score, submission requirements, allowed tools]"
           },
           {
-            "name": "Section 1: Multiple Choice (X points)",
-            "content": "[Questions with 4 options each, indicate correct answer in evaluator guide only]"
+            "name": "Sección 1: Opción Múltiple (X puntos)",
+            "content": "[Questions with 4 options each — NO correct answer indicated]"
           },
           {
-            "name": "Section 2: Short Answer (X points)",
-            "content": "[Questions requiring brief written responses, provide evaluation criteria]"
+            "name": "Sección 2: Respuesta Corta (X puntos)",
+            "content": "[Questions requiring brief written responses — NO evaluation criteria shown]"
           },
           {
-            "name": "Section 3: Code Completion (X points) [if technical/mixed]",
-            "content": "[Incomplete code with clearly marked gaps, provide official solution in evaluator guide]"
+            "name": "Sección 3: Completar Código (X puntos) [if technical/mixed]",
+            "content": "[Incomplete code with clearly marked gaps — NO solutions shown]"
           },
           {
-            "name": "Section 4: Use Cases (X points) [if non_technical/mixed]",
-            "content": "[Realistic scenarios requiring judgment, provide evaluation framework]"
+            "name": "Sección 4: Casos de Uso (X puntos) [if non_technical/mixed]",
+            "content": "[Realistic scenarios requiring judgment — NO evaluation framework shown]"
           },
           {
-            "name": "Section 5: Hands-On Task (X points)",
-            "content": "[Real-world task with dataset, clear deliverables, submission manifest]"
+            "name": "Sección 5: Tarea Práctica (X puntos)",
+            "content": "[Real-world task with dataset, clear deliverables]"
+          },
+          {
+            "name": "Manifiesto de Entrega",
+            "content": "[Exact files to submit, folder structure, format requirements]"
           }
         ],
         "totals": [
-          "Total: 100 points",
-          "Passing: 70 points"
+          "Total: 100 puntos",
+          "Aprobación: 70 puntos"
         ]
       },
-      "evaluator_guide_structure": {
-        "title": "Evaluator Guide: {inputs.skill}",
+      "document_2_exam_md": {
+        "format": "Markdown file for download",
+        "filename": "examen_{inputs.skill_slug}.md",
+        "audience": "The learner/candidate (NO evaluator content)",
+        "content_rule": "Identical to Document 1 but in Markdown format instead of PDF."
+      },
+      "document_3_evaluator_guide_md": {
+        "format": "Markdown file for download",
+        "filename": "guia_evaluacion_{inputs.skill_slug}.md",
+        "audience": "The AI evaluator or human grader (NO exam questions — reference by number only)",
+        "title": "Guía de Evaluación: {inputs.skill}",
         "sections": [
           {
-            "name": "Answer Key",
-            "content": "[MCQ answers, short answer evaluation criteria, code completion solutions]"
+            "name": "Clave de Respuestas",
+            "content": "[MCQ correct answers by question number, short answer evaluation criteria, code completion official solutions]"
           },
           {
-            "name": "Hands-On Task Rubric",
+            "name": "Rúbrica de Tarea Práctica",
             "content": "[Detailed scoring rubric with point allocations per criterion]"
           },
           {
-            "name": "Common Mistakes to Watch For",
+            "name": "Errores Comunes a Vigilar",
             "content": "[Based on exercise_summary weaknesses]"
           },
           {
-            "name": "Alignment Map",
-            "content": "[Each question/task mapped to content_summary + exercise_summary]"
+            "name": "Mapa de Alineación",
+            "content": "[Each question/task number mapped to content_summary + exercise_summary concepts]"
           }
         ]
       },
       "submission_manifest": {
-        "description": "For hands-on tasks with multiple files",
+        "description": "For hands-on tasks with multiple files (included in Documents 1 and 2)",
         "requirements": [
           "List required files with exact names",
           "Specify folder structure if applicable",
