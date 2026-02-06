@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Purpose
 
-This is the **AI Certifications Manager** — a prompt-orchestration system that chains parameterized JSON templates to generate skill-based certifications, learning paths, practice exercises, and evaluation guides. The system works via a Custom GPT that executes these templates in sequence.
+This is the **AI Certifications Manager** — a prompt-orchestration system that chains parameterized templates to generate skill-based certifications, learning paths, practice exercises, and evaluation guides. The system works via a Custom GPT that executes these templates in sequence.
 
 **Core Workflow:**
 1. **Skill Tree** generation (decomposition into learnable units)
@@ -19,17 +19,23 @@ This is the **AI Certifications Manager** — a prompt-orchestration system that
 
 ## File Structure
 
-The repository contains 5 JSON template files that define the prompt orchestration:
+The repository contains **two formats** of templates:
 
-| Current Filename | Canonical Name | Purpose |
-|---|---|---|
-| [skill_tree_builder_template.json](skill_tree_builder_template.json) | `skill_tree_builder.json` | Generates 2-level skill trees with impact weights |
-| [skill_tree_to_content_tree_template.json](skill_tree_to_content_tree_template.json) | `skill_tree_to_content_tree.json` | Converts skill trees to learning content plans with sources |
-| [skill_to_practice_exercises_template.json](skill_to_practice_exercises_template.json) | `skill_to_practice_exercises.json` | Creates dataset-grounded practice exercises |
-| [skill_to_evaluation_exam_template.json](skill_to_evaluation_exam_template.json) | `skill_to_evaluation_exam.json` | Generates certification exams + evaluator guides |
-| [custom_gpt_instructions.json](custom_gpt_instructions.json) | `certifications_manager_router.json` | Orchestrates the workflow (router/state machine) |
+### JSON Format (json_format/)
+Pure JSON with proper object hierarchy for programmatic parsing and API consumption.
 
-**Note:** Files should be renamed to canonical names; internal references must be updated accordingly.
+### XML/Markdown Format (xml_format/)
+Markdown files with XML tags for Custom GPT prompt engineering (better instruction adherence).
+
+| Template Name | Purpose | Inputs | Outputs |
+|---|---|---|---|
+| `skill_tree_builder_template` | Generates 2-level skill trees with impact weights | skill, level, context | skill_tree |
+| `skill_tree_to_content_tree_template` | Converts skill trees to learning content plans with sources | skill, skill_tree, level, context | content_summary (+ full content tree to user) |
+| `skill_to_practice_exercises_template` | Creates dataset-grounded practice exercises | skill, content_summary, level, context | exercise_summary (+ full exercise tree to user) |
+| `skill_to_evaluation_exam_template` | Generates certification exams + evaluator guides | skill, content_summary, exercise_summary, level, context | exam, evaluation_guide (to user) |
+| `custom_gpt_instructions` | Orchestrates the workflow (router/state machine) | N/A | N/A |
+
+**Note:** The Custom GPT references `.md` files from xml_format/ in its workflow steps.
 
 ---
 
@@ -41,57 +47,80 @@ The repository contains 5 JSON template files that define the prompt orchestrati
    - **Conceptual/mental-model skills** (tool-agnostic, evaluated via scenarios and artifacts)
    - **Technical implementation skills** (code completions, hands-on deliverables with datasets)
 
-2. **Language Contract**:
-   - **Instruction text** (inside JSON): English (for model performance)
+2. **Dual-Format Approach**:
+   - **JSON format** (json_format/): Pure JSON structure with keys for programmatic parsing
+   - **XML/Markdown format** (xml_format/): XML tags in Markdown files for prompt engineering
+   - Both formats contain identical content, just different structures
+
+3. **Language Contract**:
+   - **Instruction text** (inside templates): English (for model performance)
    - **User-visible outputs**: Spanish (except code blocks and proper nouns)
 
-3. **Real Sources Only**: No search queries or invented URLs
+4. **Real Sources Only**: No search queries or invented URLs
    - Every source must be a clickable URL to existing content
+   - Sources must be self-explanatory (no alignment notes required)
 
-4. **Dataset Policy**: Only real, downloadable datasets
+5. **Dataset Policy**: Only real, downloadable datasets
    - Framework built-in loaders (e.g., `sklearn.datasets`)
    - Registry loaders (OpenML, HuggingFace)
    - Direct download URLs (exact file links)
    - No synthetic data generation; no inline datasets
 
-### Template Interconnections
+### Template Data Flow
 
-Templates pass data forward through **summaries**:
+Templates pass data forward based on workflow requirements:
 
 ```
-skill_tree_builder
-  ↓ (outputs: skill_tree)
-skill_tree_to_content_tree
-  ↓ (outputs: content_tree, content_summary)
-skill_to_practice_exercises
-  ↓ (outputs: exercise_tree, exercise_summary)
-skill_to_evaluation_exam
-  ↓ (outputs: exam, evaluation_guide, submission_requirements)
+Step 1: skill_tree_builder
+  Inputs: skill, level, context
+  Outputs to user: Full skill tree (table + hierarchical list)
+  Outputs to next step: skill_tree (summary)
+
+Step 2: skill_tree_to_content_tree
+  Inputs: skill, skill_tree, level, context
+  Outputs to user: Full content tree with sources
+  Outputs to next step: content_summary
+
+Step 3: skill_to_practice_exercises
+  Inputs: skill, content_summary, level, context
+  Outputs to user: Full exercise tree with datasets
+  Outputs to next step: exercise_summary
+
+Step 4: skill_to_evaluation_exam
+  Inputs: skill, content_summary, exercise_summary, level, context
+  Outputs to user: Exam + evaluation guide
+  Outputs to next step: None (end of workflow)
 ```
 
-Each template receives inputs from previous steps and produces machine-usable summaries for the next step.
+**Key Principle:** Each template only receives inputs available from previous steps. No configuration parameters - sensible defaults are hardcoded within templates.
 
 ---
 
 ## Common Template Patterns
 
 ### Inputs Structure
-Every template defines:
-- `skill`: The skill name
-- `level`: Target ability level (entry/intermediate/expert)
-- `context`: WHO/WHERE/WHY + constraints + target outcomes
-- Template-specific parameters (tools, platforms, language preferences)
+Each template has simplified inputs based on data flow:
+- **Core inputs**: skill, level, context (present in all templates)
+- **Summary inputs**: skill_tree, content_summary, exercise_summary (passed from previous steps)
+- **No configuration parameters**: All settings (time_unit, language preferences, density, etc.) are hardcoded to sensible defaults
 
 ### Output Requirements
-All templates must produce:
-- **Hierarchical structure** (numbered sections, maintained across PARTS)
-- **Time estimates** (per item + cumulative total)
-- **Spanish labels** (for all user-visible fields)
-- **Sources** (clickable URLs)
+All templates produce two types of outputs:
+
+1. **User-facing outputs** (full, detailed):
+   - **Hierarchical structure** (numbered sections, maintained across PARTS)
+   - **Time estimates** (per item + cumulative total)
+   - **Spanish labels** (for all user-visible fields)
+   - **Sources** (clickable URLs with brief notes on usefulness)
+
+2. **Summary outputs** (for next step):
+   - Condensed versions capturing essential information
+   - Generated at the end of each template execution
+   - Self-contained in each template specification
 
 ### PARTS System
 Templates support iterative output across multiple chat turns:
-- `max_items_per_part`: Limits numbered items per response
+- Hardcoded limits per template (e.g., 40 items for content, 28 for exercises, 24 for exam)
 - **Counting rule**: Only numbered items count (1., 1.1, 1.2...); bullets don't count
 - **Continuity**: Numbering and format must remain consistent across PARTS
 - **Running totals**: Each PART must include cumulative time estimate
@@ -104,46 +133,47 @@ Templates support iterative output across multiple chat turns:
 
 **Problem**: Links must be reliably clickable in ChatGPT interface.
 
-**Rule**: Use one of these formats:
+**Rule**: Raw URLs separated from other text by blank lines:
 
-**Preferred** (when UI supports preview):
 ```
+Title or description of source
+
 https://www.kaggle.com/datasets/example
-```
-(URL alone on its own line, no bullets, no punctuation)
 
-**Fallback** (maximum reliability per OpenAI):
-```
-[https://www.kaggle.com/datasets/example](https://www.kaggle.com/datasets/example)
+Brief note about why it's useful and what to extract
 ```
 
 **Never**:
 - Put links inside code blocks
+- Use markdown [text](url) syntax
+- Wrap URLs in parentheses, quotes, or code blocks
+- Add "Nota:", "Query:", or language tags before sources
 - Use search query placeholders
 - Invent URLs
+- Put parenthetical explanations on same line as URL
 
 ### 2. Validation Invariants
 
 Each template must enforce:
 
-**skill_tree_builder.json**:
+**skill_tree_builder**:
 - Impact weights sum to exactly 100
 - Exactly 2 levels of hierarchy
 - Action-oriented, assessable nodes
 - No vague outcomes ("understand X" → "apply X to...")
 
-**skill_tree_to_content_tree.json**:
+**skill_tree_to_content_tree**:
 - Every source is a real URL
 - Total time computed and reported
-- Minimum 80% English sources (when specified)
+- Minimum 80% English sources (hardcoded default)
 
-**skill_to_practice_exercises.json**:
+**skill_to_practice_exercises**:
 - Dataset acquisition is real (URL or loader ID + steps)
 - Explicit PASS/FAIL acceptance criteria (no code solutions)
 - Evidence requirements specified
 - Block exercises if no real dataset available
 
-**skill_to_evaluation_exam.json**:
+**skill_to_evaluation_exam**:
 - Total score normalized to 100 points
 - Submission manifest for complex tasks (required files, folder structure)
 - Code completions only for technical/mixed skills
@@ -163,26 +193,25 @@ Templates infer `skill_type` from inputs:
 
 When modifying any template:
 
-1. **Bump** `template_version` (use semantic versioning)
-2. **Add** changelog entry explaining changes
+1. **Bump** `version` in meta section (use semantic versioning)
+2. **Add** changelog entry or note explaining changes
 3. **Update** validation invariants if schema changes
-4. **Maintain** at least 2 examples:
+4. **Update both formats**: json_format/ AND xml_format/ versions
+5. **Maintain** at least 2 examples:
    - 1 conceptual skill (tool-agnostic)
    - 1 technical skill (implementation-focused)
 
 ---
 
-## Workflow State Machine (custom_gpt_instructions.json)
+## Workflow State Machine (custom_gpt_instructions)
 
 The orchestrator defines:
 
 ### State Artifacts
 - `skill_tree`: Hierarchical skill decomposition
-- `content_tree` + `content_summary`: Learning resources and coverage
-- `exercise_tree` + `exercise_summary`: Practice tasks and datasets
+- `content_summary`: Learning resources and coverage (condensed)
+- `exercise_summary`: Practice tasks and datasets (condensed)
 - `exam` + `evaluation_guide`: Assessment materials
-- `submission_requirements`: Required deliverables
-- `grading_report`: Evaluation results
 
 ### Routing Rules
 - **One step per turn**: Never output content from multiple steps in one message
@@ -211,6 +240,7 @@ Before considering templates "done":
    - Check: every "Fuente" is clickable URL
    - Check: no search queries present
    - Check: total time computed
+   - Check: sources have brief usefulness notes (no alignment references required)
 
 3. **Exercise validation**:
    - Check: dataset acquisition method present
@@ -233,61 +263,73 @@ Before considering templates "done":
 
 ## Working with Templates
 
+### Dual Format Maintenance
+
+When modifying templates, **always update both formats**:
+
+1. **json_format/*.json**: Pure JSON with object keys
+   - Use proper JSON structure: `{"key": "value"}`, `{"key": ["item1", "item2"]}`
+   - No XML tags in strings
+
+2. **xml_format/*.md**: Markdown with XML tags
+   - Use XML tags for structure: `<key>value</key>`, `<items><item>...</item></items>`
+   - No XML declarations (`<?xml version...?>`)
+
 ### Reading Templates
-Templates are large JSON files with nested instruction structures. Key sections:
+
+Key sections in templates:
 
 - `meta`: Version and notes
-- `inputs`: Placeholder definitions and defaults
-- `rules`: Hard constraints and processing logic
-- `instruction`: The main prompt text
-- `output`: Required structure and format
-- `content_requirements`: Per-section/per-item requirements
+- `inputs`: Only data available from workflow (no config params)
+- `prompt`: The main instruction structure
+  - JSON format: nested objects with keys
+  - XML format: nested tags
+- `output_format`: Required structure
+- Content requirements: Per-section/per-item specifications
 
 ### Modifying Templates
 
 **Before changing**:
-1. Read current version completely
-2. Identify which section needs changes (inputs/rules/instruction/output)
+1. Read current version completely (both formats if modifying)
+2. Identify which section needs changes
 3. Check dependencies on other templates
+4. Verify input availability per workflow data flow
 
 **During changes**:
-1. Maintain JSON validity
-2. Preserve existing field names unless renaming is intentional
+1. Maintain format validity (JSON or XML/Markdown)
+2. Update BOTH formats identically
 3. Keep instruction text in English, output labels in Spanish
-4. Update validation rules if schema changes
+4. Don't add configuration parameters - hardcode sensible defaults instead
+5. Ensure inputs match what's available from previous workflow steps
 
 **After changes**:
-1. Bump `template_version`
-2. Add changelog entry
+1. Bump `version` in meta section
+2. Add note explaining changes
 3. Test with both conceptual and technical examples
 4. Verify PARTS continuity if output structure changed
+5. Commit with clear message explaining changes
 
 ### Common Modifications
 
-**Adding new input parameter**:
-```json
-"inputs": {
-  "new_parameter": "[DEFAULT_VALUE]",
-  ...
-}
-```
+**Simplifying inputs** (already done - maintain this):
+- Only include inputs available from previous steps per workflow
+- Remove configuration parameters
+- Hardcode defaults within template logic
 
-**Adding validation rule**:
-```json
-"rules": {
-  "new_rule": [
-    "Clear constraint description",
-    "Expected behavior",
-    "Failure mode"
-  ]
-}
-```
+**Adding output requirements**:
+- Update output_format section
+- Update content_requirements to match
+- Test PARTS continuity
+- Document in version notes
 
-**Changing output structure**:
-1. Update `output.required_structure`
-2. Update `content_requirements` to match
-3. Test PARTS continuity
-4. Document in changelog
+**Changing URL/source format** (current standard):
+```
+Title/description
+
+https://example.com/resource
+
+Brief note about usefulness and what to extract
+```
 
 ---
 
@@ -301,12 +343,14 @@ Templates are large JSON files with nested instruction structures. Key sections:
 4. **Spanish user output**: All candidate/evaluator-facing text in Spanish
 5. **One step per turn**: Router must not skip steps or confuse PARTS with steps
 6. **Sources mandatory**: Step 2 (content plan) must always include "Fuentes" section
+7. **Simplified inputs**: Only use data available from previous workflow steps
+8. **Dual format maintenance**: Always update both json_format/ and xml_format/ versions
 
 ### Soft Preferences
 
 1. **Prefer free resources**: Paid MOOCs allowed but de-prioritized and labeled "Pago"
-2. **Prefer English sources**: Target 80%+ English when specified
-3. **Prefer deep links**: No generic landing pages; link to specific sections
+2. **Prefer English sources**: Target 80%+ English (hardcoded default)
+3. **Prefer deep links**: No generic landing pages; link to specific content
 4. **Prefer no-code instructions**: Tool UI steps over code when possible
 
 ---
@@ -327,8 +371,13 @@ Templates should support (not yet implemented):
 ## Notes for Claude Code
 
 - Templates are **schema-driven prompts**, not executable code
+- Two formats serve different purposes:
+  - **JSON**: Programmatic parsing, API consumption
+  - **XML/Markdown**: Custom GPT prompt engineering (better instruction adherence)
 - Changes require understanding of **prompt engineering** and **GPT behavior**
 - Test changes by running through Custom GPT, not locally
+- Always update **both formats** when making changes
 - Keep requirements **testable** and **observable**
 - Maintain **backward compatibility** unless explicitly breaking changes
-- Document all assumptions and defaults explicitly in template JSON
+- Follow the **workflow data flow**: each template only uses inputs from previous steps
+- Document all assumptions and defaults explicitly in templates
