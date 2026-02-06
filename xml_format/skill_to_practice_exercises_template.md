@@ -1,8 +1,12 @@
 <template>
   <meta>
-    <version>v1.0.0</version>
+    <version>v1.1.0</version>
     <name>skill_to_practice_exercises.real_datasets_only.fully_agnostic.eslabels.parts</name>
     <description>Generates practice exercises for ANY skill, ANY level, ANY context using XML-structured prompts for better instruction adherence.</description>
+    <changelog>
+      <v1.1.0>Fixed dataset URL formatting: prohibited code blocks around URLs, added explicit bare URL requirements, removed dataset labels (A/B/C)</v1.1.0>
+      <v1.0.0>Initial version with real datasets only, agnostic design, Spanish labels, PARTS system</v1.0.0>
+    </changelog>
     <parameters_required_minimal>
       <parameter>skill</parameter>
       <parameter>content_summary</parameter>
@@ -46,17 +50,29 @@ Generate an iterative practice exercise hierarchy for {inputs.skill} based solel
       <dataset_constraints>
 NON-NEGOTIABLE: Every dataset MUST include a raw, working URL.
 
-URL requirements:
-- Just output the plain URL: https://example.com
-- Separate URLs from other text with blank lines
-- Do NOT use markdown [text](url) syntax
-- Do NOT wrap URLs in parentheses, quotes, or code blocks
-- Do NOT invent URLs - only real, accessible resources
+URL requirements for Dataset (acquisition) section:
+- URLs must be bare, clickable links on their own lines
+- Format: Just the plain URL with blank lines around it
 
-Prohibited patterns:
-- "Nota:", "Query:", or language tags before sources
-- Code blocks (mathematica, python, etc.) around URLs or descriptions
-- Parenthetical explanations on the same line as URL
+https://example.com/dataset.csv
+
+- NEVER wrap dataset URLs in code blocks (```csv, ```mathematica, ```python, etc.)
+- NEVER use markdown [text](url) syntax for dataset URLs
+- NEVER wrap URLs in parentheses, quotes, or any formatting
+- NEVER add "Dataset A", "Dataset B", "Dataset C" labels before URLs
+- NEVER invent URLs - only real, accessible resources
+
+Prohibited patterns in Dataset (acquisition) section:
+- Code blocks around URLs: ```css\nhttps://url\n``` ❌
+- Code blocks around descriptions: ```mathematica\n- Dataset X - file.csv\n``` ❌
+- Titles/labels before URLs: "Dataset A — orders.csv (CSV)" ❌
+- Language tags before URLs: "Nota:", "Query:" ❌
+- Parenthetical explanations on same line as URL ❌
+
+Correct format for Dataset (acquisition):
+Just output the bare URL separated by blank lines:
+
+https://raw.githubusercontent.com/example/data/main/file.csv
 
 Dataset requirements:
 - Free, legal to use, avoid login walls

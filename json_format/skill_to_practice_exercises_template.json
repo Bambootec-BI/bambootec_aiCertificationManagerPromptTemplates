@@ -1,13 +1,17 @@
 {
   "meta": {
     "name": "skill_to_practice_exercises.real_datasets_only.fully_agnostic.eslabels.parts",
-    "version": "v1.0.0",
+    "version": "v1.1.0",
     "notes": [
       "Generates practice exercises for ANY skill, ANY level, ANY context.",
       "Uses proper JSON structure for better instruction adherence.",
       "Real datasets only - no synthetic data generation.",
       "Dataset acquisition must be exact URL or exact loader with dataset id/name."
-    ]
+    ],
+    "changelog": {
+      "v1.1.0": "Fixed dataset URL formatting: prohibited code blocks around URLs, added explicit bare URL requirements, removed dataset labels (A/B/C)",
+      "v1.0.0": "Initial version with real datasets only, agnostic design, Spanish labels, PARTS system"
+    }
   },
   "parameters_required_minimal": ["skill", "content_summary", "level", "context"],
   "inputs": {
@@ -40,17 +44,26 @@
       ],
       "dataset_constraints": {
         "description": "NON-NEGOTIABLE: Every dataset MUST include a raw, working URL.",
-        "url_requirements": [
-          "Just output the plain URL: https://example.com",
-          "Separate URLs from other text with blank lines",
-          "Do NOT use markdown [text](url) syntax",
-          "Do NOT wrap URLs in parentheses, quotes, or code blocks",
-          "Do NOT invent URLs - only real, accessible resources"
+        "url_requirements_for_dataset_acquisition_section": [
+          "URLs must be bare, clickable links on their own lines",
+          "Format: Just the plain URL with blank lines around it",
+          "Example: https://example.com/dataset.csv",
+          "NEVER wrap dataset URLs in code blocks (```csv, ```mathematica, ```python, etc.)",
+          "NEVER use markdown [text](url) syntax for dataset URLs",
+          "NEVER wrap URLs in parentheses, quotes, or any formatting",
+          "NEVER add 'Dataset A', 'Dataset B', 'Dataset C' labels before URLs",
+          "NEVER invent URLs - only real, accessible resources"
         ],
-        "prohibited_patterns": [
-          "\"Nota:\", \"Query:\", or language tags before sources",
-          "Code blocks (mathematica, python, etc.) around URLs or descriptions",
-          "Parenthetical explanations on the same line as URL"
+        "prohibited_patterns_in_dataset_acquisition": [
+          "Code blocks around URLs: ```css\\nhttps://url\\n``` ❌",
+          "Code blocks around descriptions: ```mathematica\\n- Dataset X - file.csv\\n``` ❌",
+          "Titles/labels before URLs: 'Dataset A — orders.csv (CSV)' ❌",
+          "Language tags before URLs: 'Nota:', 'Query:' ❌",
+          "Parenthetical explanations on same line as URL ❌"
+        ],
+        "correct_format_for_dataset_acquisition": [
+          "Just output the bare URL separated by blank lines:",
+          "https://raw.githubusercontent.com/example/data/main/file.csv"
         ],
         "dataset_requirements": [
           "Free, legal to use, avoid login walls",
