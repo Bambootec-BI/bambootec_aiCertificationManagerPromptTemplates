@@ -111,7 +111,7 @@ All templates produce two types of outputs:
    - **Hierarchical structure** (numbered sections, maintained across PARTS)
    - **Time estimates** (per item + cumulative total)
    - **Spanish labels** (for all user-visible fields)
-   - **Sources** (clickable URLs with brief notes on usefulness)
+   - **Sources** (clickable URLs with title only)
 
 2. **Summary outputs** (for next step):
    - Condensed versions capturing essential information
@@ -136,18 +136,21 @@ Templates support iterative output across multiple chat turns:
 **Rule**: Raw URLs separated from other text by blank lines:
 
 ```
-Title or description of source
+Title of source
 
 https://www.kaggle.com/datasets/example
 
-Brief note about why it's useful and what to extract
+Next source title
+
+https://example.com/another-resource
 ```
 
 **Never**:
 - Put links inside code blocks
 - Use markdown [text](url) syntax
 - Wrap URLs in parentheses, quotes, or code blocks
-- Add "Nota:", "Query:", or language tags before sources
+- Add "Nota:", "Query:", "Extraer:", "Extract:", or language tags before/after sources
+- Add any explanatory text after the URL
 - Use search query placeholders
 - Invent URLs
 - Put parenthetical explanations on same line as URL
@@ -324,11 +327,13 @@ Key sections in templates:
 
 **Changing URL/source format** (current standard):
 ```
-Title/description
+Title of source
 
 https://example.com/resource
 
-Brief note about usefulness and what to extract
+Next source title
+
+https://example.com/another-resource
 ```
 
 ---

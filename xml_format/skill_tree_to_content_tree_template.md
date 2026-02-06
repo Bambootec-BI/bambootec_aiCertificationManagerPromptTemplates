@@ -54,15 +54,16 @@ URL requirements:
 - Sources must be immediately usable for learning (YouTube videos/playlists, targeted documentation pages, practical articles, labs, notebooks)
 
 Prohibited patterns:
-- "Nota:", "Query:", or language tags before sources
-- Code blocks (mathematica, python, etc.) around URLs or descriptions
+- "Nota:", "Query:", "Extraer:", "Extract:", or language tags before/after URLs
+- Code blocks (mathematica, python, etc.) around URLs
+- Any explanatory text after the URL
 - Parenthetical explanations on the same line as URL
       </sources_non_negotiable>
 
       <source_quality_and_cost>
 - Prioritize the most practical, high-signal resources for fast learning in this {context}
 - Prefer free resources first when quality is comparable
-- Paid MOOCs/courses are allowed but MUST be de-prioritized; include them only when they are clearly superior or uniquely comprehensive, and label them as 'Paid' in the note
+- Paid MOOCs/courses are allowed but MUST be de-prioritized; include them only when they are clearly superior or uniquely comprehensive
 - Avoid low-quality SEO content; prefer official docs, reputable educators, and established publishers
 - Prefer sources with hands-on steps, examples, and demonstrated workflows over purely conceptual overviews
       </source_quality_and_cost>
@@ -113,7 +114,7 @@ Do NOT include these labels/sections in the output: 'Practice', 'Validation', 'F
       <source_language_preference>
 NON-NEGOTIABLE: Prefer sources in English. Aim for at least 80% of sources per PART to be in English.
 
-If (and only if) a suitable English source cannot be found for a specific node, you may use a non-English source (Spanish allowed), but you MUST label it explicitly in the note as 'Language: ES' and keep it minimal.
+If (and only if) a suitable English source cannot be found for a specific node, you may use a non-English source (Spanish allowed), but keep it minimal.
       </source_language_preference>
 
       <no_generic_sources>
@@ -129,14 +130,14 @@ NON-NEGOTIABLE: Do NOT use generic/umbrella sources (homepages, category pages, 
 - Write a 1-line section goal grounded in {context}
 - Include 'Expected learning outcomes' as 3–6 bullets (observable)
 - Include 'Coverage (details)' with: (a) the micro-skills verbatim, and (b) 3–6 bullets of what the section covers at a higher level (sub-areas/topics)
-- Include 'Sources (details)' with 2–6 items. Each source: title/description on one line, then URL on its own line, then a brief note about why it's useful and what to extract. If paid, label note with 'Paid'. If not English, label 'Language: ES'
+- Include 'Sources (details)' with 2–6 items. Each source: title on one line, then URL on its own line. Nothing else.
 - Include 'Estimated time' as a range in {inputs.time_unit}
       </for_each_section>
 
       <for_each_micro_skill>
 - Include 'Expected learning outcomes' as 2–5 bullets (concrete)
 - Include 'Coverage (details)' as 3–7 short headings/bullets (topics only; no long explanations)
-- Include 'Sources (details)' with 2–6 items. Each source: title/description on one line, then URL on its own line, then a brief note indicating exactly what to learn/do. If paid, label 'Paid'. If not English, label 'Language: ES'
+- Include 'Sources (details)' with 2–6 items. Each source: title on one line, then URL on its own line. Nothing else.
 - Include 'Estimated time' as a range in {inputs.time_unit}
 - Optionally include 'Prerequisites' ONLY when necessary to prevent confusion; otherwise omit it
       </for_each_micro_skill>
@@ -153,12 +154,12 @@ Skill tree: {skill_tree}
    - Coverage (details):
      - Micro-skills: &lt;list of micro-skills verbatim as bullets&gt;
      - Scope: &lt;3–6 bullets of sub-areas/topics&gt;
-   - Sources (details): &lt;2–6 items. Each source: title, then URL on separate line, then brief note indicating why useful and what to extract. Output as regular markdown text, NOT in code blocks. Label 'Paid' or 'Language: ES' if applicable&gt;
+   - Sources (details): &lt;2–6 items. Each source: title on one line, then URL on separate line. Nothing else. Output as regular markdown text, NOT in code blocks.&gt;
    - Estimated time: &lt;integer range in minutes&gt;
    1.1 **&lt;Micro-skill (verbatim)&gt;**
        - Expected learning outcomes: &lt;2–5 bullets&gt;
        - Coverage (details): &lt;3–7 bullets/headings&gt;
-       - Sources (details): &lt;2–6 items. Each source: title, then URL on separate line, then brief note indicating what to learn/do. Output as regular markdown text, NOT in code blocks. Label 'Paid' or 'Language: ES' if applicable&gt;
+       - Sources (details): &lt;2–6 items. Each source: title on one line, then URL on separate line. Nothing else. Output as regular markdown text, NOT in code blocks.&gt;
        - Estimated time: &lt;integer range in minutes&gt;
 
 At the end of each PART: Cumulative estimated total time: &lt;integer range in minutes&gt;

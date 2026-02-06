@@ -48,11 +48,12 @@
         ]
       },
       "prohibited_patterns": [
-        "\"Nota:\", \"Query:\", or language tags before sources",
-        "Code blocks (mathematica, python, etc.) around URLs or descriptions",
+        "\"Nota:\", \"Query:\", \"Extraer:\", \"Extract:\", or language tags before/after URLs",
+        "Code blocks (mathematica, python, etc.) around URLs",
+        "Any explanatory text after the URL",
         "Parenthetical explanations on the same line as URL"
       ],
-      "example": "Título de la fuente\n\nhttps://dominio.com/ruta\n\nNota breve sobre qué extraer de esta fuente\n\nSiguiente fuente: Otro título\n\nhttps://otro-dominio.com/recurso\n\nNota sobre este recurso\n\nThis is regular markdown output, not a code block.",
+      "example": "Título de la fuente\n\nhttps://dominio.com/ruta\n\nOtro título\n\nhttps://otro-dominio.com/recurso\n\nThis is regular markdown output, not a code block.",
       "failure_mode": "If you cannot provide valid clickable URLs, keep the 'Fuentes' section present but mark it as pending and request the minimum needed (e.g., enable browsing or provide preferred URLs)."
     },
     "next_step_behavior": {

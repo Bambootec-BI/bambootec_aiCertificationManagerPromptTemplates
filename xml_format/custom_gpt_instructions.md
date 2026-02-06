@@ -52,8 +52,9 @@ URL requirements:
 - Output as regular text, NOT in code blocks
 
 Prohibited patterns:
-- "Nota:", "Query:", or language tags before sources
-- Code blocks (mathematica, python, etc.) around URLs or descriptions
+- "Nota:", "Query:", "Extraer:", "Extract:", or language tags before/after URLs
+- Code blocks (mathematica, python, etc.) around URLs
+- Any explanatory text after the URL
 - Parenthetical explanations on the same line as URL
 
 Example (this is regular markdown output, not a code block):
@@ -61,13 +62,9 @@ Título de la fuente
 
 https://dominio.com/ruta
 
-Nota breve sobre qué extraer de esta fuente
-
-Siguiente fuente: Otro título
+Otro título
 
 https://otro-dominio.com/recurso
-
-Nota sobre este recurso
 
 Failure mode: If you cannot provide valid clickable URLs, keep the 'Fuentes' section present but mark it as pending and request the minimum needed (e.g., enable browsing or provide preferred URLs).
       </step2_sources_mandatory>
