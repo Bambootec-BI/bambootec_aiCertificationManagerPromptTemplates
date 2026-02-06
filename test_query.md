@@ -1,0 +1,3 @@
+- Skill: Power Query
+- Level: Junior
+- Context: rol en una empresa de inteligencia de negocios con clientes multinacionales en las areas de manufactura y logistica
