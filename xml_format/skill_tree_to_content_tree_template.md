@@ -45,10 +45,11 @@ Using the provided skill tree, produce a simplified actionable content tree in o
 NON-NEGOTIABLE: Every source MUST include a raw, working URL.
 
 URL requirements:
-- Just output the plain URL: https://example.com
-- Separate URLs from other text with blank lines
-- Do NOT use markdown [text](url) syntax
-- Do NOT wrap URLs in parentheses, quotes, or code blocks
+- Output the URL as plain text on its own line: https://example.com
+- Add blank lines before and after each URL for separation
+- Do NOT use markdown link syntax [text](url)
+- Do NOT wrap URLs in parentheses, quotes, code blocks, or any special formatting
+- Output as regular text, NOT in code blocks
 - Do NOT invent URLs - only real, accessible resources
 - Sources must be immediately usable for learning (YouTube videos/playlists, targeted documentation pages, practical articles, labs, notebooks)
 
@@ -128,14 +129,14 @@ NON-NEGOTIABLE: Do NOT use generic/umbrella sources (homepages, category pages, 
 - Write a 1-line section goal grounded in {context}
 - Include 'Expected learning outcomes' as 3–6 bullets (observable)
 - Include 'Coverage (details)' with: (a) the micro-skills verbatim, and (b) 3–6 bullets of what the section covers at a higher level (sub-areas/topics)
-- Include 'Sources (details)' with 2–6 items following the format in sources_non_negotiable (title/description, blank line, raw URL at column 1, blank line), + a short note that indicates why it's useful and what to extract. If paid, label note with 'Paid'. If not English, label 'Language: ES'
+- Include 'Sources (details)' with 2–6 items. Each source: title/description on one line, then URL on its own line, then a brief note about why it's useful and what to extract. If paid, label note with 'Paid'. If not English, label 'Language: ES'
 - Include 'Estimated time' as a range in {inputs.time_unit}
       </for_each_section>
 
       <for_each_micro_skill>
 - Include 'Expected learning outcomes' as 2–5 bullets (concrete)
 - Include 'Coverage (details)' as 3–7 short headings/bullets (topics only; no long explanations)
-- Include 'Sources (details)' with 2–6 items following the format in sources_non_negotiable (title/description, blank line, raw URL at column 1, blank line), + a short note indicating exactly what to learn/do. If paid, label 'Paid'. If not English, label 'Language: ES'
+- Include 'Sources (details)' with 2–6 items. Each source: title/description on one line, then URL on its own line, then a brief note indicating exactly what to learn/do. If paid, label 'Paid'. If not English, label 'Language: ES'
 - Include 'Estimated time' as a range in {inputs.time_unit}
 - Optionally include 'Prerequisites' ONLY when necessary to prevent confusion; otherwise omit it
       </for_each_micro_skill>
@@ -152,12 +153,12 @@ Skill tree: {skill_tree}
    - Coverage (details):
      - Micro-skills: &lt;list of micro-skills verbatim as bullets&gt;
      - Scope: &lt;3–6 bullets of sub-areas/topics&gt;
-   - Sources (details): &lt;2–6 items (title, raw URL separated by blank lines, note indicating why useful and what to extract). Label 'Paid' or 'Language: ES' if applicable&gt;
+   - Sources (details): &lt;2–6 items. Each source: title, then URL on separate line, then brief note indicating why useful and what to extract. Output as regular markdown text, NOT in code blocks. Label 'Paid' or 'Language: ES' if applicable&gt;
    - Estimated time: &lt;integer range in minutes&gt;
    1.1 **&lt;Micro-skill (verbatim)&gt;**
        - Expected learning outcomes: &lt;2–5 bullets&gt;
        - Coverage (details): &lt;3–7 bullets/headings&gt;
-       - Sources (details): &lt;2–6 items (title, raw URL separated by blank lines, note indicating what to learn/do). Label 'Paid' or 'Language: ES' if applicable&gt;
+       - Sources (details): &lt;2–6 items. Each source: title, then URL on separate line, then brief note indicating what to learn/do. Output as regular markdown text, NOT in code blocks. Label 'Paid' or 'Language: ES' if applicable&gt;
        - Estimated time: &lt;integer range in minutes&gt;
 
 At the end of each PART: Cumulative estimated total time: &lt;integer range in minutes&gt;

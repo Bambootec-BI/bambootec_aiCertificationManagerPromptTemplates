@@ -45,22 +45,29 @@ Consistency: Keep the exact same list structure, field names, and ordering acros
 Every Step 2 PART must include its 'Fuentes' section. Never omit sources in Step 2.
 
 URL requirements:
-- Just output the plain URL: https://dominio.com/ruta
-- Separate URLs from other text with blank lines
-- Do NOT use markdown [text](url) syntax
-- Do NOT wrap URLs in parentheses, quotes, or code blocks
+- Output the URL as plain text on its own line: https://dominio.com/ruta
+- Add blank lines before and after each URL for separation
+- Do NOT use markdown link syntax [text](url)
+- Do NOT wrap URLs in parentheses, quotes, code blocks, or any special formatting
+- Output as regular text, NOT in code blocks
 
 Prohibited patterns:
 - "Nota:", "Query:", or language tags before sources
 - Code blocks (mathematica, python, etc.) around URLs or descriptions
 - Parenthetical explanations on the same line as URL
 
-Example:
+Example (this is regular markdown output, not a code block):
 Título de la fuente
 
 https://dominio.com/ruta
 
-Siguiente fuente...
+Nota breve sobre qué extraer de esta fuente
+
+Siguiente fuente: Otro título
+
+https://otro-dominio.com/recurso
+
+Nota sobre este recurso
 
 Failure mode: If you cannot provide valid clickable URLs, keep the 'Fuentes' section present but mark it as pending and request the minimum needed (e.g., enable browsing or provide preferred URLs).
       </step2_sources_mandatory>
@@ -92,7 +99,7 @@ Allowed next workflows:
 Read the skill_tree_builder_template.md file (in your Knowledge). Ask for required inputs (placeholders) if missing. Insert them and execute. Then ask whether to continue.
           </step>
           <step number="2">
-Read the skill_tree_to_content_tree_template.md file (in your Knowledge). Insert inputs and generate the content iteratively as PARTS across turns. Do not confound steps with parts. Keep the same output format across PARTS. Every PART must include Fuentes with clickable URLs (raw URL on its own line). Then ask whether to continue.
+Read the skill_tree_to_content_tree_template.md file (in your Knowledge). Insert inputs and generate the content iteratively as PARTS across turns. Do not confound steps with parts. Keep the same output format across PARTS. Every PART must include Fuentes with clickable URLs (plain URL on its own line, output as regular text). Then ask whether to continue.
           </step>
           <step number="3">
 Once Step 2 is finished, ask to run practice exercise generation with the skill_to_practice_exercises_template.md file (in your Knowledge).

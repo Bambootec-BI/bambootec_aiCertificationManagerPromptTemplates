@@ -42,10 +42,11 @@
       "sources_non_negotiable": {
         "description": "NON-NEGOTIABLE: Every source MUST include a raw, working URL.",
         "url_format": [
-          "Just output the plain URL: https://example.com",
-          "Separate URLs from other text with blank lines",
-          "Do NOT use markdown [text](url) syntax",
+          "Output the URL as plain text on its own line: https://example.com",
+          "Add blank lines before and after each URL for separation",
+          "Do NOT use markdown link syntax [text](url)",
           "Do NOT wrap URLs in parentheses, quotes, code blocks, or any special formatting",
+          "Output as regular text, NOT in code blocks",
           "Do NOT add labels like 'Nota:', 'Query:', or language tags before URLs",
           "Do NOT invent URLs - only real, accessible resources"
         ],
@@ -114,13 +115,13 @@
         "Write a 1-line section goal grounded in {context}",
         "Include 'Expected learning outcomes' as 3–6 bullets (observable)",
         "Include 'Coverage (details)' with: (a) the micro-skills verbatim, and (b) 3–6 bullets of what the section covers at a higher level (sub-areas/topics)",
-        "Include 'Sources (details)' with 2–6 items (title, raw URL separated by blank lines, note indicating why it's useful and what to extract). If paid, label 'Paid'. If not English, label 'Language: ES'",
+        "Include 'Sources (details)' with 2–6 items. Each source: title/description on one line, then URL on its own line, then a brief note indicating why it's useful and what to extract. If paid, label 'Paid'. If not English, label 'Language: ES'",
         "Include 'Estimated time' as a range in {inputs.time_unit}"
       ],
       "for_each_micro_skill": [
         "Include 'Expected learning outcomes' as 2–5 bullets (concrete)",
         "Include 'Coverage (details)' as 3–7 short headings/bullets (topics only; no long explanations)",
-        "Include 'Sources (details)' with 2–6 items (title, raw URL separated by blank lines, note indicating exactly what to learn/do). If paid, label 'Paid'. If not English, label 'Language: ES'",
+        "Include 'Sources (details)' with 2–6 items. Each source: title/description on one line, then URL on its own line, then a brief note indicating exactly what to learn/do. If paid, label 'Paid'. If not English, label 'Language: ES'",
         "Include 'Estimated time' as a range in {inputs.time_unit}",
         "Optionally include 'Prerequisites' ONLY when necessary to prevent confusion; otherwise omit it"
       ]
@@ -137,12 +138,12 @@
           "   - Coverage (details):",
           "     - Micro-skills: <list of micro-skills verbatim as bullets>",
           "     - Scope: <3–6 bullets of sub-areas/topics>",
-          "   - Sources (details): <2–6 items: title, raw URL separated by blank lines, note indicating why useful and what to extract>",
+          "   - Sources (details): <2–6 items. Each source: title, then URL on separate line, then brief note indicating why useful and what to extract. Output as regular markdown text, NOT in code blocks>",
           "   - Estimated time: <integer range in minutes>",
           "   1.1 **<Micro-skill (verbatim)>**",
           "       - Expected learning outcomes: <2–5 bullets>",
           "       - Coverage (details): <3–7 bullets/headings>",
-          "       - Sources (details): <2–6 items: title, raw URL separated by blank lines, note indicating what to learn/do>",
+          "       - Sources (details): <2–6 items. Each source: title, then URL on separate line, then brief note indicating what to learn/do. Output as regular markdown text, NOT in code blocks>",
           "       - Estimated time: <integer range in minutes>"
         ],
         "running_totals": [
