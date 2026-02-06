@@ -40,10 +40,11 @@
         "Do provide compact headings and curated learning resources; keep it easy to read"
       ],
       "sources_non_negotiable": {
-        "description": "NON-NEGOTIABLE: Every source MUST include a raw, working URL.",
+        "description": "NON-NEGOTIABLE: Every source MUST be a bare URL only, nothing else.",
         "url_format": [
-          "Output the URL as plain text on its own line: https://example.com",
+          "Output ONLY the URL as plain text on its own line: https://example.com",
           "Add blank lines before and after each URL for separation",
+          "Do NOT include titles, names, or descriptions",
           "Do NOT use markdown link syntax [text](url)",
           "Do NOT wrap URLs in parentheses, quotes, code blocks, or any special formatting",
           "Output as regular text, NOT in code blocks",
@@ -51,12 +52,15 @@
           "Do NOT invent URLs - only real, accessible resources"
         ],
         "prohibited_patterns": [
+          "Source titles, names, or labels before URLs",
+          "Parenthetical additions like (Book), (Microsoft Learn), (Video), etc.",
           "\"Nota:\", \"Query:\", \"Extraer:\", \"Extract:\", or language tags before/after URLs",
           "Code blocks (mathematica, python, etc.) around URLs",
           "Any explanatory text after the URL",
-          "Parenthetical explanations on the same line as URL"
+          "Parenthetical explanations on the same line as URL",
+          "Em dashes or descriptions before/after URLs"
         ],
-        "requirements": "Sources must be immediately usable: YouTube videos, documentation, articles, labs, notebooks."
+        "requirements": "Sources must be immediately usable: YouTube videos, documentation, articles, labs, notebooks. Just the URL, nothing else."
       },
       "source_quality_and_cost": [
         "Prioritize the most practical, high-signal resources for fast learning in this {context}",
@@ -116,13 +120,13 @@
         "Write a 1-line section goal grounded in {context}",
         "Include 'Expected learning outcomes' as 3–6 bullets (observable)",
         "Include 'Coverage (details)' with: (a) the micro-skills verbatim, and (b) 3–6 bullets of what the section covers at a higher level (sub-areas/topics)",
-        "Include 'Sources (details)' with 2–6 items. Each source: title on one line, then URL on its own line. Nothing else.",
+        "Include 'Sources' with 2–6 items. Each source: just the URL on its own line with blank lines for separation. Nothing else.",
         "Include 'Estimated time' as a range in {inputs.time_unit}"
       ],
       "for_each_micro_skill": [
         "Include 'Expected learning outcomes' as 2–5 bullets (concrete)",
         "Include 'Coverage (details)' as 3–7 short headings/bullets (topics only; no long explanations)",
-        "Include 'Sources (details)' with 2–6 items. Each source: title on one line, then URL on its own line. Nothing else.",
+        "Include 'Sources' with 2–6 items. Each source: just the URL on its own line with blank lines for separation. Nothing else.",
         "Include 'Estimated time' as a range in {inputs.time_unit}",
         "Optionally include 'Prerequisites' ONLY when necessary to prevent confusion; otherwise omit it"
       ]
@@ -139,12 +143,12 @@
           "   - Coverage (details):",
           "     - Micro-skills: <list of micro-skills verbatim as bullets>",
           "     - Scope: <3–6 bullets of sub-areas/topics>",
-          "   - Sources (details): <2–6 items. Each source: title on one line, then URL on separate line. Nothing else. Output as regular markdown text, NOT in code blocks>",
+          "   - Sources: <2–6 items. Each source: just the URL on its own line with blank lines for separation. Nothing else. Output as regular markdown text, NOT in code blocks>",
           "   - Estimated time: <integer range in minutes>",
           "   1.1 **<Micro-skill (verbatim)>**",
           "       - Expected learning outcomes: <2–5 bullets>",
           "       - Coverage (details): <3–7 bullets/headings>",
-          "       - Sources (details): <2–6 items. Each source: title on one line, then URL on separate line. Nothing else. Output as regular markdown text, NOT in code blocks>",
+          "       - Sources: <2–6 items. Each source: just the URL on its own line with blank lines for separation. Nothing else. Output as regular markdown text, NOT in code blocks>",
           "       - Estimated time: <integer range in minutes>"
         ],
         "running_totals": [

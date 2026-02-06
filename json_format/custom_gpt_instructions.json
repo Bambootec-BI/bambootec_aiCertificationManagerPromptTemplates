@@ -48,12 +48,15 @@
         ]
       },
       "prohibited_patterns": [
+        "Source titles, names, or labels before URLs",
+        "Parenthetical additions like (Book), (Microsoft Learn), (Video), etc.",
         "\"Nota:\", \"Query:\", \"Extraer:\", \"Extract:\", or language tags before/after URLs",
         "Code blocks (mathematica, python, etc.) around URLs",
         "Any explanatory text after the URL",
-        "Parenthetical explanations on the same line as URL"
+        "Parenthetical explanations on the same line as URL",
+        "Em dashes or descriptions before/after URLs"
       ],
-      "example": "Título de la fuente\n\nhttps://dominio.com/ruta\n\nOtro título\n\nhttps://otro-dominio.com/recurso\n\nThis is regular markdown output, not a code block.",
+      "example": "https://dominio.com/ruta\n\nhttps://otro-dominio.com/recurso\n\nThis is regular markdown output, not a code block.",
       "failure_mode": "If you cannot provide valid clickable URLs, keep the 'Fuentes' section present but mark it as pending and request the minimum needed (e.g., enable browsing or provide preferred URLs)."
     },
     "next_step_behavior": {

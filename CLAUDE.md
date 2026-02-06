@@ -58,7 +58,7 @@ Markdown files with XML tags for Custom GPT prompt engineering (better instructi
 
 4. **Real Sources Only**: No search queries or invented URLs
    - Every source must be a clickable URL to existing content
-   - Sources must be self-explanatory (no alignment notes required)
+   - Sources are bare URLs only (no titles, no names, no descriptions)
 
 5. **Dataset Policy**: Only real, downloadable datasets
    - Framework built-in loaders (e.g., `sklearn.datasets`)
@@ -111,7 +111,7 @@ All templates produce two types of outputs:
    - **Hierarchical structure** (numbered sections, maintained across PARTS)
    - **Time estimates** (per item + cumulative total)
    - **Spanish labels** (for all user-visible fields)
-   - **Sources** (clickable URLs with title only)
+   - **Sources** (bare URLs only, nothing else)
 
 2. **Summary outputs** (for next step):
    - Condensed versions capturing essential information
@@ -133,19 +133,16 @@ Templates support iterative output across multiple chat turns:
 
 **Problem**: Links must be reliably clickable in ChatGPT interface.
 
-**Rule**: Raw URLs separated from other text by blank lines:
+**Rule**: Bare URLs only, separated by blank lines:
 
 ```
-Title of source
-
 https://www.kaggle.com/datasets/example
-
-Next source title
 
 https://example.com/another-resource
 ```
 
 **Never**:
+- Add titles, names, or descriptions before URLs
 - Put links inside code blocks
 - Use markdown [text](url) syntax
 - Wrap URLs in parentheses, quotes, or code blocks
@@ -154,6 +151,7 @@ https://example.com/another-resource
 - Use search query placeholders
 - Invent URLs
 - Put parenthetical explanations on same line as URL
+- Add labels like "(Book)", "(Microsoft Learn)", "(Video)", etc.
 
 ### 2. Validation Invariants
 
@@ -240,10 +238,10 @@ Before considering templates "done":
    - Verify: weights sum to 100, 2 levels, assessable nodes
 
 2. **Content plan validation**:
-   - Check: every "Fuente" is clickable URL
+   - Check: every "Fuente" is a bare URL only (no titles or descriptions)
    - Check: no search queries present
    - Check: total time computed
-   - Check: sources have brief usefulness notes (no alignment references required)
+   - Check: URLs are separated by blank lines
 
 3. **Exercise validation**:
    - Check: dataset acquisition method present
@@ -327,14 +325,12 @@ Key sections in templates:
 
 **Changing URL/source format** (current standard):
 ```
-Title of source
-
 https://example.com/resource
-
-Next source title
 
 https://example.com/another-resource
 ```
+
+Each source is just a bare URL on its own line with blank lines for separation. No titles, no names, no descriptions.
 
 ---
 

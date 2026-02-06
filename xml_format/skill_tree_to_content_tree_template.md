@@ -42,22 +42,27 @@ Using the provided skill tree, produce a simplified actionable content tree in o
       </no_full_teaching_content>
 
       <sources_non_negotiable>
-NON-NEGOTIABLE: Every source MUST include a raw, working URL.
+NON-NEGOTIABLE: Every source MUST be a bare URL only, nothing else.
 
 URL requirements:
-- Output the URL as plain text on its own line: https://example.com
+- Output ONLY the URL as plain text on its own line: https://example.com
 - Add blank lines before and after each URL for separation
+- Do NOT include titles, names, or descriptions
 - Do NOT use markdown link syntax [text](url)
 - Do NOT wrap URLs in parentheses, quotes, code blocks, or any special formatting
 - Output as regular text, NOT in code blocks
+- Do NOT add labels like 'Nota:', 'Query:', or language tags before URLs
 - Do NOT invent URLs - only real, accessible resources
 - Sources must be immediately usable for learning (YouTube videos/playlists, targeted documentation pages, practical articles, labs, notebooks)
 
 Prohibited patterns:
+- Source titles, names, or labels before URLs
+- Parenthetical additions like (Book), (Microsoft Learn), (Video), etc.
 - "Nota:", "Query:", "Extraer:", "Extract:", or language tags before/after URLs
 - Code blocks (mathematica, python, etc.) around URLs
 - Any explanatory text after the URL
 - Parenthetical explanations on the same line as URL
+- Em dashes or descriptions before/after URLs
       </sources_non_negotiable>
 
       <source_quality_and_cost>
@@ -130,14 +135,14 @@ NON-NEGOTIABLE: Do NOT use generic/umbrella sources (homepages, category pages, 
 - Write a 1-line section goal grounded in {context}
 - Include 'Expected learning outcomes' as 3–6 bullets (observable)
 - Include 'Coverage (details)' with: (a) the micro-skills verbatim, and (b) 3–6 bullets of what the section covers at a higher level (sub-areas/topics)
-- Include 'Sources (details)' with 2–6 items. Each source: title on one line, then URL on its own line. Nothing else.
+- Include 'Sources' with 2–6 items. Each source: just the URL on its own line with blank lines for separation. Nothing else.
 - Include 'Estimated time' as a range in {inputs.time_unit}
       </for_each_section>
 
       <for_each_micro_skill>
 - Include 'Expected learning outcomes' as 2–5 bullets (concrete)
 - Include 'Coverage (details)' as 3–7 short headings/bullets (topics only; no long explanations)
-- Include 'Sources (details)' with 2–6 items. Each source: title on one line, then URL on its own line. Nothing else.
+- Include 'Sources' with 2–6 items. Each source: just the URL on its own line with blank lines for separation. Nothing else.
 - Include 'Estimated time' as a range in {inputs.time_unit}
 - Optionally include 'Prerequisites' ONLY when necessary to prevent confusion; otherwise omit it
       </for_each_micro_skill>
@@ -154,12 +159,12 @@ Skill tree: {skill_tree}
    - Coverage (details):
      - Micro-skills: &lt;list of micro-skills verbatim as bullets&gt;
      - Scope: &lt;3–6 bullets of sub-areas/topics&gt;
-   - Sources (details): &lt;2–6 items. Each source: title on one line, then URL on separate line. Nothing else. Output as regular markdown text, NOT in code blocks.&gt;
+   - Sources: &lt;2–6 items. Each source: just the URL on its own line with blank lines for separation. Nothing else. Output as regular markdown text, NOT in code blocks.&gt;
    - Estimated time: &lt;integer range in minutes&gt;
    1.1 **&lt;Micro-skill (verbatim)&gt;**
        - Expected learning outcomes: &lt;2–5 bullets&gt;
        - Coverage (details): &lt;3–7 bullets/headings&gt;
-       - Sources (details): &lt;2–6 items. Each source: title on one line, then URL on separate line. Nothing else. Output as regular markdown text, NOT in code blocks.&gt;
+       - Sources: &lt;2–6 items. Each source: just the URL on its own line with blank lines for separation. Nothing else. Output as regular markdown text, NOT in code blocks.&gt;
        - Estimated time: &lt;integer range in minutes&gt;
 
 At the end of each PART: Cumulative estimated total time: &lt;integer range in minutes&gt;

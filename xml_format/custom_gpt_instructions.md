@@ -52,17 +52,16 @@ URL requirements:
 - Output as regular text, NOT in code blocks
 
 Prohibited patterns:
+- Source titles, names, or labels before URLs
+- Parenthetical additions like (Book), (Microsoft Learn), (Video), etc.
 - "Nota:", "Query:", "Extraer:", "Extract:", or language tags before/after URLs
 - Code blocks (mathematica, python, etc.) around URLs
 - Any explanatory text after the URL
 - Parenthetical explanations on the same line as URL
+- Em dashes or descriptions before/after URLs
 
 Example (this is regular markdown output, not a code block):
-Título de la fuente
-
 https://dominio.com/ruta
-
-Otro título
 
 https://otro-dominio.com/recurso
 
