@@ -47,7 +47,7 @@
 
     <conceptual_overview_requirements>
       <purpose>Every skill tree MUST start with a conceptual overview section that provides mental models and context before practical skills</purpose>
-      <section_title_output>Visión Conceptual (in Spanish output)</section_title_output>
+      <section_title_output>Conceptual Overview (translated per language_policy in output)</section_title_output>
       <learning_order>0 (always first, before all practical skills which start at 1)</learning_order>
 
       <level_adaptation>
@@ -137,23 +137,29 @@
     <output_format>
       <single_output>
         <type>Numbered hierarchical skill tree (book-index style)</type>
-        <format>Numbered markdown list</format>
+        <format>Sections as ### headings, skills as plain text lines</format>
         <requirements>
-          <requirement>Two levels only: Level 1 = Section numbers (1, 2, 3…), Level 2 = Skill numbers (1.1, 1.2, 2.1…)</requirement>
+          <requirement>Two levels only: Level 1 = Sections as ### headings with number, Level 2 = Skills as plain text lines with decimal number</requirement>
           <requirement>Ordered by learning progression</requirement>
-          <requirement>Conceptual Overview section uses 0 as its number (0, 0.1, 0.2, 0.3)</requirement>
-          <requirement>Impact (%) shown per skill — e.g., "1.1 Skill title (examples) — Impacto X%"</requirement>
-          <requirement>No table, no justifications, no "Why this matters" column — just the numbered tree</requirement>
+          <requirement>Conceptual Overview section is number 0</requirement>
+          <requirement>Impact (%) shown per skill</requirement>
+          <requirement>No table, no justifications, no "Why this matters" — just the tree</requirement>
+          <requirement>Do NOT use markdown list syntax (no "-", no "*", no "1." ordered lists). Skills are plain text lines, not list items.</requirement>
         </requirements>
         <example>
-0. **Visión Conceptual**
-   0.1 Entender qué es X y su valor (definición, casos de uso, valor práctico) — Impacto 4%
-   0.2 Interiorizar el flujo mental de trabajo (pasos clave, analogías) — Impacto 4%
-1. **Sección Uno**
-   1.1 Primera habilidad (ejemplo A, ejemplo B) — Impacto 5%
-   1.2 Segunda habilidad (ejemplo C, ejemplo D) — Impacto 4%
-2. **Sección Dos**
-   2.1 Tercera habilidad (ejemplo E, ejemplo F) — Impacto 3%
+### 0 Conceptual Overview
+
+0.1 Understand what X is and its value (definition, use cases, practical value) — Impact 4%
+0.2 Internalize the mental workflow (key steps, analogies) — Impact 4%
+
+### 1 Section One
+
+1.1 First skill (example A, example B) — Impact 5%
+1.2 Second skill (example C, example D) — Impact 4%
+
+### 2 Section Two
+
+2.1 Third skill (example E, example F) — Impact 3%
         </example>
       </single_output>
     </output_format>

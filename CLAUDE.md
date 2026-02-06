@@ -60,10 +60,12 @@ Markdown files with XML tags for Custom GPT prompt engineering (better instructi
    - Every source must be a clickable URL to existing content
    - Sources are bare URLs only (no titles, no names, no descriptions)
 
-5. **Video Source Priority** (content tree): At least 40% of sources must be video content
-   - YouTube tutorials, playlists, conference talks, screencasts, live-coding sessions
-   - Each node must have at least 1 video source; nodes with 4+ sources need at least 2
-   - Prefer hands-on/demo videos over lecture-only formats
+5. **Video Source Policy** (content tree): Every node must include at least 1 video source, allocated by node type
+   - Procedural/visual nodes (UI, demos, debugging): 2+ videos
+   - Conceptual/analytical nodes (models, architecture): 1-2 videos
+   - Reference/definitional nodes (terminology, rules): 1 video
+   - Global floor: at least 30% of all sources should be videos
+   - Prefer shorter, denser videos (10-20 min) over long lectures
 
 6. **Dataset Policy**: Only real, downloadable datasets
    - Framework built-in loaders (e.g., `sklearn.datasets`)
@@ -173,8 +175,8 @@ Each template must enforce:
 
 **skill_tree_to_content_tree**:
 - Every source is a real URL
-- At least 40% of all sources must be video content (YouTube, conference talks, screencasts)
-- Each node with 2–6 sources must have at least 1 video; nodes with 4+ sources need at least 2 videos
+- Every node must include at least 1 video source (procedural 2+, conceptual 1-2, reference 1)
+- At least 30% of all sources across the tree should be videos
 - Total time computed and reported
 - Minimum 80% English sources (hardcoded default)
 
@@ -253,8 +255,8 @@ Before considering templates "done":
 2. **Content plan validation**:
    - Check: every "Fuente" is a bare URL only (no titles or descriptions)
    - Check: no search queries present
-   - Check: at least 40% of sources are video URLs (YouTube, conference talks, etc.)
-   - Check: every node has at least 1 video source; nodes with 4+ sources have at least 2
+   - Check: every node has at least 1 video source (procedural nodes 2+, conceptual 1-2, reference 1)
+   - Check: at least 30% of all sources across the tree are videos
    - Check: total time computed
    - Check: URLs are separated by blank lines
 
