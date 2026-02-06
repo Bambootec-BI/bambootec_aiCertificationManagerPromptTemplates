@@ -107,26 +107,20 @@
           "Avoid linking to general product documentation entry points (e.g., documentation home, overview pages). Use deep links to the specific page/section that teaches the exact micro-skill",
           "Every source must be tightly aligned to the node: the title/section/video must clearly match the micro-skill name or its immediate subtopics"
         ]
-      },
-      "alignment_per_source": [
-        "For every source item, include a short 'Alignment:' note describing exactly which part of the source covers the micro-skill",
-        "For videos, include a timestamp range when possible (e.g., 'Alignment: 12:30–18:10 explains X')",
-        "For articles/docs, reference the specific heading/section name (e.g., 'Alignment: section \"...\" covers X')",
-        "If you cannot provide an alignment note, replace the source with a better-aligned one"
-      ]
+      }
     },
     "content_requirements": {
       "for_each_section": [
         "Write a 1-line section goal grounded in {context}",
         "Include 'Expected learning outcomes' as 3–6 bullets (observable)",
         "Include 'Coverage (details)' with: (a) the micro-skills verbatim, and (b) 3–6 bullets of what the section covers at a higher level (sub-areas/topics)",
-        "Include 'Sources (details)' with 2–6 items (title, raw URL separated by blank lines, note with 'Alignment:' reference to exact part). If paid, label 'Paid'. If not English, label 'Language: ES'",
+        "Include 'Sources (details)' with 2–6 items (title, raw URL separated by blank lines, note indicating why it's useful and what to extract). If paid, label 'Paid'. If not English, label 'Language: ES'",
         "Include 'Estimated time' as a range in {inputs.time_unit}"
       ],
       "for_each_micro_skill": [
         "Include 'Expected learning outcomes' as 2–5 bullets (concrete)",
         "Include 'Coverage (details)' as 3–7 short headings/bullets (topics only; no long explanations)",
-        "Include 'Sources (details)' with 2–6 items (title, raw URL separated by blank lines, note with 'Alignment:' reference to heading/timecode). If paid, label 'Paid'. If not English, label 'Language: ES'",
+        "Include 'Sources (details)' with 2–6 items (title, raw URL separated by blank lines, note indicating exactly what to learn/do). If paid, label 'Paid'. If not English, label 'Language: ES'",
         "Include 'Estimated time' as a range in {inputs.time_unit}",
         "Optionally include 'Prerequisites' ONLY when necessary to prevent confusion; otherwise omit it"
       ]
@@ -143,12 +137,12 @@
           "   - Coverage (details):",
           "     - Micro-skills: <list of micro-skills verbatim as bullets>",
           "     - Scope: <3–6 bullets of sub-areas/topics>",
-          "   - Sources (details): <2–6 items: title, raw URL separated by blank lines, note with 'Alignment:'>",
+          "   - Sources (details): <2–6 items: title, raw URL separated by blank lines, note indicating why useful and what to extract>",
           "   - Estimated time: <integer range in minutes>",
           "   1.1 **<Micro-skill (verbatim)>**",
           "       - Expected learning outcomes: <2–5 bullets>",
           "       - Coverage (details): <3–7 bullets/headings>",
-          "       - Sources (details): <2–6 items: title, raw URL separated by blank lines, note with 'Alignment:'>",
+          "       - Sources (details): <2–6 items: title, raw URL separated by blank lines, note indicating what to learn/do>",
           "       - Estimated time: <integer range in minutes>"
         ],
         "running_totals": [

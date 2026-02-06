@@ -121,13 +121,6 @@ NON-NEGOTIABLE: Do NOT use generic/umbrella sources (homepages, category pages, 
 - Avoid linking to general product documentation entry points (e.g., documentation home, overview pages). Use deep links to the specific page/section that teaches the exact micro-skill
 - Every source must be tightly aligned to the node: the title/section/video must clearly match the micro-skill name or its immediate subtopics
       </no_generic_sources>
-
-      <alignment_per_source>
-- For every source item, include a short 'Alignment:' note describing exactly which part of the source covers the micro-skill
-- For videos, include a timestamp range when possible (e.g., 'Alignment: 12:30–18:10 explains X')
-- For articles/docs, reference the specific heading/section name (e.g., 'Alignment: section "..." covers X')
-- If you cannot provide an alignment note, replace the source with a better-aligned one
-      </alignment_per_source>
     </constraints>
 
     <content_requirements>
@@ -135,14 +128,14 @@ NON-NEGOTIABLE: Do NOT use generic/umbrella sources (homepages, category pages, 
 - Write a 1-line section goal grounded in {context}
 - Include 'Expected learning outcomes' as 3–6 bullets (observable)
 - Include 'Coverage (details)' with: (a) the micro-skills verbatim, and (b) 3–6 bullets of what the section covers at a higher level (sub-areas/topics)
-- Include 'Sources (details)' with 2–6 items following the format in sources_non_negotiable (title/description, blank line, raw URL at column 1, blank line), + a short note that indicates why it's useful, what to extract, and an explicit 'Alignment:' reference to the exact part (heading/timecode) that matches the section. If paid, label note with 'Paid'. If not English, label 'Language: ES'
+- Include 'Sources (details)' with 2–6 items following the format in sources_non_negotiable (title/description, blank line, raw URL at column 1, blank line), + a short note that indicates why it's useful and what to extract. If paid, label note with 'Paid'. If not English, label 'Language: ES'
 - Include 'Estimated time' as a range in {inputs.time_unit}
       </for_each_section>
 
       <for_each_micro_skill>
 - Include 'Expected learning outcomes' as 2–5 bullets (concrete)
 - Include 'Coverage (details)' as 3–7 short headings/bullets (topics only; no long explanations)
-- Include 'Sources (details)' with 2–6 items following the format in sources_non_negotiable (title/description, blank line, raw URL at column 1, blank line), + a short note indicating exactly what to learn/do and an explicit 'Alignment:' reference (heading/timecode) showing where the micro-skill is covered. If paid, label 'Paid'. If not English, label 'Language: ES'
+- Include 'Sources (details)' with 2–6 items following the format in sources_non_negotiable (title/description, blank line, raw URL at column 1, blank line), + a short note indicating exactly what to learn/do. If paid, label 'Paid'. If not English, label 'Language: ES'
 - Include 'Estimated time' as a range in {inputs.time_unit}
 - Optionally include 'Prerequisites' ONLY when necessary to prevent confusion; otherwise omit it
       </for_each_micro_skill>
@@ -159,12 +152,12 @@ Skill tree: {skill_tree}
    - Coverage (details):
      - Micro-skills: &lt;list of micro-skills verbatim as bullets&gt;
      - Scope: &lt;3–6 bullets of sub-areas/topics&gt;
-   - Sources (details): &lt;2–6 items (title, raw URL separated by blank lines, note with 'Alignment:' reference). Label 'Paid' or 'Language: ES' if applicable&gt;
+   - Sources (details): &lt;2–6 items (title, raw URL separated by blank lines, note indicating why useful and what to extract). Label 'Paid' or 'Language: ES' if applicable&gt;
    - Estimated time: &lt;integer range in minutes&gt;
    1.1 **&lt;Micro-skill (verbatim)&gt;**
        - Expected learning outcomes: &lt;2–5 bullets&gt;
        - Coverage (details): &lt;3–7 bullets/headings&gt;
-       - Sources (details): &lt;2–6 items (title, raw URL separated by blank lines, note with 'Alignment:' reference). Label 'Paid' or 'Language: ES' if applicable&gt;
+       - Sources (details): &lt;2–6 items (title, raw URL separated by blank lines, note indicating what to learn/do). Label 'Paid' or 'Language: ES' if applicable&gt;
        - Estimated time: &lt;integer range in minutes&gt;
 
 At the end of each PART: Cumulative estimated total time: &lt;integer range in minutes&gt;

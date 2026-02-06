@@ -47,7 +47,6 @@ The repository contains 5 JSON template files that define the prompt orchestrati
 
 3. **Real Sources Only**: No search queries or invented URLs
    - Every source must be a clickable URL to existing content
-   - Sources must include alignment notes (timestamp/section/heading)
 
 4. **Dataset Policy**: Only real, downloadable datasets
    - Framework built-in loaders (e.g., `sklearn.datasets`)
@@ -88,7 +87,7 @@ All templates must produce:
 - **Hierarchical structure** (numbered sections, maintained across PARTS)
 - **Time estimates** (per item + cumulative total)
 - **Spanish labels** (for all user-visible fields)
-- **Sources** (clickable URLs with alignment notes)
+- **Sources** (clickable URLs)
 
 ### PARTS System
 Templates support iterative output across multiple chat turns:
@@ -135,7 +134,6 @@ Each template must enforce:
 
 **skill_tree_to_content_tree.json**:
 - Every source is a real URL
-- Each source includes alignment detail (timestamp/section/heading)
 - Total time computed and reported
 - Minimum 80% English sources (when specified)
 
@@ -212,7 +210,6 @@ Before considering templates "done":
 2. **Content plan validation**:
    - Check: every "Fuente" is clickable URL
    - Check: no search queries present
-   - Check: alignment notes exist (timestamp/section)
    - Check: total time computed
 
 3. **Exercise validation**:
