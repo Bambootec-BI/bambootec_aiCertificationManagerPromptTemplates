@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "skill_to_evaluation_exam.real_datasets_only.fully_agnostic.eslabels.parts",
-    "version": "v1.0.0",
+    "version": "v1.3.0",
     "notes": [
       "Generates certification-style exam + evaluator guide.",
       "Uses proper JSON structure for better instruction adherence.",

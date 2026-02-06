@@ -1,6 +1,6 @@
 <template>
   <meta>
-    <version>v1.1.0</version>
+    <version>v1.3.0</version>
     <name>skill_to_practice_exercises.real_datasets_only.fully_agnostic.eslabels.parts</name>
     <description>Generates practice exercises for ANY skill, ANY level, ANY context using XML-structured prompts for better instruction adherence.</description>
     <parameters_required_minimal>

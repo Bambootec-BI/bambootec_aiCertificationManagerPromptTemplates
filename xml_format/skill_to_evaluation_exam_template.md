@@ -1,6 +1,6 @@
 <template>
   <meta>
-    <version>v1.0.0</version>
+    <version>v1.3.0</version>
     <name>skill_to_evaluation_exam.real_datasets_only.fully_agnostic.eslabels.parts</name>
     <description>Generates certification-style exam + evaluator guide using XML-structured prompts. Instructions in English, output controlled by language_policy.</description>
     <parameters_required_minimal>

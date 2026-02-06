@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "skill_tree_to_content",
-    "version": "v1.0.0",
+    "version": "v1.3.0",
     "notes": [
       "English prompt for best model performance; Spanish output labels.",
       "Simplified organic hierarchy.",

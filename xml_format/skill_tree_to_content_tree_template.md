@@ -1,6 +1,6 @@
 <template>
   <meta>
-    <version>v1.0.0</version>
+    <version>v1.3.0</version>
     <name>skill_tree_to_content</name>
     <description>English prompt for best model performance; Spanish output labels. Simplified organic hierarchy. NON-NEGOTIABLE: sources must be clickable URLs to real content (no search queries). Strong preference for English sources and deep, micro-skill-specific links (no generic docs/landing pages). Prefer free/practical sources; paid MOOCs may be suggested but de-prioritized and clearly labeled.</description>
   </meta>

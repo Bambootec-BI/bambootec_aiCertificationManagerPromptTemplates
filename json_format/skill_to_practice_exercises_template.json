@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "skill_to_practice_exercises.real_datasets_only.fully_agnostic.eslabels.parts",
-    "version": "v1.1.0",
+    "version": "v1.3.0",
     "notes": [
       "Generates practice exercises for ANY skill, ANY level, ANY context.",
       "Uses proper JSON structure for better instruction adherence.",
