@@ -1,7 +1,14 @@
 {
-  "template_version": "v1.0.0",
-  "name": "skill_to_evaluation_exam.real_datasets_only.fully_agnostic.eslabels.parts",
-  "description": "Generates certification-style exam + evaluator guide using XML-structured prompts. Instructions in English, output controlled by language_policy.",
+  "meta": {
+    "name": "skill_to_evaluation_exam.real_datasets_only.fully_agnostic.eslabels.parts",
+    "version": "v1.0.0",
+    "notes": [
+      "Generates certification-style exam + evaluator guide.",
+      "Uses proper JSON structure for better instruction adherence.",
+      "Instructions in English, output controlled by language_policy.",
+      "Real datasets only - no synthetic data generation."
+    ]
+  },
   "parameters_required_minimal": ["skill", "content_summary", "exercise_summary", "level", "context"],
   "inputs": {
     "skill": "[SKILL_NAME]",
@@ -15,5 +22,194 @@
     "max_items_per_part": 24,
     "time_unit": "minutes"
   },
-  "prompt": "<language_policy>\nTranslate user input into English. Think in English. Only translate to Spanish for the output.\nInstruction language: English | Output language: Spanish\nExceptions: proper names, commonly used names, code blocks\n</language_policy>\n\n<role>\nPersona: Instructional designer + certification examiner\nMission: Design an evaluable certification-style exam for {inputs.skill} at {inputs.level} in {inputs.context}, aligned to {inputs.content_summary} and {inputs.exercise_summary}.\n</role>\n\n<task>\nGenerate a complete certification exam with evaluator guide. The exam must test real understanding and practical ability in {inputs.skill} at {inputs.level} for {inputs.context}. Every item must map to content_summary and exercise_summary. Use real datasets only. Include submission manifest for hands-on tasks.\n</task>\n\n<constraints>\n<skill_type_inference>\nInfer skill_type from inputs.skill + inputs.content_summary + inputs.exercise_summary:\n- If it requires implementation/coding/engineering → technical\n- If mostly decision-making/communication/process → non_technical  \n- If both → mixed\n\nQuestion mix by skill_type:\ntechnical: MCQ 25-40%, Short answer 10-20%, Code completion 15-30%, Hands-on 25-45%, Use cases 0-10%\nnon_technical: MCQ 20-35%, Short answer 15-25%, Use cases 35-55%, Hands-on 0-20%, Code completion 0%\nmixed: MCQ 20-35%, Short answer 10-20%, Code completion 10-20%, Use cases 15-30%, Hands-on 20-40%\n</skill_type_inference>\n\n<alignment>\n- Every item must explicitly map to (a) at least one concept/pitfall/constraint from content_summary AND (b) at least one coverage point from exercise_summary\n</alignment>\n\n<scoring>\n- Total score must normalize to exactly 100 points\n- Passing threshold: 70%\n- Each question/task must show points clearly\n</scoring>\n\n<dataset_constraints>\nNON-NEGOTIABLE: Every dataset MUST include a raw, working URL.\n\nURL requirements:\n- Just output the plain URL: https://example.com\n- Separate URLs from other text with blank lines\n- Do NOT use markdown [text](url) syntax\n- Do NOT wrap URLs in parentheses, quotes, or code blocks\n- Do NOT invent URLs - only real, accessible resources\n\nProhibited patterns:\n- \"Nota:\", \"Query:\", or language tags before sources\n- Code blocks (mathematica, python, etc.) around URLs or descriptions\n- Parenthetical explanations on the same line as URL\n\nDataset requirements: Free, legal, no login walls, max 200MB\nAcquisition methods: framework loader, registry loader, direct URL, public repo file, API export\n\nBlocking: If dataset required and no real acquisition method available, output BLOCKED and omit that item.\n</dataset_constraints>\n\n<code_completion_section>\nIf technical or mixed skill_type:\n- Include 'Code completion' section\n- Provide incomplete code snippets with clearly marked gaps\n- Include official solution in evaluator guide\n- Rubric dimensions: Compiles/Executes, Correctness (output/effect), Minimum style (readability/names), Robustness (common errors/edge cases), Alignment to constraints (performance/security/privacy if applicable)\n</code_completion_section>\n\n<use_cases_section>\nIf non_technical or mixed skill_type:\n- Include 'Use cases' section\n- Present realistic scenarios requiring judgment/decision-making\n- Define clear evaluation criteria\n</use_cases_section>\n\n<hands_on_tasks>\nFor hands-on tasks requiring deliverables:\n- Include submission manifest specifying exactly which files candidate must upload\n- Provide dataset acquisition with real URL/loader\n- Define explicit rubric with scoring dimensions:\n  * Functional correctness\n  * Reproducibility (clean run)\n  * Process quality/clarity\n  * Maintainability (structure/names)\n  * Relevant edge-case handling\n  * Validations and quality controls\n  * Alignment to context constraints\n</hands_on_tasks>\n\n<parts_system>\nEnabled: true\nMax items per part: {inputs.max_items_per_part}\nCounting rule: Only numbered questions/tasks count\n\nStop conditions:\n- Stop when max reached\n- Stop if overflow likely\n\nEnd text: Reply: continue\n\nContinuity:\n- Maintain numbering\n- Continue where left off\n</parts_system>\n\n<time_estimation>\n- Include total exam time estimate\n- Break down by section\n</time_estimation>\n</constraints>\n\n<output_format>\n<exam_structure>\n# Certification Exam: {inputs.skill}\n\n## Instructions for Candidate\n[Exam duration, passing score, submission requirements]\n\n## Section 1: Multiple Choice (X points)\n[Questions with 4 options each, indicate correct answer in evaluator guide only]\n\n## Section 2: Short Answer (X points)\n[Questions requiring brief written responses, provide evaluation criteria]\n\n## Section 3: Code Completion (X points) [if technical/mixed]\n[Incomplete code with clearly marked gaps, provide official solution in evaluator guide]\n\n## Section 4: Use Cases (X points) [if non_technical/mixed]\n[Realistic scenarios requiring judgment, provide evaluation framework]\n\n## Section 5: Hands-On Task (X points)\n[Real-world task with dataset, clear deliverables, submission manifest]\n\nTotal: 100 points\nPassing: 70 points\n</exam_structure>\n\n<evaluator_guide_structure>\n# Evaluator Guide: {inputs.skill}\n\n## Answer Key\n[MCQ answers, short answer evaluation criteria, code completion solutions]\n\n## Hands-On Task Rubric\n[Detailed scoring rubric with point allocations per criterion]\n\n## Common Mistakes to Watch For\n[Based on exercise_summary weaknesses]\n\n## Alignment Map\n[Each question/task mapped to content_summary + exercise_summary]\n</evaluator_guide_structure>\n\n<submission_manifest>\nFor hands-on tasks with multiple files:\n- List required files with exact names\n- Specify folder structure if applicable  \n- Define file format requirements\n- State what must be included in each file\n</submission_manifest>\n</output_format>"
+  "prompt": {
+    "language_policy": {
+      "instruction": "Translate user input into English. Think in English. Only translate to Spanish for the output.",
+      "instruction_language": "English",
+      "output_language": "Spanish",
+      "exceptions": ["proper names", "commonly used names", "code blocks"]
+    },
+    "role": {
+      "persona": "Instructional designer + certification examiner",
+      "mission": "Design an evaluable certification-style exam for {inputs.skill} at {inputs.level} in {inputs.context}, aligned to {inputs.content_summary} and {inputs.exercise_summary}."
+    },
+    "task": {
+      "description": "Generate a complete certification exam with evaluator guide. The exam must test real understanding and practical ability in {inputs.skill} at {inputs.level} for {inputs.context}. Every item must map to content_summary and exercise_summary. Use real datasets only. Include submission manifest for hands-on tasks."
+    },
+    "constraints": {
+      "skill_type_inference": {
+        "description": "Infer skill_type from inputs.skill + inputs.content_summary + inputs.exercise_summary",
+        "types": {
+          "technical": "If it requires implementation/coding/engineering",
+          "non_technical": "If mostly decision-making/communication/process",
+          "mixed": "If both"
+        },
+        "question_mix_by_skill_type": {
+          "technical": {
+            "MCQ": "25-40%",
+            "Short_answer": "10-20%",
+            "Code_completion": "15-30%",
+            "Hands_on": "25-45%",
+            "Use_cases": "0-10%"
+          },
+          "non_technical": {
+            "MCQ": "20-35%",
+            "Short_answer": "15-25%",
+            "Use_cases": "35-55%",
+            "Hands_on": "0-20%",
+            "Code_completion": "0%"
+          },
+          "mixed": {
+            "MCQ": "20-35%",
+            "Short_answer": "10-20%",
+            "Code_completion": "10-20%",
+            "Use_cases": "15-30%",
+            "Hands_on": "20-40%"
+          }
+        }
+      },
+      "alignment": [
+        "Every item must explicitly map to (a) at least one concept/pitfall/constraint from content_summary AND (b) at least one coverage point from exercise_summary"
+      ],
+      "scoring": [
+        "Total score must normalize to exactly 100 points",
+        "Passing threshold: 70%",
+        "Each question/task must show points clearly"
+      ],
+      "dataset_constraints": {
+        "description": "NON-NEGOTIABLE: Every dataset MUST include a raw, working URL.",
+        "url_requirements": [
+          "Just output the plain URL: https://example.com",
+          "Separate URLs from other text with blank lines",
+          "Do NOT use markdown [text](url) syntax",
+          "Do NOT wrap URLs in parentheses, quotes, or code blocks",
+          "Do NOT invent URLs - only real, accessible resources"
+        ],
+        "prohibited_patterns": [
+          "\"Nota:\", \"Query:\", or language tags before sources",
+          "Code blocks (mathematica, python, etc.) around URLs or descriptions",
+          "Parenthetical explanations on the same line as URL"
+        ],
+        "dataset_requirements": [
+          "Free, legal, no login walls, max 200MB",
+          "Acquisition methods: framework loader, registry loader, direct URL, public repo file, API export"
+        ],
+        "blocking": "If dataset required and no real acquisition method available, output BLOCKED and omit that item."
+      },
+      "code_completion_section": {
+        "condition": "If technical or mixed skill_type",
+        "requirements": [
+          "Include 'Code completion' section",
+          "Provide incomplete code snippets with clearly marked gaps",
+          "Include official solution in evaluator guide",
+          "Rubric dimensions: Compiles/Executes, Correctness (output/effect), Minimum style (readability/names), Robustness (common errors/edge cases), Alignment to constraints (performance/security/privacy if applicable)"
+        ]
+      },
+      "use_cases_section": {
+        "condition": "If non_technical or mixed skill_type",
+        "requirements": [
+          "Include 'Use cases' section",
+          "Present realistic scenarios requiring judgment/decision-making",
+          "Define clear evaluation criteria"
+        ]
+      },
+      "hands_on_tasks": {
+        "requirements": [
+          "Include submission manifest specifying exactly which files candidate must upload",
+          "Provide dataset acquisition with real URL/loader",
+          "Define explicit rubric with scoring dimensions:",
+          "  * Functional correctness",
+          "  * Reproducibility (clean run)",
+          "  * Process quality/clarity",
+          "  * Maintainability (structure/names)",
+          "  * Relevant edge-case handling",
+          "  * Validations and quality controls",
+          "  * Alignment to context constraints"
+        ]
+      },
+      "parts_system": {
+        "enabled": true,
+        "max_items_per_part": "{inputs.max_items_per_part}",
+        "counting_rule": "Only numbered questions/tasks count",
+        "stop_conditions": [
+          "Stop when max reached",
+          "Stop if overflow likely"
+        ],
+        "end_text": "Reply: continue",
+        "continuity": [
+          "Maintain numbering",
+          "Continue where left off"
+        ]
+      },
+      "time_estimation": [
+        "Include total exam time estimate",
+        "Break down by section"
+      ]
+    },
+    "output_format": {
+      "exam_structure": {
+        "title": "Certification Exam: {inputs.skill}",
+        "sections": [
+          {
+            "name": "Instructions for Candidate",
+            "content": "[Exam duration, passing score, submission requirements]"
+          },
+          {
+            "name": "Section 1: Multiple Choice (X points)",
+            "content": "[Questions with 4 options each, indicate correct answer in evaluator guide only]"
+          },
+          {
+            "name": "Section 2: Short Answer (X points)",
+            "content": "[Questions requiring brief written responses, provide evaluation criteria]"
+          },
+          {
+            "name": "Section 3: Code Completion (X points) [if technical/mixed]",
+            "content": "[Incomplete code with clearly marked gaps, provide official solution in evaluator guide]"
+          },
+          {
+            "name": "Section 4: Use Cases (X points) [if non_technical/mixed]",
+            "content": "[Realistic scenarios requiring judgment, provide evaluation framework]"
+          },
+          {
+            "name": "Section 5: Hands-On Task (X points)",
+            "content": "[Real-world task with dataset, clear deliverables, submission manifest]"
+          }
+        ],
+        "totals": [
+          "Total: 100 points",
+          "Passing: 70 points"
+        ]
+      },
+      "evaluator_guide_structure": {
+        "title": "Evaluator Guide: {inputs.skill}",
+        "sections": [
+          {
+            "name": "Answer Key",
+            "content": "[MCQ answers, short answer evaluation criteria, code completion solutions]"
+          },
+          {
+            "name": "Hands-On Task Rubric",
+            "content": "[Detailed scoring rubric with point allocations per criterion]"
+          },
+          {
+            "name": "Common Mistakes to Watch For",
+            "content": "[Based on exercise_summary weaknesses]"
+          },
+          {
+            "name": "Alignment Map",
+            "content": "[Each question/task mapped to content_summary + exercise_summary]"
+          }
+        ]
+      },
+      "submission_manifest": {
+        "description": "For hands-on tasks with multiple files",
+        "requirements": [
+          "List required files with exact names",
+          "Specify folder structure if applicable",
+          "Define file format requirements",
+          "State what must be included in each file"
+        ]
+      }
+    }
+  }
 }
