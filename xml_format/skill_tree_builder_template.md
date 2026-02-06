@@ -1,7 +1,7 @@
 <template>
   <meta>
     <name>skill_tree_builder</name>
-    <version>v1.4.0</version>
+    <version>v1.5.0</version>
     <notes>
       <note>Fill ONLY inputs.skill, inputs.level, inputs.context.</note>
       <note>Ordering is learning progression; Impact (%) is informational and must sum to 100.</note>
