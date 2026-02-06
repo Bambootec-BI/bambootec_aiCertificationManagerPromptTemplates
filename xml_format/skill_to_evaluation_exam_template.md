@@ -14,15 +14,10 @@
 
   <inputs>
     <skill>[SKILL_NAME]</skill>
-    <level>[LEVEL_TARGET]</level>
-    <context>[WHO/WHERE/WHY + constraints + target outcomes]</context>
     <content_summary>[CONCEPTS + pitfalls + constraints + expected artifacts + scope boundaries]</content_summary>
     <exercise_summary>[PRACTICE COVERAGE: exercise types + datasets used + success criteria + observed weaknesses]</exercise_summary>
-    <preferred_implementation_language>[Python|SQL|JavaScript|R|No-code|Mixed|Other]</preferred_implementation_language>
-    <preferred_tools_or_platform>[TOOLS/PLATFORMS USED IN THIS CONTEXT]</preferred_tools_or_platform>
-    <exam_density>[auto|light|standard|heavy]</exam_density>
-    <max_items_per_part>24</max_items_per_part>
-    <time_unit>minutes</time_unit>
+    <level>[LEVEL_TARGET]</level>
+    <context>[WHO/WHERE/WHY + constraints + target outcomes]</context>
   </inputs>
 
   <prompt>
@@ -116,7 +111,7 @@ For hands-on tasks requiring deliverables:
 
       <parts_system>
 Enabled: true
-Max items per part: {inputs.max_items_per_part}
+Max items per part: 24
 Counting rule: Only numbered questions/tasks count
 
 Stop conditions:

@@ -7,19 +7,9 @@
 
   <inputs>
     <skill>[SKILL_NAME]</skill>
+    <skill_tree>PASTE_THE_HIERARCHICAL_SKILL_TREE_HERE__KEEP_NAMES_VERBATIM</skill_tree>
     <level>[LEVEL_TARGET]</level>
     <context>[WHO/WHERE/WHY + constraints + target outcomes]</context>
-    <max_items_per_part>40</max_items_per_part>
-    <time_unit>minutes</time_unit>
-    <default_time_per_section_range>[60-180]</default_time_per_section_range>
-    <default_time_per_micro_skill_range>[20-60]</default_time_per_micro_skill_range>
-    <skill_tree_source>PASTE_THE_HIERARCHICAL_SKILL_TREE_HERE__KEEP_NAMES_VERBATIM</skill_tree_source>
-    <preferred_source_language>English</preferred_source_language>
-    <secondary_source_languages_allowed>
-      <language>Spanish</language>
-    </secondary_source_languages_allowed>
-    <min_english_source_ratio>0.8</min_english_source_ratio>
-    <disallow_generic_sources>true</disallow_generic_sources>
   </inputs>
 
   <prompt>
@@ -83,7 +73,7 @@ Prohibited patterns:
 
       <parts_system>
 Enabled: true
-Max numbered items per part: {max_items_per_part}
+Max numbered items per part: 40
 Counting rule: Only numbered items count toward the limit (1., 1.1, 1.2, ...). Bullets under a numbered item do NOT count as separate items.
 
 Stop conditions:
@@ -107,8 +97,8 @@ Do NOT include these labels/sections in the output: 'Practice', 'Validation', 'F
       </remove_difficult_points>
 
       <time_estimation>
-- Every section and micro-skill MUST include estimated time as an integer range in {inputs.time_unit}
-- Use {inputs.default_time_per_section_range} and {inputs.default_time_per_micro_skill_range} as baselines and adjust based on complexity and prerequisites
+- Every section and micro-skill MUST include estimated time as an integer range in minutes
+- Use [60-180] for sections and [20-60] for micro-skills as baselines and adjust based on complexity and prerequisites
 - Time must be plausible for a learner at {level} in {context}
       </time_estimation>
 
@@ -120,9 +110,9 @@ Do NOT include these labels/sections in the output: 'Practice', 'Validation', 'F
       </time_total>
 
       <source_language_preference>
-NON-NEGOTIABLE: Prefer sources in English. Aim for at least {inputs.min_english_source_ratio} of sources per PART to be in English.
+NON-NEGOTIABLE: Prefer sources in English. Aim for at least 80% of sources per PART to be in English.
 
-If (and only if) a suitable English source cannot be found for a specific node, you may use a non-English source from {inputs.secondary_source_languages_allowed}, but you MUST label it explicitly in the note as 'Language: ES' and keep it minimal.
+If (and only if) a suitable English source cannot be found for a specific node, you may use a non-English source (Spanish allowed), but you MUST label it explicitly in the note as 'Language: ES' and keep it minimal.
       </source_language_preference>
 
       <no_generic_sources>
@@ -159,7 +149,7 @@ NON-NEGOTIABLE: Do NOT use generic/umbrella sources (homepages, category pages, 
     </content_requirements>
 
     <input>
-Skill tree: {skill_tree_source}
+Skill tree: {skill_tree}
     </input>
 
     <output_format>

@@ -12,17 +12,9 @@
   },
   "inputs": {
     "skill": "[SKILL_NAME]",
+    "skill_tree": "PASTE_THE_HIERARCHICAL_SKILL_TREE_HERE__KEEP_NAMES_VERBATIM",
     "level": "[LEVEL_TARGET]",
-    "context": "[WHO/WHERE/WHY + constraints + target outcomes]",
-    "max_items_per_part": 40,
-    "time_unit": "minutes",
-    "default_time_per_section_range": "[60-180]",
-    "default_time_per_micro_skill_range": "[20-60]",
-    "skill_tree_source": "PASTE_THE_HIERARCHICAL_SKILL_TREE_HERE__KEEP_NAMES_VERBATIM",
-    "preferred_source_language": "English",
-    "secondary_source_languages_allowed": ["Spanish"],
-    "min_english_source_ratio": 0.8,
-    "disallow_generic_sources": true
+    "context": "[WHO/WHERE/WHY + constraints + target outcomes]"
   },
   "prompt": {
     "language_policy": {
@@ -77,7 +69,7 @@
       ],
       "parts_system": {
         "enabled": true,
-        "max_numbered_items_per_part": "{max_items_per_part}",
+        "max_numbered_items_per_part": "40",
         "counting_rule": "Only numbered items count toward the limit (1., 1.1, 1.2, ...). Bullets under a numbered item do NOT count as separate items.",
         "stop_conditions": [
           "Stop immediately when you reach the limit",
@@ -95,8 +87,8 @@
       },
       "remove_difficult_points": "Do NOT include these labels/sections in the output: 'Practice', 'Validation', 'Failure modes', 'Artifacts'.",
       "time_estimation": [
-        "Every section and micro-skill MUST include estimated time as an integer range in {inputs.time_unit}",
-        "Use {inputs.default_time_per_section_range} and {inputs.default_time_per_micro_skill_range} as baselines and adjust based on complexity and prerequisites",
+        "Every section and micro-skill MUST include estimated time as an integer range in minutes",
+        "Use [60-180] for sections and [20-60] for micro-skills as baselines and adjust based on complexity and prerequisites",
         "Time must be plausible for a learner at {level} in {context}"
       ],
       "time_total": [
@@ -106,8 +98,8 @@
         "Total time must equal the sum of the time ranges you provided for all numbered section + micro-skill items"
       ],
       "source_language_preference": {
-        "rule": "NON-NEGOTIABLE: Prefer sources in English. Aim for at least {inputs.min_english_source_ratio} of sources per PART to be in English.",
-        "exception": "If (and only if) a suitable English source cannot be found for a specific node, you may use a non-English source from {inputs.secondary_source_languages_allowed}, but you MUST label it explicitly in the note as 'Language: ES' and keep it minimal."
+        "rule": "NON-NEGOTIABLE: Prefer sources in English. Aim for at least 80% of sources per PART to be in English.",
+        "exception": "If (and only if) a suitable English source cannot be found for a specific node, you may use a non-English source (Spanish allowed), but you MUST label it explicitly in the note as 'Language: ES' and keep it minimal."
       },
       "no_generic_sources": {
         "rule": "NON-NEGOTIABLE: Do NOT use generic/umbrella sources (homepages, category pages, or broad 'getting started' pages) unless the page itself is narrowly focused on the exact micro-skill.",
@@ -140,7 +132,7 @@
       ]
     },
     "input": {
-      "skill_tree": "{skill_tree_source}"
+      "skill_tree": "{skill_tree}"
     },
     "output_format": {
       "required_structure": {

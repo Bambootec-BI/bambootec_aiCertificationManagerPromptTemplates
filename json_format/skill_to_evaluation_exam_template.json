@@ -12,15 +12,10 @@
   "parameters_required_minimal": ["skill", "content_summary", "exercise_summary", "level", "context"],
   "inputs": {
     "skill": "[SKILL_NAME]",
-    "level": "[LEVEL_TARGET]",
-    "context": "[WHO/WHERE/WHY + constraints + target outcomes]",
     "content_summary": "[CONCEPTS + pitfalls + constraints + expected artifacts + scope boundaries]",
     "exercise_summary": "[PRACTICE COVERAGE: exercise types + datasets used + success criteria + observed weaknesses]",
-    "preferred_implementation_language": "[Python|SQL|JavaScript|R|No-code|Mixed|Other]",
-    "preferred_tools_or_platform": "[TOOLS/PLATFORMS USED IN THIS CONTEXT]",
-    "exam_density": "[auto|light|standard|heavy]",
-    "max_items_per_part": 24,
-    "time_unit": "minutes"
+    "level": "[LEVEL_TARGET]",
+    "context": "[WHO/WHERE/WHY + constraints + target outcomes]"
   },
   "prompt": {
     "language_policy": {
@@ -129,7 +124,7 @@
       },
       "parts_system": {
         "enabled": true,
-        "max_items_per_part": "{inputs.max_items_per_part}",
+        "max_items_per_part": "24",
         "counting_rule": "Only numbered questions/tasks count",
         "stop_conditions": [
           "Stop when max reached",
