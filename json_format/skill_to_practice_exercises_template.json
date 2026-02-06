@@ -7,11 +7,7 @@
       "Uses proper JSON structure for better instruction adherence.",
       "Real datasets only - no synthetic data generation.",
       "Dataset acquisition must be exact URL or exact loader with dataset id/name."
-    ],
-    "changelog": {
-      "v1.1.0": "Fixed dataset URL formatting: prohibited code blocks around URLs, added explicit bare URL requirements, removed dataset labels (A/B/C)",
-      "v1.0.0": "Initial version with real datasets only, agnostic design, Spanish labels, PARTS system"
-    }
+    ]
   },
   "parameters_required_minimal": ["skill", "content_summary", "level", "context"],
   "inputs": {

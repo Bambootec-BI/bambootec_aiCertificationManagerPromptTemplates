@@ -3,10 +3,6 @@
     <version>v1.1.0</version>
     <name>skill_to_practice_exercises.real_datasets_only.fully_agnostic.eslabels.parts</name>
     <description>Generates practice exercises for ANY skill, ANY level, ANY context using XML-structured prompts for better instruction adherence.</description>
-    <changelog>
-      <v1.1.0>Fixed dataset URL formatting: prohibited code blocks around URLs, added explicit bare URL requirements, removed dataset labels (A/B/C)</v1.1.0>
-      <v1.0.0>Initial version with real datasets only, agnostic design, Spanish labels, PARTS system</v1.0.0>
-    </changelog>
     <parameters_required_minimal>
       <parameter>skill</parameter>
       <parameter>content_summary</parameter>

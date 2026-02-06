@@ -1,7 +1,7 @@
 <template>
   <meta>
     <name>skill_tree_builder</name>
-    <version>v1.0.0</version>
+    <version>v1.2.0</version>
     <notes>
       <note>Fill ONLY inputs.skill, inputs.level, inputs.context.</note>
       <note>Ordering is learning progression; Impact (%) is informational and must sum to 100.</note>
@@ -41,8 +41,59 @@
         <rule>Skill titles must be short, beginner-friendly, and action-oriented</rule>
         <rule>Each skill must include representative 'how to do it' examples in parentheses (examples only, not extra skills)</rule>
         <rule>Keep skill count within a practical range for the requested level (e.g., 18–35), unless the context clearly demands fewer</rule>
+        <rule>FIRST SECTION MUST be "Conceptual Overview" with learning order 0, containing foundational understanding before practical skills</rule>
       </hard_rules>
     </constraints>
+
+    <conceptual_overview_requirements>
+      <purpose>Every skill tree MUST start with a conceptual overview section that provides mental models and context before practical skills</purpose>
+      <section_title_output>Visión Conceptual (in Spanish output)</section_title_output>
+      <learning_order>0 (always first, before all practical skills which start at 1)</learning_order>
+
+      <level_adaptation>
+        <beginner_entry>
+          Include 2-3 foundational understanding skills in this section:
+          - What is {skill} and why it matters (core definition, practical value in context, key use cases)
+          - Basic mental model (simplified workflow, key analogies, fundamental concepts)
+          - Essential terminology (3-5 key terms with simple definitions)
+
+          Each skill gets its own Impact (%) allocation.
+        </beginner_entry>
+
+        <intermediate>
+          Include 3-4 foundational understanding skills in this section:
+          - What is {skill} and strategic value (definition with distinctions, strategic value, common use cases)
+          - Mental model and workflow (conceptual framework, workflow diagram, key principles)
+          - Key terminology and concepts (5-8 terms including advanced concepts)
+          - Common conceptual mistakes (2-3 misconceptions that learners often have)
+
+          Each skill gets its own Impact (%) allocation.
+        </intermediate>
+
+        <expert_advanced>
+          Include 4-5 foundational understanding skills in this section:
+          - What is {skill}, scope and boundaries (definition, scope, boundaries, tradeoffs)
+          - Advanced mental model (system-level view, architectural principles, design patterns)
+          - Expert terminology and concepts (8-12 terms including expert-level concepts)
+          - Subtle errors and pitfalls (3-4 common misconceptions and subtle pitfalls)
+          - Connections to adjacent domains (how this skill relates to and integrates with adjacent areas)
+
+          Each skill gets its own Impact (%) allocation.
+        </expert_advanced>
+      </level_adaptation>
+
+      <impact_allocation>
+        - Conceptual overview skills should collectively account for 10-15% of total impact
+        - Each individual conceptual skill receives its own Impact (%) value like any other skill
+        - Impact MUST still sum to exactly 100 across ALL skills (including conceptual overview skills)
+      </impact_allocation>
+
+      <examples_in_parentheses>
+        Conceptual skills should also include examples in parentheses showing how to apply understanding:
+        - Example: "Basic mental model (data flow diagrams, component interaction maps, simplified architecture)"
+        - Example: "Essential terminology (define: pipeline, transformation, orchestration)"
+      </examples_in_parentheses>
+    </conceptual_overview_requirements>
 
     <baseline_sustainability>
       Baseline sustainability (minimum) means the learner can:
