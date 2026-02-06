@@ -1,7 +1,7 @@
 <template>
   <meta>
     <version>v1.5.0</version>
-    <name>skill_to_practice_exercises.real_datasets_only.fully_agnostic.eslabels.parts</name>
+    <name>skill_to_practice_exercises</name>
     <description>Generates practice exercises for ANY skill, ANY level, ANY context using XML-structured prompts for better instruction adherence.</description>
     <parameters_required_minimal>
       <parameter>skill</parameter>
@@ -147,7 +147,7 @@ PART N
 At the end of PART: Cumulative estimated total time: X–Y minutes
 If content remaining: Reply: continue
 
-AFTER ALL ITERATIONS COMPLETE: Generate an exercise_summary section including: exercise types created, datasets used, success criteria employed, observed weaknesses or gaps that should be addressed in evaluation. This summary will be consumed by skill_to_evaluation_exam_template.json.
+AFTER ALL ITERATIONS COMPLETE: Generate an exercise_summary section including: exercise types created, datasets used, success criteria employed, observed weaknesses or gaps that should be addressed in evaluation. This summary will be consumed by skill_to_evaluation_exam_template.md.
     </output_format>
   </prompt>
 </template>

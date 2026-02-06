@@ -1,7 +1,7 @@
 <template>
   <meta>
     <version>v1.5.0</version>
-    <name>skill_to_evaluation_exam.real_datasets_only.fully_agnostic.eslabels.parts</name>
+    <name>skill_to_evaluation_exam</name>
     <description>Generates certification-style exam + evaluator guide as 3 separate documents: (1) exam-only PDF for the learner, (2) exam-only MD for the learner, (3) evaluation-guide-only MD for the AI evaluator. Instructions in English, output controlled by language_policy.</description>
     <parameters_required_minimal>
       <parameter>skill</parameter>

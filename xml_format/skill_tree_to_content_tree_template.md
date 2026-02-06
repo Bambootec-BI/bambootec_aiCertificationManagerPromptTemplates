@@ -1,7 +1,7 @@
 <template>
   <meta>
     <version>v1.5.0</version>
-    <name>skill_tree_to_content</name>
+    <name>skill_tree_to_content_tree</name>
     <description>English prompt for best model performance; Spanish output labels. Simplified organic hierarchy. NON-NEGOTIABLE: sources must be clickable URLs to real content (no search queries). Strong preference for English sources and deep, micro-skill-specific links (no generic docs/landing pages). NON-NEGOTIABLE: every node must include at least 1 video source, with allocation based on node type (procedural 2+, conceptual 1-2, reference 1). Prefer free/practical sources; paid MOOCs may be suggested but de-prioritized and clearly labeled.</description>
   </meta>
 
@@ -195,7 +195,7 @@ Skill tree: {skill_tree}
 At the end of each PART: Cumulative estimated total time: &lt;integer range in minutes&gt;
 Upon completing everything: Final estimated total time: &lt;integer range in minutes&gt;
 
-AFTER ALL ITERATIONS COMPLETE: Generate a content_summary section including: concepts covered, pitfalls mentioned in sources, constraints from context, terminology introduced, and scope boundaries. This summary will be consumed by skill_to_practice_exercises_template.json.
+AFTER ALL ITERATIONS COMPLETE: Generate a content_summary section including: concepts covered, pitfalls mentioned in sources, constraints from context, terminology introduced, and scope boundaries. This summary will be consumed by skill_to_practice_exercises_template.md.
       </required_structure>
 
       <optional>

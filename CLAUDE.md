@@ -19,23 +19,15 @@ This is the **AI Certifications Manager** — a prompt-orchestration system that
 
 ## File Structure
 
-The repository contains **two formats** of templates:
-
-### JSON Format (json_format/)
-Pure JSON with proper object hierarchy for programmatic parsing and API consumption.
-
-### XML/Markdown Format (xml_format/)
-Markdown files with XML tags for Custom GPT prompt engineering (better instruction adherence).
+All templates live in `xml_format/` as Markdown files with XML tags (best instruction adherence for Custom GPT prompt engineering).
 
 | Template Name | Purpose | Inputs | Outputs |
 |---|---|---|---|
-| `skill_tree_builder_template` | Generates numbered 2-level skill trees (book-index style) with impact weights | skill, level, context | skill_tree (numbered hierarchical list) |
-| `skill_tree_to_content_tree_template` | Converts skill trees to learning content plans with sources | skill, skill_tree, level, context | content_summary (+ full content tree to user) |
-| `skill_to_practice_exercises_template` | Creates dataset-grounded practice exercises | skill, content_summary, level, context | exercise_summary (+ full exercise tree to user) |
-| `skill_to_evaluation_exam_template` | Generates certification exams + evaluator guides as 3 separate files | skill, content_summary, exercise_summary, level, context | exam PDF (learner), exam MD (learner), evaluation_guide MD (evaluator) |
-| `custom_gpt_instructions` | Orchestrates the workflow (router/state machine) | N/A | N/A |
-
-**Note:** The Custom GPT references `.md` files from xml_format/ in its workflow steps.
+| `skill_tree_builder_template.md` | Generates numbered 2-level skill trees (book-index style) with impact weights | skill, level, context | skill_tree (numbered hierarchical list) |
+| `skill_tree_to_content_tree_template.md` | Converts skill trees to learning content plans with sources | skill, skill_tree, level, context | content_summary (+ full content tree to user) |
+| `skill_to_practice_exercises_template.md` | Creates dataset-grounded practice exercises | skill, content_summary, level, context | exercise_summary (+ full exercise tree to user) |
+| `skill_to_evaluation_exam_template.md` | Generates certification exams + evaluator guides as 3 separate files | skill, content_summary, exercise_summary, level, context | exam PDF (learner), exam MD (learner), evaluation_guide MD (evaluator) |
+| `custom_gpt_instructions.md` | Orchestrates the workflow (router/state machine) | N/A | N/A |
 
 ---
 
@@ -47,10 +39,7 @@ Markdown files with XML tags for Custom GPT prompt engineering (better instructi
    - **Conceptual/mental-model skills** (tool-agnostic, evaluated via scenarios and artifacts)
    - **Technical implementation skills** (code completions, hands-on deliverables with datasets)
 
-2. **Dual-Format Approach**:
-   - **JSON format** (json_format/): Pure JSON structure with keys for programmatic parsing
-   - **XML/Markdown format** (xml_format/): XML tags in Markdown files for prompt engineering
-   - Both formats contain identical content, just different structures
+2. **Single Format**: XML/Markdown files in `xml_format/` — XML tags in Markdown for Custom GPT prompt engineering
 
 3. **Language Contract**:
    - **Instruction text** (inside templates): English (for model performance)
@@ -212,8 +201,7 @@ When modifying any template:
 1. **Bump** `version` in meta section (use semantic versioning)
 2. **Add** changelog entry or note explaining changes
 3. **Update** validation invariants if schema changes
-4. **Update both formats**: json_format/ AND xml_format/ versions
-5. **Maintain** at least 2 examples:
+4. **Maintain** at least 2 examples:
    - 1 conceptual skill (tool-agnostic)
    - 1 technical skill (implementation-focused)
 
@@ -284,42 +272,27 @@ Before considering templates "done":
 
 ## Working with Templates
 
-### Dual Format Maintenance
-
-When modifying templates, **always update both formats**:
-
-1. **json_format/*.json**: Pure JSON with object keys
-   - Use proper JSON structure: `{"key": "value"}`, `{"key": ["item1", "item2"]}`
-   - No XML tags in strings
-
-2. **xml_format/*.md**: Markdown with XML tags
-   - Use XML tags for structure: `<key>value</key>`, `<items><item>...</item></items>`
-   - No XML declarations (`<?xml version...?>`)
-
 ### Reading Templates
 
 Key sections in templates:
 
 - `meta`: Version and notes
 - `inputs`: Only data available from workflow (no config params)
-- `prompt`: The main instruction structure
-  - JSON format: nested objects with keys
-  - XML format: nested tags
+- `prompt`: The main instruction structure (nested XML tags)
 - `output_format`: Required structure
 - Content requirements: Per-section/per-item specifications
 
 ### Modifying Templates
 
 **Before changing**:
-1. Read current version completely (both formats if modifying)
+1. Read current version completely
 2. Identify which section needs changes
 3. Check dependencies on other templates
 4. Verify input availability per workflow data flow
 
 **During changes**:
-1. Maintain format validity (JSON or XML/Markdown)
-2. Update BOTH formats identically
-3. Keep instruction text in English, output labels in Spanish
+1. Maintain XML/Markdown format validity
+2. Keep instruction text in English, output labels in Spanish
 4. Don't add configuration parameters - hardcode sensible defaults instead
 5. Ensure inputs match what's available from previous workflow steps
 
@@ -365,7 +338,7 @@ Each source is just a bare URL on its own line with blank lines for separation. 
 5. **One step per turn**: Router must not skip steps or confuse PARTS with steps
 6. **Sources mandatory**: Step 2 (content plan) must always include "Sources" section
 7. **Simplified inputs**: Only use data available from previous workflow steps
-8. **Dual format maintenance**: Always update both json_format/ and xml_format/ versions
+8. **Template format**: All templates in xml_format/ as Markdown with XML tags
 
 ### Soft Preferences
 
@@ -392,12 +365,9 @@ Templates should support (not yet implemented):
 ## Notes for Claude Code
 
 - Templates are **schema-driven prompts**, not executable code
-- Two formats serve different purposes:
-  - **JSON**: Programmatic parsing, API consumption
-  - **XML/Markdown**: Custom GPT prompt engineering (better instruction adherence)
+- Single format: **XML/Markdown** files in `xml_format/` for Custom GPT prompt engineering
 - Changes require understanding of **prompt engineering** and **GPT behavior**
 - Test changes by running through Custom GPT, not locally
-- Always update **both formats** when making changes
 - Keep requirements **testable** and **observable**
 - Maintain **backward compatibility** unless explicitly breaking changes
 - Follow the **workflow data flow**: each template only uses inputs from previous steps
