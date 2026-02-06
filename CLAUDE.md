@@ -96,9 +96,9 @@ Step 3: skill_to_practice_exercises
 Step 4: skill_to_evaluation_exam
   Inputs: skill, content_summary, exercise_summary, level, context
   Outputs to user: 3 downloadable files:
-    - examen_{skill_slug}.pdf (exam only, for learner)
-    - examen_{skill_slug}.md (exam only, for learner)
-    - guia_evaluacion_{skill_slug}.md (evaluation guide only, for AI evaluator)
+    - exam_{skill_slug}.pdf (exam only, for learner)
+    - exam_{skill_slug}.md (exam only, for learner)
+    - evaluation_guide_{skill_slug}.md (evaluation guide only, for AI evaluator)
   Outputs to next step: None (end of workflow)
 ```
 
@@ -199,9 +199,9 @@ Each template must enforce:
 ### 3. Abstraction Profile Inference
 
 Templates infer `skill_type` from inputs:
-- **tecnico**: Requires implementation/coding/engineering → include "Completar código" sections
-- **no_tecnico**: Decision-making/communication/process → include "Use cases" sections
-- **mixto**: Both → include both with balanced weight
+- **technical**: Requires implementation/coding/engineering → include "Code completion" sections
+- **non_technical**: Decision-making/communication/process → include "Use cases" sections
+- **mixed**: Both → include both with balanced weight
 
 ---
 
@@ -253,7 +253,7 @@ Before considering templates "done":
    - Verify: weights sum to 100, 2 levels, assessable nodes
 
 2. **Content plan validation**:
-   - Check: every "Fuente" is a bare URL only (no titles or descriptions)
+   - Check: every source is a bare URL only (no titles or descriptions)
    - Check: no search queries present
    - Check: every node has at least 1 video source (procedural nodes 2+, conceptual 1-2, reference 1)
    - Check: at least 30% of all sources across the tree are videos
@@ -359,11 +359,11 @@ Each source is just a bare URL on its own line with blank lines for separation. 
 ### Hard Requirements (Non-Negotiable)
 
 1. **No fake sources**: Every URL must point to real, accessible content
-2. **No search queries**: No "Consulta de búsqueda:" or placeholder text
+2. **No search queries**: No search query placeholders or placeholder text
 3. **Real datasets only**: Framework loaders or direct download URLs; no synthetic generation
 4. **Spanish user output**: All candidate/evaluator-facing text in Spanish
 5. **One step per turn**: Router must not skip steps or confuse PARTS with steps
-6. **Sources mandatory**: Step 2 (content plan) must always include "Fuentes" section
+6. **Sources mandatory**: Step 2 (content plan) must always include "Sources" section
 7. **Simplified inputs**: Only use data available from previous workflow steps
 8. **Dual format maintenance**: Always update both json_format/ and xml_format/ versions
 

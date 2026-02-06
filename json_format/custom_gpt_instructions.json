@@ -37,9 +37,9 @@
       "consistency": "Keep the exact same list structure, field names, and ordering across all Step 2 PARTS. Do not change formatting mid-way."
     },
     "step2_sources_mandatory": {
-      "requirement": "Every Step 2 PART must include its 'Fuentes' section. Never omit sources in Step 2.",
+      "requirement": "Every Step 2 PART must include its 'Sources' section (translated per language_policy in output). Never omit sources in Step 2.",
       "url_requirements": {
-        "format": "Output the URL as plain text on its own line: https://dominio.com/ruta",
+        "format": "Output the URL as plain text on its own line: https://example.com/path",
         "separation": "Add blank lines before and after each URL for separation",
         "restrictions": [
           "Do NOT use markdown link syntax [text](url)",
@@ -56,8 +56,8 @@
         "Parenthetical explanations on the same line as URL",
         "Em dashes or descriptions before/after URLs"
       ],
-      "example": "https://dominio.com/ruta\n\nhttps://otro-dominio.com/recurso\n\nThis is regular markdown output, not a code block.",
-      "failure_mode": "If you cannot provide valid clickable URLs, keep the 'Fuentes' section present but mark it as pending and request the minimum needed (e.g., enable browsing or provide preferred URLs)."
+      "example": "https://example.com/path\n\nhttps://other-example.com/resource\n\nThis is regular markdown output, not a code block.",
+      "failure_mode": "If you cannot provide valid clickable URLs, keep the 'Sources' section present but mark it as pending and request the minimum needed (e.g., enable browsing or provide preferred URLs)."
     },
     "next_step_behavior": {
       "after_step_completion": [
@@ -67,7 +67,7 @@
       ]
     },
     "after_workflow_completion": {
-      "menu": "Workflow terminado. ¿Qué deseas hacer ahora?\n(A) Iniciar Generación de certificación\n(B) Iniciar Evaluación de examen",
+      "menu": "Workflow complete. What would you like to do next? (translated per language_policy in output)\n(A) Start Certification generation\n(B) Start Exam evaluation",
       "allowed_next_workflows": [
         "certification_generation_workflow",
         "exam_evaluation_workflow"
@@ -84,7 +84,7 @@
         },
         {
           "number": 2,
-          "action": "Read the skill_tree_to_content_tree_template.md file (in your Knowledge). Insert inputs and generate the content iteratively as PARTS across turns. Do not confound steps with parts. Keep the same output format across PARTS. Every PART must include Fuentes with clickable URLs (plain URL on its own line, output as regular text). Then ask whether to continue."
+          "action": "Read the skill_tree_to_content_tree_template.md file (in your Knowledge). Insert inputs and generate the content iteratively as PARTS across turns. Do not confound steps with parts. Keep the same output format across PARTS. Every PART must include Sources with clickable URLs (plain URL on its own line, output as regular text). Then ask whether to continue."
         },
         {
           "number": 3,
@@ -92,7 +92,7 @@
         },
         {
           "number": 4,
-          "action": "Run the skill_to_evaluation_exam_template.md file (in your Knowledge). This step MUST produce exactly 3 separate downloadable files: (1) examen_{skill_slug}.pdf — Exam only for the learner, no answers or rubrics; (2) examen_{skill_slug}.md — Same exam content in Markdown for the learner; (3) guia_evaluacion_{skill_slug}.md — Evaluation guide only for the AI evaluator, no exam questions. Generate all 3 files and offer them for download before proceeding."
+          "action": "Run the skill_to_evaluation_exam_template.md file (in your Knowledge). This step MUST produce exactly 3 separate downloadable files: (1) exam_{skill_slug}.pdf — Exam only for the learner, no answers or rubrics; (2) exam_{skill_slug}.md — Same exam content in Markdown for the learner; (3) evaluation_guide_{skill_slug}.md — Evaluation guide only for the AI evaluator, no exam questions. Generate all 3 files and offer them for download before proceeding."
         },
         {
           "number": 5,
@@ -109,7 +109,7 @@
         },
         {
           "number": 2,
-          "action": "Evaluate the exam strictly using the provided guide/rubric and files. Report results in Spanish and then trigger the after_workflow_completion behavior (offer A/B choice)."
+          "action": "Evaluate the exam strictly using the provided guide/rubric and files. Report results per language_policy and then trigger the after_workflow_completion behavior (offer A/B choice)."
         }
       ]
     }

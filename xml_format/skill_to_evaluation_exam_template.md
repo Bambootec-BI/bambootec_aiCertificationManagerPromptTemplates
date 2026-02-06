@@ -146,60 +146,60 @@ Document separation rule: The exam documents (1 and 2) must NEVER contain answer
 
       <document_1_exam_pdf>
 Format: PDF file for download
-Filename: examen_{inputs.skill_slug}.pdf
+Filename: exam_{inputs.skill_slug}.pdf
 Audience: The learner/candidate (NO evaluator content)
 
-# Examen de Certificación: {inputs.skill}
+# Certification Exam: {inputs.skill} (translated per language_policy in output)
 
-## Instrucciones para el Candidato
+## Candidate Instructions
 [Exam duration, passing score, submission requirements, allowed tools]
 
-## Sección 1: Opción Múltiple (X puntos)
+## Section 1: Multiple Choice (X points)
 [Questions with 4 options each — NO correct answer indicated]
 
-## Sección 2: Respuesta Corta (X puntos)
+## Section 2: Short Answer (X points)
 [Questions requiring brief written responses — NO evaluation criteria shown]
 
-## Sección 3: Completar Código (X puntos) [if technical/mixed]
+## Section 3: Code Completion (X points) [if technical/mixed]
 [Incomplete code with clearly marked gaps — NO solutions shown]
 
-## Sección 4: Casos de Uso (X puntos) [if non_technical/mixed]
+## Section 4: Use Cases (X points) [if non_technical/mixed]
 [Realistic scenarios requiring judgment — NO evaluation framework shown]
 
-## Sección 5: Tarea Práctica (X puntos)
+## Section 5: Hands-on Task (X points)
 [Real-world task with dataset, clear deliverables]
 
-## Manifiesto de Entrega
+## Submission Manifest
 [Exact files to submit, folder structure, format requirements]
 
-Total: 100 puntos
-Aprobación: 70 puntos
+Total: 100 points
+Passing: 70 points
       </document_1_exam_pdf>
 
       <document_2_exam_md>
 Format: Markdown file for download
-Filename: examen_{inputs.skill_slug}.md
+Filename: exam_{inputs.skill_slug}.md
 Audience: The learner/candidate (NO evaluator content)
 Content: Identical to Document 1 but in Markdown format instead of PDF.
       </document_2_exam_md>
 
       <document_3_evaluator_guide_md>
 Format: Markdown file for download
-Filename: guia_evaluacion_{inputs.skill_slug}.md
+Filename: evaluation_guide_{inputs.skill_slug}.md
 Audience: The AI evaluator or human grader (NO exam questions — reference by number only)
 
-# Guía de Evaluación: {inputs.skill}
+# Evaluation Guide: {inputs.skill} (translated per language_policy in output)
 
-## Clave de Respuestas
+## Answer Key
 [MCQ correct answers by question number, short answer evaluation criteria, code completion official solutions]
 
-## Rúbrica de Tarea Práctica
+## Hands-on Task Rubric
 [Detailed scoring rubric with point allocations per criterion]
 
-## Errores Comunes a Vigilar
+## Common Mistakes to Watch
 [Based on exercise_summary weaknesses]
 
-## Mapa de Alineación
+## Alignment Map
 [Each question/task number mapped to content_summary + exercise_summary concepts]
       </document_3_evaluator_guide_md>
 

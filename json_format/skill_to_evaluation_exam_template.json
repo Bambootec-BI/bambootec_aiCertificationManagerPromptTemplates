@@ -151,70 +151,70 @@
       },
       "document_1_exam_pdf": {
         "format": "PDF file for download",
-        "filename": "examen_{inputs.skill_slug}.pdf",
+        "filename": "exam_{inputs.skill_slug}.pdf",
         "audience": "The learner/candidate (NO evaluator content)",
-        "title": "Examen de Certificación: {inputs.skill}",
+        "title": "Certification Exam: {inputs.skill} (translated per language_policy in output)",
         "sections": [
           {
-            "name": "Instrucciones para el Candidato",
+            "name": "Candidate Instructions",
             "content": "[Exam duration, passing score, submission requirements, allowed tools]"
           },
           {
-            "name": "Sección 1: Opción Múltiple (X puntos)",
+            "name": "Section 1: Multiple Choice (X points)",
             "content": "[Questions with 4 options each — NO correct answer indicated]"
           },
           {
-            "name": "Sección 2: Respuesta Corta (X puntos)",
+            "name": "Section 2: Short Answer (X points)",
             "content": "[Questions requiring brief written responses — NO evaluation criteria shown]"
           },
           {
-            "name": "Sección 3: Completar Código (X puntos) [if technical/mixed]",
+            "name": "Section 3: Code Completion (X points) [if technical/mixed]",
             "content": "[Incomplete code with clearly marked gaps — NO solutions shown]"
           },
           {
-            "name": "Sección 4: Casos de Uso (X puntos) [if non_technical/mixed]",
+            "name": "Section 4: Use Cases (X points) [if non_technical/mixed]",
             "content": "[Realistic scenarios requiring judgment — NO evaluation framework shown]"
           },
           {
-            "name": "Sección 5: Tarea Práctica (X puntos)",
+            "name": "Section 5: Hands-on Task (X points)",
             "content": "[Real-world task with dataset, clear deliverables]"
           },
           {
-            "name": "Manifiesto de Entrega",
+            "name": "Submission Manifest",
             "content": "[Exact files to submit, folder structure, format requirements]"
           }
         ],
         "totals": [
-          "Total: 100 puntos",
-          "Aprobación: 70 puntos"
+          "Total: 100 points",
+          "Passing: 70 points"
         ]
       },
       "document_2_exam_md": {
         "format": "Markdown file for download",
-        "filename": "examen_{inputs.skill_slug}.md",
+        "filename": "exam_{inputs.skill_slug}.md",
         "audience": "The learner/candidate (NO evaluator content)",
         "content_rule": "Identical to Document 1 but in Markdown format instead of PDF."
       },
       "document_3_evaluator_guide_md": {
         "format": "Markdown file for download",
-        "filename": "guia_evaluacion_{inputs.skill_slug}.md",
+        "filename": "evaluation_guide_{inputs.skill_slug}.md",
         "audience": "The AI evaluator or human grader (NO exam questions — reference by number only)",
-        "title": "Guía de Evaluación: {inputs.skill}",
+        "title": "Evaluation Guide: {inputs.skill} (translated per language_policy in output)",
         "sections": [
           {
-            "name": "Clave de Respuestas",
+            "name": "Answer Key",
             "content": "[MCQ correct answers by question number, short answer evaluation criteria, code completion official solutions]"
           },
           {
-            "name": "Rúbrica de Tarea Práctica",
+            "name": "Hands-on Task Rubric",
             "content": "[Detailed scoring rubric with point allocations per criterion]"
           },
           {
-            "name": "Errores Comunes a Vigilar",
+            "name": "Common Mistakes to Watch",
             "content": "[Based on exercise_summary weaknesses]"
           },
           {
-            "name": "Mapa de Alineación",
+            "name": "Alignment Map",
             "content": "[Each question/task number mapped to content_summary + exercise_summary concepts]"
           }
         ]
