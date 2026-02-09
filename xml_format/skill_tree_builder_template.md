@@ -1,167 +1,168 @@
-<template>
-  <meta>
-    <name>skill_tree_builder</name>
-    <version>v1.5.0</version>
-    <notes>
-      <note>Fill ONLY inputs.skill, inputs.level, inputs.context.</note>
-      <note>Ordering is learning progression; Impact (%) is informational and must sum to 100.</note>
-      <note>This template is skill-agnostic (no domain-specific references).</note>
-    </notes>
-  </meta>
+<name>
+  skill_tree_builder
+</name>
 
-  <inputs>
-    <skill>[SKILL_NAME]</skill>
-    <level>[ABILITY_LEVEL_REQUIRED]</level>
-    <context>[CONTEXT: where/how the skill is used in real work]</context>
-  </inputs>
+<version>
+  v1.6.0
+</version>
 
-  <prompt>
-    <language_policy>
-      Translate user input into English. Think in English. Only translate to Spanish for the output.
+<inputs>
+  <skill>Skill: the skill name and some specification if required</skill>
+  <level>Ability Level: level of proficiency with the skill</level>
+  <context>Context: where/how the skill is used in real work</context>
+</inputs>
 
-      Instruction language: English
-      Output language: Spanish
-      Exceptions: proper names, commonly used names, code blocks
-    </language_policy>
+<command>
+  Build a learning skill tree for {inputs.skill} at {inputs.level} for {inputs.context}.
 
-    <task>
-      Build a learning skill tree for {inputs.skill} at {inputs.level} for {inputs.context}.
+  Audience: first-time learners entering to this skill-level domain.
+  Style: textbook index (short section titles + short skill titles)
+</command>
 
-      Audience: first-time learners entering this kind of work
-      Style: textbook index (short section titles + short skill titles)
-    </task>
+<critical_commands>
+  Ordering is learning progression; Impact (%) is informational and must sum to 100.
+</critical_commands>
 
-    <constraints>
-      <hard_rules>
-        <rule>Order MUST follow a learning progression (what to learn first → later)</rule>
-        <rule>Each concrete skill MUST include an Impact (%) integer, but Impact MUST NOT affect ordering</rule>
-        <rule>The sum of Impact (%) across ALL concrete skills MUST equal exactly 100</rule>
-        <rule>Exactly two levels: Level 1 = Section titles (capability areas), Level 2 = Skill titles</rule>
-        <rule>Each section MUST contain at least two skills</rule>
-        <rule>Skill titles must be short, beginner-friendly, and action-oriented</rule>
-        <rule>Each skill must include representative 'how to do it' examples in parentheses (examples only, not extra skills)</rule>
-        <rule>Keep skill count within a practical range for the requested level (e.g., 18–35), unless the context clearly demands fewer</rule>
-        <rule>FIRST SECTION MUST be "Conceptual Overview" with learning order 0, containing foundational understanding before practical skills</rule>
-      </hard_rules>
-    </constraints>
+<language_policy>
+  Use language_policy from instructions. Reminder:
+  Translate user input into English. Think in English. Only translate to Spanish for the output.
+</language_policy>
 
-    <conceptual_overview_requirements>
-      <purpose>Every skill tree MUST start with a conceptual overview section that provides mental models and context before practical skills</purpose>
-      <section_title_output>Conceptual Overview (translated per language_policy in output)</section_title_output>
-      <learning_order>0 (always first, before all practical skills which start at 1)</learning_order>
+<non_negotiable>
+  - Order MUST follow a learning progression (what to learn first → later)
+  - Each concrete skill MUST include an Impact (%) integer, but Impact MUST NOT affect ordering
+  - The sum of Impact (%) across ALL concrete skills MUST equal exactly 100
+  - Exactly two levels: Level 1 = Section titles (capability areas), Level 2 = Skill titles
+  - Each section MUST contain at least two skills.
+  - Skill titles must be short, beginner-friendly, easily understandable and action-oriented
+  - Each skill must include representative 'how to do it' examples in parentheses (examples only, not extra skills)
+  - Keep skill count within a practical range for the requested level (e.g., 18–35), unless the context clearly demands fewer
+  - FIRST SECTION MUST be "Conceptual Overview" with learning order 1, containing foundational understanding before practical skills
+</non_negotiable>
 
-      <level_adaptation>
-        <beginner_entry>
-          Include 2-3 foundational understanding skills in this section:
-          - What is {skill} and why it matters (core definition, practical value in context, key use cases)
-          - Basic mental model (simplified workflow, key analogies, fundamental concepts)
-          - Essential terminology (3-5 key terms with simple definitions)
+<conceptual_overview_requirements>
+  <purpose>
+    Every skill tree MUST start with a conceptual overview section that provides mental models and context before practical skills
+  </purpose>
 
-          Each skill gets its own Impact (%) allocation.
-        </beginner_entry>
+  <section_title_output>
+    Conceptual Overview (translated per language_policy in output)
+  </section_title_output>
 
-        <intermediate>
-          Include 3-4 foundational understanding skills in this section:
-          - What is {skill} and strategic value (definition with distinctions, strategic value, common use cases)
-          - Mental model and workflow (conceptual framework, workflow diagram, key principles)
-          - Key terminology and concepts (5-8 terms including advanced concepts)
-          - Common conceptual mistakes (2-3 misconceptions that learners often have)
+  <learning_order>
+    1 (always first, before all practical skills which start at 2)
+  </learning_order>
 
-          Each skill gets its own Impact (%) allocation.
-        </intermediate>
+  <level_adaptation>
+    <beginner_entry>
+      Include 2-3 foundational understanding skills in this section:
+      - What is {skill} and why it matters (core definition, practical value in context, key use cases)
+      - Basic mental model (simplified workflow, key analogies, fundamental concepts)
+      - Essential terminology (3-5 key terms with simple definitions)
 
-        <expert_advanced>
-          Include 4-5 foundational understanding skills in this section:
-          - What is {skill}, scope and boundaries (definition, scope, boundaries, tradeoffs)
-          - Advanced mental model (system-level view, architectural principles, design patterns)
-          - Expert terminology and concepts (8-12 terms including expert-level concepts)
-          - Subtle errors and pitfalls (3-4 common misconceptions and subtle pitfalls)
-          - Connections to adjacent domains (how this skill relates to and integrates with adjacent areas)
+      Each skill gets its own Impact (%) allocation.
+    
+    </beginner_entry>
 
-          Each skill gets its own Impact (%) allocation.
-        </expert_advanced>
-      </level_adaptation>
+    <intermediate>
+      Include 3-4 foundational understanding skills in this section:
+      - What is {skill} and strategic value (definition with distinctions, strategic value, common use cases)
+      - Mental model and workflow (conceptual framework, workflow diagram, key principles)
+      - Key terminology and concepts (5-8 terms including advanced concepts)
+      - Common conceptual mistakes (2-3 misconceptions that learners often have)
 
-      <impact_allocation>
-        - Conceptual overview skills should collectively account for 10-15% of total impact
-        - Each individual conceptual skill receives its own Impact (%) value like any other skill
-        - Impact MUST still sum to exactly 100 across ALL skills (including conceptual overview skills)
-      </impact_allocation>
+      Each skill gets its own Impact (%) allocation.
+    </intermediate>
 
-      <examples_in_parentheses>
-        Conceptual skills should also include examples in parentheses showing how to apply understanding:
-        - Example: "Basic mental model (data flow diagrams, component interaction maps, simplified architecture)"
-        - Example: "Essential terminology (define: pipeline, transformation, orchestration)"
-      </examples_in_parentheses>
-    </conceptual_overview_requirements>
+    <expert_advanced>
+      Include 4-5 foundational understanding skills in this section:
+      - What is {skill}, scope and boundaries (definition, scope, boundaries, tradeoffs)
+      - Advanced mental model (system-level view, architectural principles, design patterns)
+      - Expert terminology and concepts (8-12 terms including expert-level concepts)
+      - Subtle errors and pitfalls (3-4 common misconceptions and subtle pitfalls)
+      - Connections to adjacent domains (how this skill relates to and integrates with adjacent areas)
 
-    <baseline_sustainability>
-      Baseline sustainability (minimum) means the learner can:
-      - perform the core workflow end-to-end in {inputs.context}
-      - avoid the most common correctness mistakes
-      - apply basic safety/governance rules relevant to {inputs.context}
-      - detect issues early using basic validation checks
-      - troubleshoot common failures and recover
-      - produce work that is understandable and maintainable by someone else
-    </baseline_sustainability>
+      Each skill gets its own Impact (%) allocation.
+    </expert_advanced>
+  </level_adaptation>
 
-    <level_scaling>
-      Principle: Always cover the baseline sustainability definition. Then expand depth and scope according to inputs.level.
+  <impact_allocation>
+    - Each individual conceptual skill receives its own Impact (%) value like any other skill
+    - Impact MUST still sum to exactly 100 across ALL skills (including conceptual overview skills)
+  </impact_allocation>
 
-      - If inputs.level implies beginner/entry-level: focus on the essential/common workflow; exclude expert-only optimizations and rare edge cases
-      - If inputs.level implies intermediate: include common robustness and performance patterns; include a small set of context-relevant edge cases
-      - If inputs.level implies expert: include expert-level optimizations, deeper debugging/diagnostics, and context-relevant edge cases and tradeoffs
-      - If inputs.level is ambiguous: default to 'entry-level production' scope unless the level explicitly requests advanced/expert coverage
-    </level_scaling>
+  <examples_in_parentheses>
+    Conceptual skills should also include examples in parentheses showing how to apply understanding:
+    - Example: "Basic mental model (data flow diagrams, component interaction maps, simplified architecture)"
+    - Example: "Essential terminology (define: pipeline, transformation, orchestration)"
+  </examples_in_parentheses>
+</conceptual_overview_requirements>
 
-    <coverage_requirements>
-      <must_include>
-        <item>Workflow basics (where work happens, how changes apply, how outputs are produced)</item>
-        <item>Inputs and access (setup, permissions/credentials if applicable)</item>
-        <item>Core operations (the main actions people do in this skill)</item>
-        <item>Combining or integrating parts (if applicable)</item>
-        <item>Quality checks (common errors, validation, sanity checks)</item>
-        <item>Safety/governance (privacy, security, compliance, safe defaults)</item>
-        <item>Performance/reliability basics (avoid obvious slow/brittle patterns)</item>
-        <item>Handoff readiness (naming, structure, minimal documentation)</item>
-        <item>Production use (run/deploy behavior in {inputs.context}, if applicable)</item>
-      </must_include>
+<baseline_sustainability>
+  Baseline sustainability (minimum) means the learner can:
+  - perform the core workflow end-to-end in {inputs.context}
+  - avoid the most common correctness mistakes
+  - apply basic safety/governance rules relevant to {inputs.context}
+  - detect issues early using basic validation checks
+  - troubleshoot common failures and recover
+  - produce work that is understandable and maintainable by someone else
+</baseline_sustainability>
 
-      <exclude>
-        <item>Expert-only optimizations when inputs.level is entry-level</item>
-        <item>Deep theory not required for {inputs.level}</item>
-        <item>Rare edge cases unless inputs.level is expert or the context makes them common</item>
-      </exclude>
-    </coverage_requirements>
+<level_scaling>
+  Principle: Always cover the baseline sustainability definition. Then expand depth and scope according to inputs.level.
 
-    <output_format>
-      <single_output>
-        <type>Numbered hierarchical skill tree (book-index style)</type>
-        <format>Sections as ### headings, skills as plain text lines</format>
-        <requirements>
-          <requirement>Two levels only: Level 1 = Sections as ### headings with number, Level 2 = Skills as plain text lines with decimal number</requirement>
-          <requirement>Ordered by learning progression</requirement>
-          <requirement>Conceptual Overview section is number 0</requirement>
-          <requirement>Impact (%) shown per skill</requirement>
-          <requirement>No table, no justifications, no "Why this matters" — just the tree</requirement>
-          <requirement>Do NOT use markdown list syntax (no "-", no "*", no "1." ordered lists). Skills are plain text lines, not list items.</requirement>
-        </requirements>
-        <example>
-### 0 Conceptual Overview
+  - If inputs.level implies beginner/entry-level: focus on the essential/common workflow; exclude expert-only optimizations and rare edge cases
+  - If inputs.level implies intermediate: include common robustness and performance patterns; include a small set of context-relevant edge cases
+  - If inputs.level implies expert: include expert-level optimizations, deeper debugging/diagnostics, and context-relevant edge cases and tradeoffs
+  - If inputs.level is ambiguous: default to 'entry-level production' scope unless the level explicitly requests advanced/expert coverage
+</level_scaling>
 
-0.1 Understand what X is and its value (definition, use cases, practical value) — Impact 4%
-0.2 Internalize the mental workflow (key steps, analogies) — Impact 4%
+<coverage_requirements>
+  <must_include>
+    - Workflow basics (where work happens, how changes apply, how outputs are produced)
+    - Inputs and access (setup, permissions/credentials if applicable)
+    - Core operations (the main actions people do in this skill)
+    - Combining or integrating parts (if applicable)
+    - Quality checks (common errors, validation, sanity checks)
+    - Safety/governance (privacy, security, compliance, safe defaults)
+    - Performance/reliability basics (avoid obvious slow/brittle patterns)
+    - Handoff readiness (naming, structure, minimal documentation)
+    - Production use (run/deploy behavior in {inputs.context}, if applicable)
+  </must_include>
 
-### 1 Section One
+  <exclude>
+    - Expert-only optimizations when inputs.level is entry-level
+    - Deep theory not required for {inputs.level}
+    - Rare edge cases unless inputs.level is expert or the context makes them common
+  </exclude>
+</coverage_requirements>
 
-1.1 First skill (example A, example B) — Impact 5%
-1.2 Second skill (example C, example D) — Impact 4%
+<output_format>
+  <formatting>
+    Primary format: Numbered hierarchical lists
 
-### 2 Section Two
+    Indentation:
+    - Use spaces only (2 spaces per level)
+    - Tabs forbidden
 
-2.1 Third skill (example E, example F) — Impact 3%
-        </example>
-      </single_output>
-    </output_format>
-  </prompt>
-</template>
+    List markers: Numbers like 1. or 1.1 or 1.1.1
+  </formatting>
+
+  <requirements>
+    - Two levels only: Level 1 = Sections as ### headings with number, Level 2 = Skills as plain text lines with decimal number
+    - Ordered by learning progression
+    - Impact (%) shown per skill
+    - No table, no justifications, no "Why this matters" — just the tree
+  </requirements>
+
+  <example>
+1 Conceptual Overview
+- 1.1 Understand what X is and its value (definition, use cases, practical value) — Impact 4%
+- 1.2 Internalize the mental workflow (key steps, analogies) - Impact 4%
+2 Skill Section One
+- 2.1 First skill (example A, example B) — Impact 5%    
+- 2.2 Second skill (example C, example D) — Impact 4%
+3 Skill Section Two
+- 3.1 Third skill (example E, example F) — Impact 3%
+  </example>
+</output_format>
