@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v1.6.0
+  v1.7.0
 </version>
 <inputs>
   <skill>[SKILL_NAME]</skill>
@@ -14,7 +14,7 @@
 
 <command>
   Using the provided skill tree, produce a simplified actionable content tree in organic Markdown while preserving hierarchy (Section -> Micro-skills). Output in PARTS per the parts rules. Every node must include: Resultados de aprendizaje esperados, Cobertura (detalles), Fuentes (sources may be in English), and Tiempo estimado. 
-  All headings and narrative text MUST be in Spanish. Only proper names and source titles can remain in their original language.
+  All headings and narrative text MUST be in Spanish. Only proper names and source titles can remain in their original language. After finishing all the parts generate a human readable nicely formatted pdf with the content-tree.
 </command>
 
 <non_negotiable>

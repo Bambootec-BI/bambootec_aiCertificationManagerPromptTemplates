@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v1.6.0
+  v1.7.0
 </version>
 
 <inputs>
@@ -16,7 +16,7 @@
   Build a learning skill tree for {inputs.skill} at {inputs.level} for {inputs.context}.
 
   Audience: first-time learners entering to this skill-level domain.
-  Style: textbook index (short section titles + short skill titles)
+  Style: textbook index (short section titles + short skill titles). After finishing generate a human readable, nicely formatted pdf with the skill tree.
 </command>
 
 <critical_commands>
