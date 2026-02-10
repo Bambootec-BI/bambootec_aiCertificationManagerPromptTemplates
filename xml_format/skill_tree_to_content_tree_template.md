@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v1.7.0
+  v1.8.0
 </version>
 <inputs>
   <skill>[SKILL_NAME]</skill>
@@ -14,7 +14,7 @@
 
 <command>
   Using the provided skill tree, produce a simplified actionable content tree in organic Markdown while preserving hierarchy (Section -> Micro-skills). Output in PARTS per the parts rules. Every node must include: Resultados de aprendizaje esperados, Cobertura (detalles), Fuentes (sources may be in English), and Tiempo estimado. 
-  All headings and narrative text MUST be in Spanish. Only proper names and source titles can remain in their original language. After finishing all the parts generate a human readable nicely formatted pdf with the content-tree.
+  All headings and narrative text MUST be in Spanish. Only proper names and source titles can remain in their original language.
 </command>
 
 <non_negotiable>
@@ -43,49 +43,6 @@
   - Do provide compact headings and curated learning resources; keep it easy to read
 </no_full_teaching_content>
 
-<sources_non_negotiable>
-  URL requirements:
-  - Do NOT use generic/umbrella sources (homepages, category pages, or broad 'getting started' pages) unless the page itself is narrowly focused on the exact micro-skill.
-  - Avoid linking to general product documentation entry points (e.g., documentation home, overview pages). Use deep links to the specific page/section that teaches the exact micro-skill
-  - Every source must be tightly aligned to the node: the title/section must clearly match the micro-skill name or its immediate subtopics
-  - Output the title and  the URL as plain text on its own line: [title] - https://example.com
-  - Do NOT include n- Avoid linking to general product documentation entry points (e.g., documentation home, overview pages). Use deep links to the specific page/section that teaches the exact micro-skillames, or descriptions
-  - Do NOT use markdown link syntax [text](url)
-  - Do NOT wrap URLs in parentheses, quotes, code blocks, or any special formatting
-  - Do NOT add labels like 'Nota:', 'Query:' before URLs
-  - Do NOT invent URLs - only real, accessible resources
-
-  Prohibited patterns:
-  - Parenthetical additions like (Book), (Microsoft Learn), (Video), etc.
-  - "Extraer:", "Extract:", or language tags before/after URLs
-  - Parenthetical explanations on the same line as URL
-  - Descriptions before/after URLs, only title is allowed
-</sources_non_negotiable>
-
-<video_source_non_negotiable>
-  Every node MUST include at least 1 video source. Video allocation depends on node type:
-
-  Node type inference (infer from micro-skill name and context):
-  - Procedural/visual (UI walkthroughs, tool demos, debugging, data manipulation): 2+ video sources
-  - Conceptual/analytical (mental models, architecture, design decisions): 1-2 video sources
-  - Reference/definitional (terminology, conventions, syntax rules): 1 video source
-
-  Global floor: at least 30% of all sources across the content tree should be videos.
-
-  Video source types (in priority order):
-  - YouTube tutorials and walkthroughs (10-20 min preferred over 1-hour lectures)
-  - YouTube playlists covering the section topic
-  - Conference talks and recorded workshops
-  - Screencasts and live-coding sessions
-  - Platform-hosted video courses (free first; paid only when clearly superior)
-
-  Rules:
-  - Video sources follow the same URL format rule; [title] - [clickable_url]
-  - Video sources must be tightly aligned to the micro-skill — no generic "intro to X" playlists unless the node is itself introductory
-  - Prefer shorter, denser videos that demonstrate hands-on workflows over long lecture-only formats
-  - Video sources count toward the 2–6 source range per node (they do not add extra slots)
-  - Before finishing a "Fuentes" node check the presence of videos
-</video_source_non_negotiable>
 
 <source_quality_and_cost>
   - Prioritize the most practical, high-signal resources for fast learning in this {inputs.context}
@@ -157,54 +114,4 @@
 <output_format>
   ALL bullet content and descriptions MUST be written in Spanish. Only source titles and proper names may remain in their original language.
 
-  <required_structure>
-    1. **Section Title (verbatim)** — 1-line objective
-       - Resultados de aprendizaje esperados:
-         - bullet
-         - bullet
-         - bullet
-       - Cobertura (detalles):
-         - Micro-skills:
-           - Micro-skill 1 (verbatim)
-           - Micro-skill 2 (verbatim)
-           - Micro-skill 3 (verbatim)
-         - Alcance:
-           - bullet
-           - bullet
-           - bullet
-
-       1. **Micro-skill (verbatim)**
-          - Resultados de aprendizaje esperados:
-            - bullet
-            - bullet
-          - Cobertura (detalles):
-            - bullet / heading
-            - bullet / heading
-            - bullet / heading
-          - Fuentes:
-            - title - url
-            - [video] title - url (procedural: 2+, conceptual: 1-2, reference: 1)
-            - [video] title - url
-            - title - url
-          - Tiempo estimado: integer range in minutes
-
-       2. **Micro-skill (verbatim)**
-          - Resultados de aprendizaje esperados:
-            - bullet
-            - bullet
-          - Cobertura (detalles):
-            - bullet / heading
-            - bullet / heading
-            - bullet / heading
-          - Fuentes:
-            - title - url
-            - [video] title - url (procedural: 2+, conceptual: 1-2, reference: 1)
-            - title - url
-          - Tiempo estimado: integer range in minutes
-
-      At the end of each PART: Cumulative estimated total time: integer range in minutes
-      Upon completing everything: Final estimated total time: integer range in minutes
-
-      AFTER ALL ITERATIONS COMPLETE: Generate a content_summary section including: concepts covered, pitfalls mentioned in sources, constraints from context, terminology introduced, and scope boundaries. This summary will be consumed by skill_to_practice_exercises_template.md.
-  </required_structure>
 </output_format>

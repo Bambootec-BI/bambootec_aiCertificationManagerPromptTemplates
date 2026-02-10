@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v1.7.0
+  v1.8.0
 </version>
 
 <inputs>
@@ -16,7 +16,7 @@
   Build a learning skill tree for {inputs.skill} at {inputs.level} for {inputs.context}.
 
   Audience: first-time learners entering to this skill-level domain.
-  Style: textbook index (short section titles + short skill titles). After finishing generate a human readable, nicely formatted pdf with the skill tree.
+  Style: textbook index (short section titles + short skill titles).
 </command>
 
 <critical_commands>
@@ -155,14 +155,4 @@
     - No table, no justifications, no "Why this matters" — just the tree
   </requirements>
 
-  <example>
-1 Conceptual Overview
-- 1.1 Understand what X is and its value (definition, use cases, practical value) — Impact 4%
-- 1.2 Internalize the mental workflow (key steps, analogies) - Impact 4%
-2 Skill Section One
-- 2.1 First skill (example A, example B) — Impact 5%    
-- 2.2 Second skill (example C, example D) — Impact 4%
-3 Skill Section Two
-- 3.1 Third skill (example E, example F) — Impact 3%
-  </example>
 </output_format>
