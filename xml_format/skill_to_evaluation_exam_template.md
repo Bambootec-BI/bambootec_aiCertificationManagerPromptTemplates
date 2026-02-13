@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v1.7.0
+  v1.9.0
 </version>
 
 <description>

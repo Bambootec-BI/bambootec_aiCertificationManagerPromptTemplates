@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v1.8.0
+  v1.9.0
 </version>
 
 <inputs>
@@ -15,12 +15,12 @@
 <command>
   Build a learning skill tree for {inputs.skill} at {inputs.level} for {inputs.context}.
 
-  Audience: first-time learners entering to this skill-level domain.
-  Style: textbook index (short section titles + short skill titles).
+  Audience: junior/entry-level practitioners — people who can independently deliver production-ready work in {inputs.context}, handling the core workflow end-to-end with correct, maintainable results.
+  Style: textbook index (short chapter titles + short skill titles).
 </command>
 
 <critical_commands>
-  Ordering is learning progression; Impact (%) is informational and must sum to 100.
+  Ordering is learning progression. Impact is a categorical level (Low, Moderate, High, Very High, Critical) — it does not affect ordering.
 </critical_commands>
 
 <language_policy>
@@ -30,91 +30,109 @@
 
 <non_negotiable>
   - Order MUST follow a learning progression (what to learn first → later)
-  - Each concrete skill MUST include an Impact (%) integer, but Impact MUST NOT affect ordering
-  - The sum of Impact (%) across ALL concrete skills MUST equal exactly 100
-  - Exactly two levels: Level 1 = Section titles (capability areas), Level 2 = Skill titles
-  - Each section MUST contain at least two skills.
+  - Each concrete skill MUST include an Impact level (one of: Low, Moderate, High, Very High, Critical), but Impact MUST NOT affect ordering
+  - Two levels: Level 1 = Chapter titles (### headings), Level 2 = Subtitles (mental model, example, and skills as numbered lines)
+  - For chapters 2+: the first subtitle MUST be the chapter's mental model, the second MUST be a concrete example of that mental model, followed by the actionable skills
+  - Chapter 1 (Conceptual Overview) is the exception: it already IS the global mental model, so it has no nested mental model subtitle — it contains an example subtitle and descriptive subtitles directly
+  - Each chapter MUST contain at least two actionable skills (in addition to the mental model and example subtitles for chapters 2+)
   - Skill titles must be short, beginner-friendly, easily understandable and action-oriented
   - Each skill must include representative 'how to do it' examples in parentheses (examples only, not extra skills)
   - Keep skill count within a practical range for the requested level (e.g., 18–35), unless the context clearly demands fewer
-  - FIRST SECTION MUST be "Conceptual Overview" with learning order 1, containing foundational understanding before practical skills
+  - FIRST CHAPTER MUST be "Conceptual Overview" with learning order 1, containing foundational understanding before practical skills
 </non_negotiable>
+
+<chapter_structure>
+  <purpose>
+    Every chapter frames its skills with a mental model (the key idea) and a concrete example before listing actionable skills. This helps learners understand WHY before HOW.
+  </purpose>
+
+  <chapters_2_and_beyond>
+    Each chapter (2, 3, 4, ...) MUST follow this internal order:
+    1. Mental model subtitle — a short sentence describing the key idea or principle of this chapter (e.g., "How data flows from source to storage")
+    2. Example subtitle — a concrete, relatable scenario that illustrates the mental model (e.g., "Example: Loading a CSV file into a database table")
+    3. Actionable skills — the specific skills the learner must acquire, each with Impact level and examples in parentheses
+
+    The mental model and example subtitles also receive an Impact level like any other subtitle.
+  </chapters_2_and_beyond>
+
+  <chapter_1_exception>
+    Chapter 1 (Conceptual Overview) already serves as the mental model for the entire skill.
+    It does NOT need a nested mental model subtitle.
+    It DOES include an example subtitle and the descriptive subtitles defined in conceptual_overview_requirements.
+  </chapter_1_exception>
+</chapter_structure>
 
 <conceptual_overview_requirements>
   <purpose>
-    Every skill tree MUST start with a conceptual overview section that provides mental models and context before practical skills
+    Chapter 1 is the conceptual overview — it IS the mental model for the entire skill.
+    Unlike chapters 2+, it does NOT have a nested mental model subtitle.
+    It DOES include an example subtitle and descriptive subtitles that explain the global mental model.
   </purpose>
 
-  <section_title_output>
+  <chapter_title_output>
     Conceptual Overview (translated per language_policy in output)
-  </section_title_output>
+  </chapter_title_output>
 
   <learning_order>
-    1 (always first, before all practical skills which start at 2)
+    1 (always first, before all practical chapters which start at 2)
   </learning_order>
 
   <level_adaptation>
     <beginner_entry>
-      Include 2-3 foundational understanding skills in this section:
+      Include 2-3 foundational understanding subtitles in this chapter:
       - What is {skill} and why it matters (core definition, practical value in context, key use cases)
       - Basic mental model (simplified workflow, key analogies, fundamental concepts)
       - Essential terminology (3-5 key terms with simple definitions)
 
-      Each skill gets its own Impact (%) allocation.
-    
+      Each subtitle gets its own Impact level.
     </beginner_entry>
 
     <intermediate>
-      Include 3-4 foundational understanding skills in this section:
+      Include 3-4 foundational understanding subtitles in this chapter:
       - What is {skill} and strategic value (definition with distinctions, strategic value, common use cases)
       - Mental model and workflow (conceptual framework, workflow diagram, key principles)
       - Key terminology and concepts (5-8 terms including advanced concepts)
       - Common conceptual mistakes (2-3 misconceptions that learners often have)
 
-      Each skill gets its own Impact (%) allocation.
+      Each subtitle gets its own Impact level.
     </intermediate>
 
     <expert_advanced>
-      Include 4-5 foundational understanding skills in this section:
+      Include 4-5 foundational understanding subtitles in this chapter:
       - What is {skill}, scope and boundaries (definition, scope, boundaries, tradeoffs)
       - Advanced mental model (system-level view, architectural principles, design patterns)
       - Expert terminology and concepts (8-12 terms including expert-level concepts)
       - Subtle errors and pitfalls (3-4 common misconceptions and subtle pitfalls)
       - Connections to adjacent domains (how this skill relates to and integrates with adjacent areas)
 
-      Each skill gets its own Impact (%) allocation.
+      Each subtitle gets its own Impact level.
     </expert_advanced>
   </level_adaptation>
 
-  <impact_allocation>
-    - Each individual conceptual skill receives its own Impact (%) value like any other skill
-    - Impact MUST still sum to exactly 100 across ALL skills (including conceptual overview skills)
-  </impact_allocation>
-
   <examples_in_parentheses>
-    Conceptual skills should also include examples in parentheses showing how to apply understanding:
+    Conceptual subtitles should also include examples in parentheses showing how to apply understanding:
     - Example: "Basic mental model (data flow diagrams, component interaction maps, simplified architecture)"
     - Example: "Essential terminology (define: pipeline, transformation, orchestration)"
   </examples_in_parentheses>
 </conceptual_overview_requirements>
 
 <baseline_sustainability>
-  Baseline sustainability (minimum) means the learner can:
+  This is what "junior/entry-level production readiness" means — the minimum bar where a worker can deliver real, usable output:
   - perform the core workflow end-to-end in {inputs.context}
   - avoid the most common correctness mistakes
-  - apply basic safety/governance rules relevant to {inputs.context}
+  - apply basic safety and best practices relevant to {inputs.context}
   - detect issues early using basic validation checks
   - troubleshoot common failures and recover
   - produce work that is understandable and maintainable by someone else
 </baseline_sustainability>
 
 <level_scaling>
-  Principle: Always cover the baseline sustainability definition. Then expand depth and scope according to inputs.level.
+  Principle: Always cover baseline sustainability first (the junior/entry-level production readiness bar). Then expand depth and scope according to inputs.level.
 
-  - If inputs.level implies beginner/entry-level: focus on the essential/common workflow; exclude expert-only optimizations and rare edge cases
-  - If inputs.level implies intermediate: include common robustness and performance patterns; include a small set of context-relevant edge cases
-  - If inputs.level implies expert: include expert-level optimizations, deeper debugging/diagnostics, and context-relevant edge cases and tradeoffs
-  - If inputs.level is ambiguous: default to 'entry-level production' scope unless the level explicitly requests advanced/expert coverage
+  - If inputs.level implies beginner/entry-level: focus on the essential workflow and best practices; exclude expert-only optimizations and rare edge cases
+  - If inputs.level implies intermediate: add common robustness patterns and best practices for quality; include a small set of context-relevant edge cases
+  - If inputs.level implies expert: add expert-level optimizations, deeper debugging, and context-relevant edge cases and tradeoffs
+  - If inputs.level is ambiguous: default to junior/entry-level production readiness unless the level explicitly requests advanced/expert coverage
 </level_scaling>
 
 <coverage_requirements>
@@ -125,7 +143,7 @@
     - Combining or integrating parts (if applicable)
     - Quality checks (common errors, validation, sanity checks)
     - Safety/governance (privacy, security, compliance, safe defaults)
-    - Performance/reliability basics (avoid obvious slow/brittle patterns)
+    - Best practices for performance and reliability (avoid obvious slow or fragile patterns)
     - Handoff readiness (naming, structure, minimal documentation)
     - Production use (run/deploy behavior in {inputs.context}, if applicable)
   </must_include>
@@ -149,9 +167,11 @@
   </formatting>
 
   <requirements>
-    - Two levels only: Level 1 = Sections as ### headings with number, Level 2 = Skills as plain text lines with decimal number
+    - Two levels: Level 1 = Chapters as ### headings with number, Level 2 = Subtitles as plain text lines with decimal number
+    - For chapters 2+: first subtitle = mental model, second subtitle = example, remaining subtitles = actionable skills
+    - Chapter 1 (Conceptual Overview): no mental model subtitle (the chapter itself is the mental model); includes example subtitle + descriptive subtitles
     - Ordered by learning progression
-    - Impact (%) shown per skill
+    - Impact level (Low, Moderate, High, Very High, Critical) shown per subtitle
     - No table, no justifications, no "Why this matters" — just the tree
   </requirements>
 

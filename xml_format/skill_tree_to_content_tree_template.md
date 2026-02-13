@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v1.8.0
+  v1.9.0
 </version>
 <inputs>
   <skill>[SKILL_NAME]</skill>
@@ -20,6 +20,7 @@
 <non_negotiable>
   - Sources must be clickable URLs to real content (no search queries). Strong preference for English sources and deep, micro-skill-specific links (no generic docs/landing pages).
   - Every node must include at least 1 video source, with allocation based on node type (procedural 2+, conceptual 1-2, reference 1). Prefer free/practical sources; paid MOOCs may be suggested but de-prioritized and clearly labeled. This video source generation must be maintained in all the PARTS. This must not stop in the first PART and then not be applied.
+  - Video recency is absolutely enforced: always select the most recent video available, but NEVER sacrifice relevance for recency. Between two equally relevant videos, always pick the newer one. Between a recent but off-topic video and an older but highly relevant one, pick the relevant one. Recency matters as much as possible without compromising relevance.
 </non_negotiable>
 
 <language_policy>
@@ -55,7 +56,7 @@
 
 <ordering>
   - Order sections and micro-skills by learning progression AND by impact for success in {inputs.context}
-  - Use Impact (%) if present as a signal, but respect prerequisites
+  - Use Impact level (Low, Moderate, High, Very High, Critical) if present as a signal, but respect prerequisites
 </ordering>
 
 <parts_system>
