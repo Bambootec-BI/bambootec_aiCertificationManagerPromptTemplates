@@ -112,6 +112,34 @@
   </for_each_micro_skill>
 </content_requirements>
 
+<constraint_priority>
+  If constraints conflict, prioritize in this exact order:
+  1. Relevance to micro-skill
+  2. Technical correctness
+  3. Practical applicability
+  4. Source quality
+  5. Recency
+  6. Language preference
+  7. Cost preference
+
+  Never sacrifice relevance or correctness for recency.
+</constraint_priority>
+
+<anti_hallucination_protocol>
+  - Only include sources you are confident are real and accessible.
+  - If a suitable recent video cannot be found, explicitly state that and provide the best available relevant video.
+  - Do NOT fabricate publication dates.
+  - If browsing is not available, do not claim recency validation; instead select widely known authoritative sources.
+</anti_hallucination_protocol>
+
+<pre_output_validation>
+  Before outputting each PART, verify:
+  - Cumulative time is recalculated and correct
+  - Numbering continuity is maintained from the previous PART
+  - Every node includes all required fields (learning outcomes, coverage, sources, time)
+  - Video quota is met for every node (procedural 2+, conceptual 1-2, reference 1)
+</pre_output_validation>
+
 <output_format>
   ALL bullet content and descriptions MUST be written in Spanish. Only source titles and proper names may remain in their original language.
 
