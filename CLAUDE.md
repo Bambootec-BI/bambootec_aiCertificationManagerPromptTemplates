@@ -41,9 +41,7 @@ All templates live in `xml_format/` as Markdown files with XML tags (best instru
 
 2. **Single Format**: XML/Markdown files in `xml_format/` — XML tags in Markdown for Custom GPT prompt engineering
 
-3. **Language Contract**:
-   - **Instruction text** (inside templates): English (for model performance)
-   - **User-visible outputs**: Spanish (except code blocks and proper nouns)
+3. **Language**: All templates and outputs are in English
 
 4. **Real Sources Only**: No search queries or invented URLs
    - Every source must be a clickable URL to existing content
@@ -101,7 +99,7 @@ Step 4: skill_to_evaluation_exam
 Each template has simplified inputs based on data flow:
 - **Core inputs**: skill, level, context (present in all templates)
 - **Summary inputs**: skill_tree, content_summary, exercise_summary (passed from previous steps)
-- **No configuration parameters**: All settings (time_unit, language preferences, density, etc.) are hardcoded to sensible defaults
+- **No configuration parameters**: All settings (time_unit, density, etc.) are hardcoded to sensible defaults
 
 ### Output Requirements
 All templates produce two types of outputs:
@@ -109,7 +107,7 @@ All templates produce two types of outputs:
 1. **User-facing outputs** (full, detailed):
    - **Hierarchical structure** (numbered sections, maintained across PARTS)
    - **Time estimates** (per item + cumulative total)
-   - **Spanish labels** (for all user-visible fields)
+   - **English labels** (for all user-visible fields)
    - **Sources** (bare URLs only, nothing else)
 
 2. **Summary outputs** (for next step):
@@ -145,7 +143,7 @@ https://example.com/another-resource
 - Put links inside code blocks
 - Use markdown [text](url) syntax
 - Wrap URLs in parentheses, quotes, or code blocks
-- Add "Nota:", "Query:", "Extraer:", "Extract:", or language tags before/after sources
+- Add "Note:", "Query:", "Extract:", or language tags before/after sources
 - Add any explanatory text after the URL
 - Use search query placeholders
 - Invent URLs
@@ -157,7 +155,7 @@ https://example.com/another-resource
 Each template must enforce:
 
 **skill_tree_builder**:
-- Impact weights sum to exactly 100
+- Impact levels are categorical (Low, Moderate, High, Very High, Critical)
 - Exactly 2 levels of hierarchy
 - Action-oriented, assessable nodes
 - No vague outcomes ("understand X" → "apply X to...")
@@ -167,7 +165,7 @@ Each template must enforce:
 - Every node must include at least 1 video source (procedural 2+, conceptual 1-2, reference 1)
 - At least 30% of all sources across the tree should be videos
 - Total time computed and reported
-- Minimum 80% English sources (hardcoded default)
+- Prefer English sources
 
 **skill_to_practice_exercises**:
 - Dataset acquisition is real (URL or loader ID + steps)
@@ -258,7 +256,7 @@ Before considering templates "done":
    - Check: exactly 3 separate downloadable files produced (exam PDF, exam MD, evaluation guide MD)
    - Check: exam files contain NO answers, rubrics, or evaluator notes
    - Check: evaluation guide references questions by number only, does NOT repeat exam content
-   - Check: Spanish output labels
+   - Check: English output labels
    - Check: total score = 100 points
    - Check: code completions present for technical skills
    - Check: submission manifest present for hands-on tasks
@@ -292,7 +290,7 @@ Key sections in templates:
 
 **During changes**:
 1. Maintain XML/Markdown format validity
-2. Keep instruction text in English, output labels in Spanish
+2. All text in English (instructions and output labels)
 4. Don't add configuration parameters - hardcode sensible defaults instead
 5. Ensure inputs match what's available from previous workflow steps
 
@@ -334,7 +332,7 @@ Each source is just a bare URL on its own line with blank lines for separation. 
 1. **No fake sources**: Every URL must point to real, accessible content
 2. **No search queries**: No search query placeholders or placeholder text
 3. **Real datasets only**: Framework loaders or direct download URLs; no synthetic generation
-4. **Spanish user output**: All candidate/evaluator-facing text in Spanish
+4. **English output**: All candidate/evaluator-facing text in English
 5. **One step per turn**: Router must not skip steps or confuse PARTS with steps
 6. **Sources mandatory**: Step 2 (content plan) must always include "Sources" section
 7. **Simplified inputs**: Only use data available from previous workflow steps
@@ -342,8 +340,8 @@ Each source is just a bare URL on its own line with blank lines for separation. 
 
 ### Soft Preferences
 
-1. **Prefer free resources**: Paid MOOCs allowed but de-prioritized and labeled "Pago"
-2. **Prefer English sources**: Target 80%+ English (hardcoded default)
+1. **Prefer free resources**: Paid MOOCs allowed but de-prioritized and labeled "Paid"
+2. **Prefer English sources**: English sources preferred
 3. **Prefer deep links**: No generic landing pages; link to specific content
 4. **Prefer no-code instructions**: Tool UI steps over code when possible
 
@@ -357,7 +355,7 @@ Templates should support (not yet implemented):
 2. **Source verification**: Automated URL reachability checks
 3. **Dataset verification**: Size/license/accessibility validation
 4. **Schema evolution**: Version migration for older generated artifacts
-5. **Multi-language support**: Parameterized output language beyond Spanish
+5. **Multi-language support**: Parameterized output language
 6. **Quality scoring**: Automated template output quality metrics
 
 ---

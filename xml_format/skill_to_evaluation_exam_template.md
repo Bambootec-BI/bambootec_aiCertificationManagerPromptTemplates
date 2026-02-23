@@ -7,7 +7,7 @@
 </version>
 
 <description>
-  Generates certification-style exam + evaluator guide as 3 separate documents: (1) exam-only PDF for the learner, (2) exam-only MD for the learner, (3) evaluation-guide-only MD for the AI evaluator. Instructions in English, output controlled by language_policy.
+  Generates certification-style exam + evaluator guide as 3 separate documents: (1) exam-only PDF for the learner, (2) exam-only MD for the learner, (3) evaluation-guide-only MD for the AI evaluator.
 </description>
 
 <inputs>
@@ -17,14 +17,6 @@
   <level>[LEVEL_TARGET]</level>
   <context>[WHO/WHERE/WHY + constraints + target outcomes]</context>
 </inputs>
-
-<language_policy>
-  Translate user input into English. Think in English. Only translate to Spanish for the output.
-
-  Instruction language: English
-  Output language: Spanish
-  Exceptions: proper names, commonly used names, code blocks
-</language_policy>
 
 <role>
   Persona: Instructional designer + certification examiner
@@ -80,7 +72,7 @@
   - Do NOT invent URLs - only real, accessible resources
 
   Prohibited patterns:
-  - "Nota:", "Query:", or language tags before sources
+  - "Note:", "Query:", or language tags before sources
   - Code blocks (mathematica, python, etc.) around URLs or descriptions
   - Parenthetical explanations on the same line as URL
 
@@ -151,7 +143,7 @@
   Filename: exam_{inputs.skill_slug}.pdf
   Audience: The learner/candidate (NO evaluator content)
 
-  # Certification Exam: {inputs.skill} (translated per language_policy in output)
+  # Certification Exam: {inputs.skill}
 
   ## Candidate Instructions
   [Exam duration, passing score, submission requirements, allowed tools]
@@ -190,7 +182,7 @@
   Filename: evaluation_guide_{inputs.skill_slug}.md
   Audience: The AI evaluator or human grader (NO exam questions — reference by number only)
 
-  # Evaluation Guide: {inputs.skill} (translated per language_policy in output)
+  # Evaluation Guide: {inputs.skill}
 
   ## Answer Key
   [MCQ correct answers by question number, short answer evaluation criteria, code completion official solutions]

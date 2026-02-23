@@ -1,0 +1,3 @@
+- Skill: AI Utilization
+- Level: Intermediate
+- Context: role as business analysts, facilitating work and increasing productivity

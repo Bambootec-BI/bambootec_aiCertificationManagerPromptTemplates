@@ -1,3 +1,0 @@
-- Skill: Utilización de AI
-- Level: Intermedio
-- Contexto: rol de business analysts, facilitar el trabajo y elevar la productividad

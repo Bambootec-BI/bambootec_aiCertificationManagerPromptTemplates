@@ -23,11 +23,6 @@
   Ordering is learning progression. Impact is a categorical level (Low, Moderate, High, Very High, Critical) — it does not affect ordering.
 </critical_commands>
 
-<language_policy>
-  Use language_policy from instructions. Reminder:
-  Translate user input into English. Think in English. Only translate to Spanish for the output.
-</language_policy>
-
 <non_negotiable>
   - Order MUST follow a learning progression (what to learn first → later)
   - Each concrete skill MUST include an Impact level (one of: Low, Moderate, High, Very High, Critical), but Impact MUST NOT affect ordering
@@ -70,7 +65,7 @@
   </purpose>
 
   <chapter_title_output>
-    Conceptual Overview (translated per language_policy in output)
+    Conceptual Overview
   </chapter_title_output>
 
   <learning_order>

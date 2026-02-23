@@ -7,7 +7,7 @@
 </version>
 
 <description>
-  Generates certification-style exam + evaluator guide as 3 separate documents: (1) exam-only PDF for the learner, (2) exam-only MD for the learner, (3) evaluation-guide-only MD for the AI evaluator. Instructions in English, output controlled by language_policy.
+  Generates certification-style exam + evaluator guide as 3 separate documents: (1) exam-only PDF for the learner, (2) exam-only MD for the learner, (3) evaluation-guide-only MD for the AI evaluator.
 </description>
 
 <skill_tree>
@@ -89,258 +89,258 @@
 </skill_tree>
 
 <content_summary>
-Práctica de ingesta y combinación (OData + CSV) — Objetivo práctico: crear una tabla "ready-to-model" combinando clientes con un catálogo de países para uso multinacional.
+Ingestion and combination practice (OData + CSV) — Practical objective: create a "ready-to-model" table combining customers with a country catalog for multinational use.
 
 Micro-skills:
 
-Conectores, credenciales y navegación
+Connectors, credentials, and navigation
 
-Merge (join) y tipado consistente
+Merge (join) and consistent typing
 
-Tiempo estimado: 60-110 minutos
+Estimated time: 60-110 minutes
 
-1.1 Conectar y combinar orígenes — Enfoque de práctica: ingestar OData + CSV y entregar una dimensión limpia para reporteo.
+1.1 Connect and combine sources — Practice focus: ingest OData + CSV and deliver a clean dimension for reporting.
 
-Tiempo estimado: 60-110 minutos
-1.1.1 Ejercicio: DimCustomerCountry lista para BI
+Estimated time: 60-110 minutes
+1.1.1 Exercise: DimCustomerCountry ready for BI
 
-Enunciado:
+Problem statement:
 
-Construye una tabla que combine clientes (Northwind) con un catálogo de países (ISO) para estandarizar el país en proyectos multinacionales.
+Build a table that combines customers (Northwind) with a country catalog (ISO) to standardize the country in multinational projects.
 
-Objetivo verificable:
+Verifiable objective:
 
-Entregar DimCustomerCountry con CountryName y CountryCode (ISO) sin errores de tipo.
+Deliver DimCustomerCountry with CountryName and CountryCode (ISO) without type errors.
 
-Dataset (adquisición):
+Dataset (acquisition):
 
 Northwind OData V4 - https://services.odata.org/V4/Northwind/Northwind.svc/
 
 Country list (CSV) - https://datahub.io/core/country-list/r/data.csv
 
-Prerrequisitos:
+Prerequisites:
 
-Power BI Desktop o Excel (Power Query)
+Power BI Desktop or Excel (Power Query)
 
-Setup (copiar/pegar):
+Setup (copy/paste):
 
-Crear 2 consultas: Customers desde OData y Countries desde el CSV
+Create 2 queries: Customers from OData and Countries from the CSV
 
-Tareas:
+Tasks:
 
-Seleccionar columnas mínimas en Customers (CustomerID, CompanyName, Country)
+Select minimum columns in Customers (CustomerID, CompanyName, Country)
 
-Tipar columnas (CustomerID texto, CompanyName texto, Country texto)
+Type columns (CustomerID text, CompanyName text, Country text)
 
-En Countries, renombrar columnas a CountryName y CountryCode
+In Countries, rename columns to CountryName and CountryCode
 
-Hacer Merge Customers.Country = Countries.CountryName (Left join)
+Merge Customers.Country = Countries.CountryName (Left join)
 
-Expandir CountryCode y validar nulos/errores
+Expand CountryCode and validate nulls/errors
 
-Comando de ejecución:
+Execution command:
 
-Power BI Desktop: Inicio > Actualizar, luego Cerrar y aplicar
+Power BI Desktop: Home > Refresh, then Close and Apply
 
-Salida esperada:
+Expected output:
 
-Tabla DimCustomerCountry con columnas CustomerID, CompanyName, CountryName, CountryCode
+Table DimCustomerCountry with columns CustomerID, CompanyName, CountryName, CountryCode
 
-Árbol de archivos esperado:
+Expected file tree:
 
-Un PBIX/XLSX con 2 consultas staging y 1 consulta final (DimCustomerCountry)
+One PBIX/XLSX with 2 staging queries and 1 final query (DimCustomerCountry)
 
-Definiciones:
+Definitions:
 
-Dimensión: tabla descriptiva usada para segmentar/filtrar métricas
+Dimension: descriptive table used to segment/filter metrics
 
-Pruebas de aceptación (cómo probar) — Pass/Fail:
+Acceptance tests (how to test) — Pass/Fail:
 
-PASS si CountryCode existe para la mayoría de filas y no hay errores de tipo en la carga
+PASS if CountryCode exists for the majority of rows and there are no type errors on load
 
-Evidencia:
+Evidence:
 
-Captura del panel de consultas mostrando las 3 consultas y vista previa de DimCustomerCountry
+Screenshot of the queries panel showing the 3 queries and preview of DimCustomerCountry
 
-Pistas (opcional):
+Hints (optional):
 
-Si hay países que no "matchean", normaliza mayúsculas/espacios antes del Merge
+If some countries don't match, normalize case/spaces before the Merge
 
-Tiempo estimado: 60-110 minutos
+Estimated time: 60-110 minutes
 
-Práctica de limpieza, tipado y calidad — Objetivo práctico: limpiar un dataset operativo (texto + coordenadas) y dejarlo consistente para merges y KPIs.
+Cleaning, typing, and quality practice — Practical objective: clean an operational dataset (text + coordinates) and make it consistent for merges and KPIs.
 
 Micro-skills:
 
-Limpieza de texto (Trim/Clean) y tipado seguro
+Text cleaning (Trim/Clean) and safe typing
 
-Perfilado de columnas (calidad/distribución)
+Column profiling (quality/distribution)
 
-Tiempo estimado: 50-90 minutos
+Estimated time: 50-90 minutes
 
-2.1 Estandarizar y validar datos de referencia — Enfoque de práctica: crear una dimensión limpia y auditable para logística.
+2.1 Standardize and validate reference data — Practice focus: create a clean and auditable dimension for logistics.
 
-Tiempo estimado: 50-90 minutos
-2.1.1 Ejercicio: DimAirport limpia y tipada
+Estimated time: 50-90 minutes
+2.1.1 Exercise: DimAirport clean and typed
 
-Enunciado:
+Problem statement:
 
-Limpia y tipa un catálogo de aeropuertos para que pueda usarse como referencia en análisis logístico.
+Clean and type an airport catalog so it can be used as a reference in logistics analysis.
 
-Objetivo verificable:
+Verifiable objective:
 
-Entregar DimAirport filtrada y tipada sin errores, con texto estandarizado.
+Deliver DimAirport filtered and typed without errors, with standardized text.
 
-Dataset (adquisición):
+Dataset (acquisition):
 
 Airport codes (CSV) - https://datahub.io/core/airport-codes/r/airport-codes.csv
 
-Prerrequisitos:
+Prerequisites:
 
-Power BI Desktop o Excel (Power Query)
+Power BI Desktop or Excel (Power Query)
 
-Setup (copiar/pegar):
+Setup (copy/paste):
 
-Crear 1 consulta desde Web/CSV y habilitar herramientas de perfilado
+Create 1 query from Web/CSV and enable profiling tools
 
-Tareas:
+Tasks:
 
-Filtrar a un subconjunto útil (por ejemplo: type = large_airport o medium_airport)
+Filter to a useful subset (e.g., type = large_airport or medium_airport)
 
-Aplicar Trim/Clean en name y municipality (o equivalentes)
+Apply Trim/Clean on name and municipality (or equivalents)
 
-Tipar latitude_deg y longitude_deg como número decimal
+Type latitude_deg and longitude_deg as decimal number
 
-Revisar Column quality/distribution y corregir nulos críticos (si aplica) o marcarlos
+Review Column quality/distribution and fix critical nulls (if applicable) or flag them
 
-Comando de ejecución:
+Execution command:
 
-Power BI Desktop: Transformar datos > Cerrar y aplicar
+Power BI Desktop: Transform Data > Close and Apply
 
-Salida esperada:
+Expected output:
 
-Tabla DimAirport con texto limpio y coordenadas numéricas (sin errores de conversión)
+Table DimAirport with clean text and numeric coordinates (no conversion errors)
 
-Árbol de archivos esperado:
+Expected file tree:
 
-Un PBIX/XLSX con 1 consulta staging y 1 consulta final (DimAirport)
+One PBIX/XLSX with 1 staging query and 1 final query (DimAirport)
 
-Definiciones:
+Definitions:
 
-Perfilado: revisión de nulos/errores/distribución para detectar problemas antes del modelado
+Profiling: review of nulls/errors/distribution to detect issues before modeling
 
-Pruebas de aceptación (cómo probar) — Pass/Fail:
+Acceptance tests (how to test) — Pass/Fail:
 
-PASS si latitude_deg/longitude_deg están tipadas como número y Column quality no muestra errores
+PASS if latitude_deg/longitude_deg are typed as number and Column quality shows no errors
 
-Evidencia:
+Evidence:
 
-Captura de Column quality + vista previa de DimAirport con tipos correctos
+Screenshot of Column quality + preview of DimAirport with correct types
 
-Pistas (opcional):
+Hints (optional):
 
-Si aparece error de tipo, revisa si hay valores no numéricos o separadores regionales
+If a type error appears, check for non-numeric values or regional separators
 
-Tiempo estimado: 50-90 minutos
+Estimated time: 50-90 minutes
 
-Práctica de agregación operativa (Group By + fechas) — Objetivo práctico: generar una tabla agregada lista para KPI (por periodo y responsable logístico).
+Operational aggregation practice (Group By + dates) — Practical objective: generate an aggregated table ready for KPI (by period and logistics carrier).
 
 Micro-skills:
 
-Group By y métricas agregadas
+Group By and aggregated metrics
 
-Preparación de columnas de fecha para periodización
+Date column preparation for periodization
 
-Tiempo estimado: 60-110 minutos
+Estimated time: 60-110 minutes
 
-3.1 Construir una tabla de métricas por periodo — Enfoque de práctica: resumir órdenes por mes y transportista para un dashboard operativo.
+3.1 Build a metrics table by period — Practice focus: summarize orders by month and carrier for an operational dashboard.
 
-Tiempo estimado: 60-110 minutos
-3.1.1 Ejercicio: KPI de envíos por mes y shipper
+Estimated time: 60-110 minutes
+3.1.1 Exercise: Shipment KPI by month and shipper
 
-Enunciado:
+Problem statement:
 
-Genera una tabla agregada de órdenes enviadas por mes y por transportista (shipper) desde Northwind.
+Generate an aggregated table of orders shipped by month and by carrier (shipper) from Northwind.
 
-Objetivo verificable:
+Verifiable objective:
 
-Entregar una tabla KPI_Shipments_Month con conteos y una fecha de periodo consistente.
+Deliver a table KPI_Shipments_Month with counts and a consistent period date.
 
-Dataset (adquisición):
+Dataset (acquisition):
 
 Northwind OData V4 - https://services.odata.org/V4/Northwind/Northwind.svc/
 
-Prerrequisitos:
+Prerequisites:
 
-Power BI Desktop o Excel (Power Query)
+Power BI Desktop or Excel (Power Query)
 
-Setup (copiar/pegar):
+Setup (copy/paste):
 
-Crear consultas Orders y Shippers desde OData
+Create queries Orders and Shippers from OData
 
-Tareas:
+Tasks:
 
-En Orders, conservar OrderID, ShippedDate, ShipVia
+In Orders, keep OrderID, ShippedDate, ShipVia
 
-Crear columna de periodo (por ejemplo: inicio de mes desde ShippedDate)
+Create a period column (e.g., start of month from ShippedDate)
 
-Merge Orders.ShipVia = Shippers.ShipperID para traer CompanyName
+Merge Orders.ShipVia = Shippers.ShipperID to bring CompanyName
 
-Group By por Periodo y ShipperName con Count Rows (órdenes enviadas)
+Group By Period and ShipperName with Count Rows (orders shipped)
 
-Comando de ejecución:
+Execution command:
 
-Power BI Desktop: Inicio > Actualizar, luego Cerrar y aplicar
+Power BI Desktop: Home > Refresh, then Close and Apply
 
-Salida esperada:
+Expected output:
 
-Tabla KPI_Shipments_Month con Periodo, ShipperName, OrdersShipped (conteo)
+Table KPI_Shipments_Month with Period, ShipperName, OrdersShipped (count)
 
-Árbol de archivos esperado:
+Expected file tree:
 
-Un PBIX/XLSX con 2 staging (Orders, Shippers) y 1 final (KPI_Shipments_Month)
+One PBIX/XLSX with 2 staging (Orders, Shippers) and 1 final (KPI_Shipments_Month)
 
-Definiciones:
+Definitions:
 
-Group By: operación para agrupar filas por claves y calcular agregaciones
+Group By: operation to group rows by keys and calculate aggregations
 
-Pruebas de aceptación (cómo probar) — Pass/Fail:
+Acceptance tests (how to test) — Pass/Fail:
 
-PASS si no hay errores de tipo en fechas y OrdersShipped es numérico y >0 en varios periodos
+PASS if there are no type errors in dates and OrdersShipped is numeric and >0 across several periods
 
-Evidencia:
+Evidence:
 
-Captura de la tabla agregada y del paso Group By en "Pasos aplicados"
+Screenshot of the aggregated table and the Group By step in "Applied Steps"
 
-Pistas (opcional):
+Hints (optional):
 
-Si ShippedDate tiene nulos, filtra nulos antes de calcular el periodo
+If ShippedDate has nulls, filter nulls before calculating the period
 
-Tiempo estimado: 60-110 minutos
+Estimated time: 60-110 minutes
 </content_summary>
 
 <exercise_summary>
-Resumen de ejercicios generados (Power Query Junior)
+Summary of generated exercises (Power Query Junior)
 
-Ejercicio: Pedidos globales con dimensión País
+Exercise: Global orders with Country dimension
 
-Objetivo: construir FactOrders uniendo Orders + Customers y estandarizar país con ISO2 (merge con tabla de países).
+Objective: build FactOrders joining Orders + Customers and standardize country with ISO2 (merge with country table).
 
-Dataset (adquisición):
+Dataset (acquisition):
 
 Northwind OData v4 - https://services.odata.org/V4/Northwind/Northwind.svc/
 
 Country list (ISO2) - https://raw.githubusercontent.com/datasets/country-list/main/data.csv
 
-Entregable: FactOrders con Country_Clean e ISO2 (match-rate objetivo ≥ 90%).
+Deliverable: FactOrders with Country_Clean and ISO2 (target match-rate ≥ 90%).
 
-Tiempo estimado: 60-100 min
+Estimated time: 60-100 min
 
-Ejercicio: Consolidación de reportes diarios desde carpeta
+Exercise: Daily report consolidation from folder
 
-Objetivo: combinar múltiples CSV desde Folder, agregar ReportDate desde el nombre del archivo y tipar columnas.
+Objective: combine multiple CSVs from Folder, add ReportDate from the file name, and type columns.
 
-Dataset (adquisición):
+Dataset (acquisition):
 
 Daily report 01-01-2021 - https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/01-01-2021.csv
 
@@ -348,98 +348,90 @@ Daily report 01-02-2021 - https://raw.githubusercontent.com/CSSEGISandData/COVID
 
 Daily report 01-05-2021 - https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/01-05-2021.csv
 
-Entregable: DailyReports_Combined con ReportDate tipo Date (sin nulos) y refresh estable.
+Deliverable: DailyReports_Combined with ReportDate as Date type (no nulls) and stable refresh.
 
-Tiempo estimado: 75-130 min
+Estimated time: 75-130 min
 
-Ejercicio: DimAirport + rutas limpias (OpenFlights)
+Exercise: DimAirport + clean routes (OpenFlights)
 
-Objetivo: importar .dat sin headers, asignar columnas, limpiar rangos (lat/long) y tipar claves; crear DimAirport y FactRoutes.
+Objective: import .dat without headers, assign columns, clean ranges (lat/long) and type keys; create DimAirport and FactRoutes.
 
-Dataset (adquisición):
+Dataset (acquisition):
 
 OpenFlights airports.dat - https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat
 
 OpenFlights routes.dat - https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat
 
-Entregable: DimAirport y FactRoutes sin errores; IDs no nulos en ≥ 99% y lat/long en rango válido.
+Deliverable: DimAirport and FactRoutes without errors; non-null IDs in ≥ 99% and lat/long within valid range.
 
-Tiempo estimado: 60-110 min
+Estimated time: 60-110 min
 
-Ejercicio: Folding vs no folding en Northwind (OData)
+Exercise: Folding vs no folding in Northwind (OData)
 
-Objetivo: crear dos variantes (Orders_Fold y Orders_NoFold), demostrar el punto donde se rompe folding y justificar la versión "producción".
+Objective: create two variants (Orders_Fold and Orders_NoFold), demonstrate the point where folding breaks, and justify the "production" version.
 
-Dataset (adquisición):
+Dataset (acquisition):
 
 Northwind OData v4 - https://services.odata.org/V4/Northwind/Northwind.svc/
 
-Entregable: evidencia del paso donde "View Native Query" deja de estar disponible + orden correcto de filtros/columnas.
+Deliverable: evidence of the step where "View Native Query" is no longer available + correct order of filters/columns.
 
-Tiempo estimado: 60-110 min
+Estimated time: 60-110 min
 
-Ejercicio: Usuarios + posts desde API (JSONPlaceholder)
+Exercise: Users + posts from API (JSONPlaceholder)
 
-Objetivo: consumir JSON, expandir campos (incluye anidados), tipar claves y hacer merge Posts ↔ Users.
+Objective: consume JSON, expand fields (including nested), type keys, and merge Posts ↔ Users.
 
-Dataset (adquisición):
+Dataset (acquisition):
 
 JSONPlaceholder Users - https://jsonplaceholder.typicode.com/users
 
 JSONPlaceholder Posts - https://jsonplaceholder.typicode.com/posts
 
-Entregable: FactUserPosts con userId/postId enteros y merge completo (nulos ≈ 0).
+Deliverable: FactUserPosts with userId/postId as integers and complete merge (nulls ≈ 0).
 
-Tiempo estimado: 60-105 min
+Estimated time: 60-105 min
 
-Ejercicio: Ventas por producto (Unpivot) con control de calidad
+Exercise: Sales by product (Unpivot) with quality control
 
-Objetivo: transformar tabla wide a long (Product/Units), crear Month y validar SUM(Units) vs total_units.
+Objective: transform wide table to long (Product/Units), create Month, and validate SUM(Units) vs total_units.
 
-Dataset (adquisición):
+Dataset (acquisition):
 
 Company sales (CSV) - https://gist.githubusercontent.com/fishtai0/5975c7e38c8566b9b3144e45a99b65cf/raw/941a7ecbab78d6032393ba8eed6579a563f126d6/company-sales.csv
 
-Entregable: FactProductMonthly sin errores + verificación de coherencia por mes.
+Deliverable: FactProductMonthly without errors + coherence verification by month.
 
-Tiempo estimado: 60-105 min
+Estimated time: 60-105 min
 
-Ejercicio: LeadTimeDays + OnTimeFlag por región
+Exercise: LeadTimeDays + OnTimeFlag by region
 
-Objetivo: tipar fechas (locale si aplica), calcular LeadTimeDays, crear OnTimeFlag y resumir KPI por Region/Country.
+Objective: type dates (locale if applicable), calculate LeadTimeDays, create OnTimeFlag, and summarize KPI by Region/Country.
 
-Dataset (adquisición):
-
-100 Sales Records (CSV) - https://gist.githubusercontent.com/denandreychuk/b9aa812f10e4b60368cff69c6384a210/raw/d24f715d9350d674b0b1bf494d82ccdf81de0647/100%2520Sales%2520Records.csv
-
-Entregable: KPI_LeadTime_ByRegion con AvgLeadTimeDays y OnTimeRate (0–1) sin errores de fechas.
-
-Tiempo estimado: 70-120 min
-
-Ejercicio: Ventana de pedidos por fecha (parametrizada)
-
-Objetivo: crear pStartDate/pEndDate y filtrar por rango sin tocar pasos; demostrar que cambia el conteo al cambiar parámetros.
-
-Dataset (adquisición):
+Dataset (acquisition):
 
 100 Sales Records (CSV) - https://gist.githubusercontent.com/denandreychuk/b9aa812f10e4b60368cff69c6384a210/raw/d24f715d9350d674b0b1bf494d82ccdf81de0647/100%2520Sales%2520Records.csv
 
-Entregable: Sales_InRange con filtro temprano estable y refresh reproducible.
+Deliverable: KPI_LeadTime_ByRegion with AvgLeadTimeDays and OnTimeRate (0–1) without date errors.
 
-Tiempo estimado: 50-85 min
+Estimated time: 70-120 min
+
+Exercise: Parameterized order date window
+
+Objective: create pStartDate/pEndDate and filter by range without touching steps; demonstrate that the count changes when parameters change.
+
+Dataset (acquisition):
+
+100 Sales Records (CSV) - https://gist.githubusercontent.com/denandreychuk/b9aa812f10e4b60368cff69c6384a210/raw/d24f715d9350d674b0b1bf494d82ccdf81de0647/100%2520Sales%2520Records.csv
+
+Deliverable: Sales_InRange with stable early filter and reproducible refresh.
+
+Estimated time: 50-85 min
 </exercise_summary>
-
-<language_policy>
-  Translate user input into English. Think in English. Only translate to Spanish for the output.
-
-  Instruction language: English
-  Output language: Spanish
-  Exceptions: proper names, commonly used names, code blocks
-</language_policy>
 
 <role>
   Persona: Instructional designer + certification examiner
-  Mission: Design an evaluable certification-style exam for Power Query at Junior level in rol en una empresa de inteligencia de negocios con clientes multinacionales en las areas de manufactura y logistica, aligned to the content_summary and exercise_summary above.
+  Mission: Design an evaluable certification-style exam for Power Query at Junior level in role in a business intelligence company with multinational clients in manufacturing and logistics, aligned to the content_summary and exercise_summary above.
 </role>
 
 <task>
@@ -449,7 +441,7 @@ Tiempo estimado: 50-85 min
   2. Exam MD (for the learner): Same content as the PDF but in Markdown format.
   3. Evaluation Guide MD (for the AI evaluator): Contains ONLY the evaluator guide — answer key, rubrics, scoring criteria, common mistakes, alignment map. No exam questions.
 
-  The exam must test real understanding and practical ability in Power Query at Junior level for rol en una empresa de inteligencia de negocios con clientes multinacionales en las areas de manufactura y logistica. Every item must map to content_summary and exercise_summary. Use real datasets only. Include submission manifest for hands-on tasks.
+  The exam must test real understanding and practical ability in Power Query at Junior level for role in a business intelligence company with multinational clients in manufacturing and logistics. Every item must map to content_summary and exercise_summary. Use real datasets only. Include submission manifest for hands-on tasks.
 
   This step MUST produce exactly 3 separate downloadable files:
   1. exam_power_query.pdf — Exam only (for the learner). No answers, no rubrics.
@@ -562,31 +554,31 @@ Tiempo estimado: 50-85 min
   Filename: exam_power_query.pdf
   Audience: The learner/candidate (NO evaluator content)
 
-  # Examen de Certificación: Power Query
+  # Certification Exam: Power Query
 
-  ## Instrucciones para el candidato
+  ## Candidate Instructions
   [Exam duration, passing score, submission requirements, allowed tools]
 
-  ## Sección 1: Opción múltiple (X puntos)
+  ## Section 1: Multiple Choice (X points)
   [Questions with 4 options each — NO correct answer indicated]
 
-  ## Sección 2: Respuesta corta (X puntos)
+  ## Section 2: Short Answer (X points)
   [Questions requiring brief written responses — NO evaluation criteria shown]
 
-  ## Sección 3: Completar código (X puntos) [if technical/mixed]
+  ## Section 3: Code Completion (X points) [if technical/mixed]
   [Incomplete code with clearly marked gaps — NO solutions shown]
 
-  ## Sección 4: Casos de uso (X puntos) [if non_technical/mixed]
+  ## Section 4: Use Cases (X points) [if non_technical/mixed]
   [Realistic scenarios requiring judgment — NO evaluation framework shown]
 
-  ## Sección 5: Tarea práctica (X puntos)
+  ## Section 5: Hands-on Task (X points)
   [Real-world task with dataset, clear deliverables]
 
-  ## Manifiesto de entrega
+  ## Submission Manifest
   [Exact files to submit, folder structure, format requirements]
 
-  Total: 100 puntos
-  Aprobación: 70 puntos
+  Total: 100 points
+  Passing: 70 points
 </document_1_exam_pdf>
 
 <document_2_exam_md>
@@ -601,18 +593,18 @@ Tiempo estimado: 50-85 min
   Filename: evaluation_guide_power_query.md
   Audience: The AI evaluator or human grader (NO exam questions — reference by number only)
 
-  # Guía de Evaluación: Power Query
+  # Evaluation Guide: Power Query
 
-  ## Clave de respuestas
+  ## Answer Key
   [MCQ correct answers by question number, short answer evaluation criteria, code completion official solutions]
 
-  ## Rúbrica de tarea práctica
+  ## Hands-on Task Rubric
   [Detailed scoring rubric with point allocations per criterion]
 
-  ## Errores comunes a vigilar
+  ## Common Mistakes to Watch
   [Based on exercise_summary weaknesses]
 
-  ## Mapa de alineación
+  ## Alignment Map
   [Each question/task number mapped to content_summary + exercise_summary concepts]
 </document_3_evaluator_guide_md>
 
@@ -625,6 +617,6 @@ Tiempo estimado: 50-85 min
 </submission_manifest>
 
 <output_format>
-  ALL bullet content and descriptions MUST be written in Spanish. Only source titles and proper names may remain in their original language.
+  ALL output MUST be in English.
   Output as plain Markdown with titles, subtitles, etc. — no XML tags in the output.
 </output_format>

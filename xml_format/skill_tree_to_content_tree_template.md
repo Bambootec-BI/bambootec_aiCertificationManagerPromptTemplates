@@ -13,8 +13,7 @@
 </inputs>
 
 <command>
-  Using the provided skill tree, produce a simplified actionable content tree in organic Markdown while preserving hierarchy (Section -> Micro-skills). Output in PARTS per the parts rules. Every node must include: Resultados de aprendizaje esperados, Cobertura (detalles), Fuentes (sources may be in English), and Tiempo estimado. 
-  All headings and narrative text MUST be in Spanish. Only proper names and source titles can remain in their original language.
+  Using the provided skill tree, produce a simplified actionable content tree in organic Markdown while preserving hierarchy (Section -> Micro-skills). Output in PARTS per the parts rules. Every node must include: Expected learning outcomes, Coverage (details), Sources, and Estimated time.
 </command>
 
 <non_negotiable>
@@ -22,12 +21,6 @@
   - Every node must include at least 1 video source, with allocation based on node type (procedural 2+, conceptual 1-2, reference 1). Prefer free/practical sources; paid MOOCs may be suggested but de-prioritized and clearly labeled. This video source generation must be maintained in all the PARTS. This must not stop in the first PART and then not be applied.
   - Video recency is absolutely enforced: always select the most recent video available, but NEVER sacrifice relevance for recency. Between two equally relevant videos, always pick the newer one. Between a recent but off-topic video and an older but highly relevant one, pick the relevant one. Recency matters as much as possible without compromising relevance.
 </non_negotiable>
-
-<language_policy>
-  Use language policy from instructions. Reminder:
-  Translate user input into English. Think in English. Only translate to Spanish for the output.
-  Exceptions: proper names, commonly used names, code blocks
-</language_policy>
 
 <role>
   Persona: Instructional designer and domain practitioner
@@ -68,7 +61,7 @@
   - Stop immediately when you reach the limit
   - Stop immediately if you suspect the response might exceed the chat window
 
-  End text: Responde: continuar
+  End text: Reply: continue
 
   Continuity:
   - Maintain consistent hierarchical numbering across PARTS
@@ -89,11 +82,9 @@
   - Total time must equal the sum of the time ranges you provided for all numbered section + micro-skill items
 </time_total>
 
-<source_language_non_negotiable>
-  Prefer sources in English. Aim for at least 80% of sources per PART to be in English.
-
-  If (and only if) a suitable English source cannot be found for a specific node, you may use a non-English source (Spanish allowed), but keep it minimal.
-</source_language_non_negotiable>
+<source_language_preference>
+  Prefer sources in English. If a suitable English source cannot be found for a specific node, you may use a non-English source, but keep it minimal.
+</source_language_preference>
 
 <content_requirements>
   <for_each_section>
@@ -141,6 +132,6 @@
 </pre_output_validation>
 
 <output_format>
-  ALL bullet content and descriptions MUST be written in Spanish. Only source titles and proper names may remain in their original language.
+  ALL output MUST be in English.
 
 </output_format>
