@@ -10,84 +10,6 @@
   Generates practice exercises for ANY skill, ANY level, ANY context using XML-structured prompts for better instruction adherence.
 </description>
 
-<skill_tree>
-1 Conceptual Overview
-
-1.1 What is Power Query and where it fits (Excel, Power BI) — Impact: High
-
-1.2 End-to-end query example (connect → transform → load, refresh) — Impact: High
-
-1.3 Read and understand Applied Steps (dependencies) — Impact: Moderate
-
-1.4 Step naming and ordering best practices (prefixes, atomic steps) — Impact: Moderate
-
-1.5 Basic error handling (Replace Errors, try…otherwise) — Impact: High
-
-2 Data sources and connectivity
-
-2.1 Mental model: data contract (schema, credentials) — Impact: High
-
-2.2 Example: consolidate logistics shipments (SQL Server, SharePoint folder) — Impact: High
-
-2.3 Connect to files and folders (CSV, Excel) — Impact: High
-
-2.4 Connect to databases and services (SQL Server, OData) — Impact: High
-
-2.5 Manage credentials and privacy (privacy levels, gateway) — Impact: High
-
-3 Data cleaning and transformation
-
-3.1 Mental model: from raw data to trusted data (correct types, rules) — Impact: Critical
-
-3.2 Example: clean production orders (dates, keys) — Impact: High
-
-3.3 Set data types and control locale (es-ES, en-US) — Impact: Critical
-
-3.4 Filter and select columns (remove nulls, keep fields) — Impact: High
-
-3.5 Clean text and formats (Trim/Clean, replacements) — Impact: High
-
-3.6 Handle nulls and errors in columns (Replace Values, try…otherwise) — Impact: High
-
-3.7 Summarize and reshape data (Group By, Unpivot) — Impact: High
-
-4 Combining and preparing for the model
-
-4.1 Mental model: keys and granularity before combining (SKU, batch/lot) — Impact: Critical
-
-4.2 Example: join inventory and movements (Merge, Expand) — Impact: High
-
-4.3 Merge (joins) and join kinds (Left Outer, Inner) — Impact: Critical
-
-4.4 Append (union tables) with a consistent schema (same columns, same types) — Impact: High
-
-4.5 Calculated and conditional columns (if/then, business rules) — Impact: High
-
-5 Reuse, parameters, and basic M
-
-5.1 Mental model: reuse without duplicating logic (parameters, functions) — Impact: High
-
-5.2 Example: country/plant parameter for multinationals (MX, DE) — Impact: High
-
-5.3 Create and use parameters (date range, DEV/PROD environment) — Impact: High
-
-5.4 Custom functions for repeatable cleaning (normalize SKU, standardize units) — Impact: High
-
-5.5 Edit M and harden against schema changes (Advanced Editor, MissingField) — Impact: Moderate
-
-6 Performance, quality, and delivery
-
-6.1 Mental model: reliable refresh at scale (folding, governance) — Impact: Critical
-
-6.2 Example: optimize daily logistics refresh (filter early, folding) — Impact: High
-
-6.3 Query folding and how not to break it (filter early, compatible steps) — Impact: Critical
-
-6.4 Staging vs final design (references, disable load) — Impact: High
-
-6.5 Operations: validations and support (row counts, documentation) — Impact: High
-</skill_tree>
-
 <content_summary>
 Ingestion and combination practice (OData + CSV) — Practical objective: create a "ready-to-model" table combining customers with a country catalog for multinational use.
 
@@ -347,10 +269,24 @@ Estimated time: 60-110 minutes
   - Use content_summary to define: what success looks like, which mistakes to catch, what outputs are expected, and which checks matter
 </use_content_summary>
 
+<generation_directive>
+  The output is EXPANSION with PROGRESSION, not restatement:
+  - Do NOT copy or restate content_summary verbatim as exercises
+  - CREATE new exercises that apply, combine, or extend the concepts from content_summary
+  - Build difficulty progression: earlier exercises target isolated micro-skills, later exercises combine multiple micro-skills
+  - Each exercise must add value beyond what content_summary already describes
+</generation_directive>
+
 <acceptance_tests_no_code>
   - Do NOT provide code for tests
   - Provide 'Acceptance tests (how to test)' as a checklist with explicit PASS/FAIL criteria and concrete thresholds
-  - Thresholds must come from the content_summary/context when available; otherwise use generic minimums (e.g., file exists; schema non-empty; counts coherent; rerun yields same counts)
+  - Thresholds must come from content_summary/context when available; otherwise apply these defaults:
+    - Key fields null rate: ≤ 10%
+    - Type errors after load: 0
+    - Refresh reproducibility: row count identical across 2 refreshes
+    - Join match rate: ≥ 90% (unless dataset mismatch is documented)
+    - Output file exists and is non-empty
+    - Schema matches expected columns
 </acceptance_tests_no_code>
 
 <parts_system>
@@ -370,8 +306,11 @@ Estimated time: 60-110 minutes
 </parts_system>
 
 <time_total>
-  - Every numbered node MUST include estimated time as an integer range in minutes
-  - End of EVERY PART: show cumulative estimated total time
+  Time accounting rule:
+  - Each exercise MUST include estimated time as an integer range in minutes, shown at the end of its description
+  - Organizational nodes (sections, micro-skill groups) do NOT include estimated time
+  - Cumulative totals aggregate exercise times only
+  - End of EVERY PART: show cumulative estimated total time (sum of exercises so far)
   - Final PART: also include final estimated total time
 </time_total>
 

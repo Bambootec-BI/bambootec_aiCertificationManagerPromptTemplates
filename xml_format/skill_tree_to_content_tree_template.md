@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v1.9.0
+  v2.0.0
 </version>
 <inputs>
   <skill>[SKILL_NAME]</skill>

@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v1.9.0
+  v2.0.0
 </version>
 
 <description>
@@ -46,10 +46,24 @@
   - Use content_summary to define: what success looks like, which mistakes to catch, what outputs are expected, and which checks matter
 </use_content_summary>
 
+<generation_directive>
+  The output is EXPANSION with PROGRESSION, not restatement:
+  - Do NOT copy or restate content_summary verbatim as exercises
+  - CREATE new exercises that apply, combine, or extend the concepts from content_summary
+  - Build difficulty progression: earlier exercises target isolated micro-skills, later exercises combine multiple micro-skills
+  - Each exercise must add value beyond what content_summary already describes
+</generation_directive>
+
 <acceptance_tests_no_code>
   - Do NOT provide code for tests
   - Provide 'Acceptance tests (how to test)' as a checklist with explicit PASS/FAIL criteria and concrete thresholds
-  - Thresholds must come from content_summary/context when available; otherwise use generic minimums (e.g., file exists; schema non-empty; counts coherent; rerun yields same counts)
+  - Thresholds must come from content_summary/context when available; otherwise apply these defaults:
+    - Key fields null rate: ≤ 10%
+    - Type errors after load: 0
+    - Refresh reproducibility: row count identical across 2 refreshes
+    - Join match rate: ≥ 90% (unless dataset mismatch is documented)
+    - Output file exists and is non-empty
+    - Schema matches expected columns
 </acceptance_tests_no_code>
 
 <parts_system>
@@ -69,8 +83,11 @@
 </parts_system>
 
 <time_total>
-  - Every numbered node MUST include estimated time as an integer range in minutes
-  - End of EVERY PART: show cumulative estimated total time
+  Time accounting rule:
+  - Each exercise MUST include estimated time as an integer range in minutes, shown at the end of its description
+  - Organizational nodes (sections, micro-skill groups) do NOT include estimated time
+  - Cumulative totals aggregate exercise times only
+  - End of EVERY PART: show cumulative estimated total time (sum of exercises so far)
   - Final PART: also include final estimated total time
 </time_total>
 
