@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v2.0.0
+  v2.1.0
 </version>
 
 <description>
@@ -24,19 +24,19 @@
 </role>
 
 <task>
-  Generate a complete certification exam with evaluator guide, delivered as 3 separate documents:
+  Generate a complete certification exam with evaluator guide, producing 3 document bodies:
 
-  1. Exam PDF (for the learner): Contains ONLY the exam — instructions, questions, tasks, submission manifest. No answers, no rubrics, no evaluator notes.
-  2. Exam MD (for the learner): Same content as the PDF but in Markdown format.
-  3. Evaluation Guide MD (for the AI evaluator): Contains ONLY the evaluator guide — answer key, rubrics, scoring criteria, common mistakes, alignment map. No exam questions.
+  1. Exam (for the learner): Contains ONLY the exam — instructions, questions, tasks, submission manifest. No answers, no rubrics, no evaluator notes.
+  2. Evaluation Guide (for the AI evaluator): Contains ONLY the evaluator guide — answer key, rubrics, scoring criteria, common mistakes, alignment map.
 
   The exam must test real understanding and practical ability in {inputs.skill} at {inputs.level} for {inputs.context}. Every item must map to content_summary and exercise_summary. Use real datasets only. Include submission manifest for hands-on tasks.
 
-  This step MUST produce exactly 3 separate downloadable files:
-  1. exam_{skill_slug}.pdf — Exam only (for the learner). No answers, no rubrics.
-  2. exam_{skill_slug}.md — Same exam content in Markdown (for the learner).
-  3. evaluation_guide_{skill_slug}.md — Evaluation guide only (for the AI evaluator). No exam questions.
-  Generate all 3 files and offer them for download before proceeding.
+  Output the 3 document bodies separated by hard delimiters:
+  --- DOCUMENT 1: exam_{skill_slug}.pdf ---
+  --- DOCUMENT 2: exam_{skill_slug}.md ---
+  --- DOCUMENT 3: evaluation_guide_{skill_slug}.md ---
+
+  The host system is responsible for rendering the PDF and writing files. The prompt produces content only.
 </task>
 
 <skill_type_inference>
@@ -55,29 +55,52 @@
   - Every item must explicitly map to (a) at least one concept/pitfall/constraint from content_summary AND (b) at least one coverage point from exercise_summary
 </alignment>
 
+<coverage_matrix>
+  The exam must balance coverage across skill_tree impact levels:
+  - Critical impact micro-skills: must be assessed at least twice (different question types)
+  - High impact micro-skills: must be assessed at least once
+  - Moderate impact micro-skills: optional, include if space allows
+  - The evaluator guide must include a coverage matrix showing which questions assess which micro-skills
+</coverage_matrix>
+
 <scoring>
   - Total score must normalize to exactly 100 points
   - Passing threshold: 70%
   - Each question/task must show points clearly
+  - Hands-on section minimum: candidate must score at least 50% of hands-on points to pass (regardless of total)
 </scoring>
 
+<composition_table>
+  Before generating questions, output a composition table showing:
+  - Section name, question type, number of items, points per item, total points, percentage of exam
+  - The table must sum to exactly 100 points
+  - The percentages must fall within the ranges defined by skill_type_inference for the inferred skill_type
+  - Include this table at the start of the evaluator guide (Document 3)
+</composition_table>
+
 <dataset_constraints>
-  NON-NEGOTIABLE: Every dataset MUST include a raw, working URL.
+  NON-NEGOTIABLE: Every dataset MUST include a raw, working URL. Do NOT invent URLs.
 
-  URL requirements:
-  - Just output the plain URL: https://example.com
-  - Separate URLs from other text with blank lines
-  - Do NOT use markdown [text](url) syntax
-  - Do NOT wrap URLs in parentheses, quotes, or code blocks
-  - Do NOT invent URLs - only real, accessible resources
+  Dataset block format (use this exact structure):
 
-  Prohibited patterns:
-  - "Note:", "Query:", or language tags before sources
-  - Code blocks (mathematica, python, etc.) around URLs or descriptions
-  - Parenthetical explanations on the same line as URL
+  Dataset URL(s):
+
+  https://example.com/dataset1.csv
+
+  https://example.com/dataset2.csv
+
+  Rules:
+  - Plain URLs only, one per line, separated by blank lines
+  - No markdown [text](url), no parentheses, no code blocks, no labels
+  - A short label before the URL block is allowed (e.g., "Dataset URL(s):")
 
   Dataset requirements: Free, legal, no login walls, max 200MB
   Acquisition methods: framework loader, registry loader, direct URL, public repo file, API export
+
+  Dataset reliability tiers (for certification, prefer higher tiers):
+  - Tier A: Vendor-hosted / established registries / long-lived official repos (preferred)
+  - Tier B: GitHub raw from reputable organizations (acceptable)
+  - Tier C: Personal gists / ephemeral sources (avoid for certification; if used, require a Tier A/B fallback)
 
   Blocking: If dataset required and no real acquisition method available, output BLOCKED and omit that item.
 </dataset_constraints>
@@ -133,13 +156,13 @@
 </time_estimation>
 
 <three_document_delivery>
-  NON-NEGOTIABLE: You must produce exactly 3 separate, self-contained documents. Each document must be generated as a downloadable file.
+  NON-NEGOTIABLE: You must produce exactly 3 separate, self-contained document bodies, each separated by the hard delimiters defined in <task>.
 
-  Document separation rule: The exam documents (1 and 2) must NEVER contain answers, rubrics, scoring criteria, or evaluator notes. The evaluation guide (3) must NEVER repeat the exam questions — it only references them by number.
+  Document separation rule: The exam documents (1 and 2) must NEVER contain answers, rubrics, scoring criteria, or evaluator notes. The evaluation guide (3) must NEVER repeat the full exam questions — it references them by number plus a micro-summary (max 12 words).
 </three_document_delivery>
 
 <document_1_exam_pdf>
-  Format: PDF file for download
+  Format: PDF (rendered by host system from this document body)
   Filename: exam_{inputs.skill_slug}.pdf
   Audience: The learner/candidate (NO evaluator content)
 
@@ -171,16 +194,16 @@
 </document_1_exam_pdf>
 
 <document_2_exam_md>
-  Format: Markdown file for download
+  Format: Markdown (written by host system from this document body)
   Filename: exam_{inputs.skill_slug}.md
   Audience: The learner/candidate (NO evaluator content)
   Content: Identical to Document 1 but in Markdown format instead of PDF.
 </document_2_exam_md>
 
 <document_3_evaluator_guide_md>
-  Format: Markdown file for download
+  Format: Markdown (written by host system from this document body)
   Filename: evaluation_guide_{inputs.skill_slug}.md
-  Audience: The AI evaluator or human grader (NO exam questions — reference by number only)
+  Audience: The AI evaluator or human grader (NO full exam questions — reference by number + micro-summary only)
 
   # Evaluation Guide: {inputs.skill}
 
@@ -198,9 +221,25 @@
 </document_3_evaluator_guide_md>
 
 <submission_manifest>
-  For hands-on tasks with multiple files (included in Documents 1 and 2):
-  - List required files with exact names
-  - Specify folder structure if applicable
-  - Define file format requirements
-  - State what must be included in each file
+  For hands-on tasks, the exam (Documents 1 and 2) must include a structured submission manifest requiring machine-checkable artifacts where possible:
+
+  Required submission folder structure:
+  - submission/answers/ — Written responses (short answers, use cases, justifications)
+  - submission/code/ — Source files, scripts, or project files (one per task, named to match)
+  - submission/outputs/ — Exported deliverables (tables, reports, results in portable formats)
+  - submission/evidence/ — Screenshots or recordings for UI-dependent evidence (optional unless specified)
+
+  The manifest must specify:
+  - Exact filenames or naming pattern expected per task
+  - What each file must contain
+  - Which files are required vs optional
+  - Format constraints appropriate to the skill context
 </submission_manifest>
+
+<grading_reliability>
+  In the evaluator guide (Document 3):
+  - If required evidence is missing for a criterion, cap the score for that criterion at 50%
+  - If an entire submission artifact is missing, score 0 for all criteria that depend on it
+  - Classify each criterion as machine-checkable (counts, schema, value ranges, file existence) or human-reviewed (process quality, naming, justification depth)
+  - For machine-checkable criteria, specify exact validation checks
+</grading_reliability>
