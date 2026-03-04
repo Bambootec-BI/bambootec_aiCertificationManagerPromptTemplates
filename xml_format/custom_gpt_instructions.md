@@ -31,6 +31,13 @@
   - exam_evaluation_workflow
 </after_workflow_completion>
 
+<url_verification_global>
+  NON-NEGOTIABLE for Steps 2, 3, and 4: Every URL you output MUST be verified before inclusion.
+  - If browsing is available: visit each URL before including it. If it returns 404/403/error, find an alternative or mark as "pending verification".
+  - If browsing is NOT available: only include URLs you have high confidence exist (official docs, major platforms, established registries). Never guess URL paths.
+  - Zero tolerance: a single broken link is a failure. When in doubt, mark as "pending verification" rather than risk a 404.
+</url_verification_global>
+
 <certification_generation_workflow>
   <step number="1">
     Read the skill_tree_builder_template.md file (in your Knowledge). Ask for required inputs (placeholders) if missing. Insert them and execute. Then ask whether to continue.

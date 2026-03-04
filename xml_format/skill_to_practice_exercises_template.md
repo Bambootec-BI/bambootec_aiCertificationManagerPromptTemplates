@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v2.2.0
+  v2.3.0
 </version>
 
 <description>
@@ -34,6 +34,20 @@
   - Never include search queries or placeholders such as 'look up'/'Search query'
 </agnosticity_guards>
 
+<url_verification_protocol>
+  NON-NEGOTIABLE: Every dataset URL you output MUST be verified before inclusion.
+
+  If browsing is available:
+  - You MUST visit each URL before including it in the output
+  - If a URL returns 404, 403, or any error, do NOT include it — find an alternative or output BLOCKED
+
+  If browsing is NOT available:
+  - Restrict to URLs you have high confidence exist (official APIs, well-known public datasets, established registries)
+  - Do NOT guess URL paths or construct URLs by pattern
+  - If you are not confident a specific URL exists, output BLOCKED for that exercise rather than risk a broken link
+
+  Zero tolerance: A single 404 in the output is a failure.
+</url_verification_protocol>
 
 <code_policy>
   Code allowed ONLY in 'Dataset (acquisition)' section.

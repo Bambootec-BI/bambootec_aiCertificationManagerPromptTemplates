@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v2.2.0
+  v2.3.0
 </version>
 
 <inputs>

@@ -3,7 +3,7 @@
 </name>
 
 <version>
-  v2.2.0
+  v2.3.0
 </version>
 <inputs>
   <skill>[SKILL_NAME]</skill>
@@ -116,6 +116,23 @@
   Never sacrifice relevance or correctness for recency.
 </constraint_priority>
 
+<url_verification_protocol>
+  NON-NEGOTIABLE: Every URL you output MUST be verified before inclusion.
+
+  If browsing is available:
+  - You MUST visit each URL before including it in the output
+  - If a URL returns 404, 403, or any error, do NOT include it — find an alternative
+  - After generating each PART, re-verify any URL you are not 100% certain about
+
+  If browsing is NOT available:
+  - Restrict sources to URLs you have high confidence exist (official documentation sites, major platform URLs, well-known publishers)
+  - Prefer canonical/stable URLs: official docs (e.g., learn.microsoft.com, docs.python.org), major platforms (YouTube watch links, Coursera course pages), established publishers
+  - Do NOT guess URL paths or construct URLs by pattern — if you are not confident a specific URL exists, omit it and note "source pending verification"
+  - Never include a URL just because it "looks right" — confidence must come from known, memorized sources
+
+  Zero tolerance: A single 404 in the output is a failure. If in doubt, mark the source as "pending verification" rather than risk a broken link.
+</url_verification_protocol>
+
 <anti_hallucination_protocol>
   - Only include sources you are confident are real and accessible.
   - If a suitable recent video cannot be found, explicitly state that and provide the best available relevant video.
@@ -129,6 +146,7 @@
   - Numbering continuity is maintained from the previous PART
   - Every node includes all required fields (learning outcomes, coverage, sources, time)
   - Video quota is met for every node (procedural 2+, conceptual 1-2, reference 1)
+  - Every URL has been verified per <url_verification_protocol> (visited if browsing available, or high-confidence known source if not)
 </pre_output_validation>
 
 <output_format>
