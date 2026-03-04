@@ -3,11 +3,11 @@
 </name>
 
 <version>
-  v2.1.0
+  v2.2.0
 </version>
 
 <description>
-  Generates certification-style exam + evaluator guide as 3 separate documents: (1) exam-only PDF for the learner, (2) exam-only MD for the learner, (3) evaluation-guide-only MD for the AI evaluator.
+  Generates certification-style exam + evaluator guide as 3 downloadable files: (1) exam PDF for the learner, (2) exam MD for the learner, (3) evaluation guide MD for the AI evaluator. Files MUST be written to disk with download links.
 </description>
 
 <inputs>
@@ -24,20 +24,26 @@
 </role>
 
 <task>
-  Generate a complete certification exam with evaluator guide, producing 3 document bodies:
+  Generate a complete certification exam with evaluator guide, delivered as exactly 3 files written to disk:
 
-  1. Exam (for the learner): Contains ONLY the exam — instructions, questions, tasks, submission manifest. No answers, no rubrics, no evaluator notes.
-  2. Evaluation Guide (for the AI evaluator): Contains ONLY the evaluator guide — answer key, rubrics, scoring criteria, common mistakes, alignment map.
+  1. Exam PDF (for the learner): Contains ONLY the exam — instructions, questions, tasks, submission manifest. No answers, no rubrics, no evaluator notes.
+  2. Exam MD (for the learner): Same exam content in Markdown format.
+  3. Evaluation Guide MD (for the AI evaluator): Contains ONLY the evaluator guide — answer key, rubrics, scoring criteria, common mistakes, alignment map.
 
   The exam must test real understanding and practical ability in {inputs.skill} at {inputs.level} for {inputs.context}. Every item must map to content_summary and exercise_summary. Use real datasets only. Include submission manifest for hands-on tasks.
-
-  Output the 3 document bodies separated by hard delimiters:
-  --- DOCUMENT 1: exam_{skill_slug}.pdf ---
-  --- DOCUMENT 2: exam_{skill_slug}.md ---
-  --- DOCUMENT 3: evaluation_guide_{skill_slug}.md ---
-
-  The host system is responsible for rendering the PDF and writing files. The prompt produces content only.
 </task>
+
+<output_artifacts>
+  Hard requirement — write to disk:
+  You MUST write the following 3 files to disk and provide download links for each:
+
+  1. /mnt/data/exam_{skill_slug}.pdf — Exam only (PDF). No answers, no rubrics.
+  2. /mnt/data/exam_{skill_slug}.md — Same exam content (Markdown). No answers, no rubrics.
+  3. /mnt/data/evaluation_guide_{skill_slug}.md — Evaluation guide only (Markdown). No exam questions.
+
+  Do NOT only paste content into the chat. You MUST create the actual files.
+  Do NOT proceed to any next step until all 3 files are generated and download links are provided.
+</output_artifacts>
 
 <skill_type_inference>
   Infer skill_type from inputs.skill + inputs.content_summary + inputs.exercise_summary:
@@ -156,14 +162,19 @@
 </time_estimation>
 
 <three_document_delivery>
-  NON-NEGOTIABLE: You must produce exactly 3 separate, self-contained document bodies, each separated by the hard delimiters defined in <task>.
+  NON-NEGOTIABLE: You must produce exactly 3 separate files written to disk at the paths specified in <output_artifacts>.
 
-  Document separation rule: The exam documents (1 and 2) must NEVER contain answers, rubrics, scoring criteria, or evaluator notes. The evaluation guide (3) must NEVER repeat the full exam questions — it references them by number plus a micro-summary (max 12 words).
+  Document separation rule:
+  - The exam files (1 and 2) must NEVER contain answers, rubrics, scoring criteria, or evaluator notes.
+  - The evaluation guide (3) must NEVER repeat the full exam questions — it references them by number plus a micro-summary (max 12 words).
+
+  Delivery is NOT complete until all 3 files exist on disk and download links are provided to the user.
 </three_document_delivery>
 
 <document_1_exam_pdf>
-  Format: PDF (rendered by host system from this document body)
-  Filename: exam_{inputs.skill_slug}.pdf
+  Format: PDF
+  Path: /mnt/data/exam_{inputs.skill_slug}.pdf
+  Deliverable: Generate the PDF file at the path above and provide a download link.
   Audience: The learner/candidate (NO evaluator content)
 
   # Certification Exam: {inputs.skill}
@@ -194,15 +205,17 @@
 </document_1_exam_pdf>
 
 <document_2_exam_md>
-  Format: Markdown (written by host system from this document body)
-  Filename: exam_{inputs.skill_slug}.md
+  Format: Markdown
+  Path: /mnt/data/exam_{inputs.skill_slug}.md
+  Deliverable: Write the Markdown file at the path above and provide a download link.
   Audience: The learner/candidate (NO evaluator content)
   Content: Identical to Document 1 but in Markdown format instead of PDF.
 </document_2_exam_md>
 
 <document_3_evaluator_guide_md>
-  Format: Markdown (written by host system from this document body)
-  Filename: evaluation_guide_{inputs.skill_slug}.md
+  Format: Markdown
+  Path: /mnt/data/evaluation_guide_{inputs.skill_slug}.md
+  Deliverable: Write the Markdown file at the path above and provide a download link.
   Audience: The AI evaluator or human grader (NO full exam questions — reference by number + micro-summary only)
 
   # Evaluation Guide: {inputs.skill}
@@ -243,3 +256,17 @@
   - Classify each criterion as machine-checkable (counts, schema, value ranges, file existence) or human-reviewed (process quality, naming, justification depth)
   - For machine-checkable criteria, specify exact validation checks
 </grading_reliability>
+
+<final_response_format>
+  After generating all content, the final response MUST include exactly these 3 download links:
+
+  1. [Download Exam (PDF)]: sandbox:/mnt/data/exam_{skill_slug}.pdf
+  2. [Download Exam (Markdown)]: sandbox:/mnt/data/exam_{skill_slug}.md
+  3. [Download Evaluation Guide (Markdown)]: sandbox:/mnt/data/evaluation_guide_{skill_slug}.md
+
+  If any file is missing, do NOT proceed. Regenerate the missing file(s) first.
+</final_response_format>
+
+<output_format>
+  ALL output MUST be in English.
+</output_format>
