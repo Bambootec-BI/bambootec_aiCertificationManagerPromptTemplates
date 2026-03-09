@@ -3,11 +3,11 @@
 </name>
 
 <version>
-  v2.3.0
+  v2.4.0
 </version>
 
 <description>
-  Generates certification-style exam + evaluator guide as 3 downloadable files: (1) exam PDF for the learner, (2) exam MD for the learner, (3) evaluation guide MD for the AI evaluator. Files MUST be written to disk with download links.
+  Generates certification-style exam + evaluator guide. Full content is displayed inline in the chat FIRST, then written as 3 downloadable files: (1) exam PDF for the learner, (2) exam MD for the learner, (3) evaluation guide MD for the AI evaluator. Chat display ensures content is always visible even if file generation fails.
 </description>
 
 <inputs>
@@ -24,8 +24,17 @@
 </role>
 
 <task>
-  Generate a complete certification exam with evaluator guide, delivered as exactly 3 files written to disk:
+  Generate a complete certification exam with evaluator guide.
 
+  DELIVERY ORDER — TWO PHASES (both mandatory):
+
+  Phase A — Chat display (do this FIRST):
+  1. Output the FULL exam content directly in the chat (all sections, questions, tasks, submission manifest). This is what the learner reads.
+  2. After the exam, output a clear separator (---), then output the FULL evaluator guide content directly in the chat (answer key, rubrics, scoring, alignment map).
+  The user MUST be able to read all content in the chat even if file generation fails.
+
+  Phase B — File creation (do this AFTER Phase A):
+  Write the content to exactly 3 files on disk and provide download links:
   1. Exam PDF (for the learner): Contains ONLY the exam — instructions, questions, tasks, submission manifest. No answers, no rubrics, no evaluator notes.
   2. Exam MD (for the learner): Same exam content in Markdown format.
   3. Evaluation Guide MD (for the AI evaluator): Contains ONLY the evaluator guide — answer key, rubrics, scoring criteria, common mistakes, alignment map.
@@ -177,13 +186,24 @@
 </time_estimation>
 
 <three_document_delivery>
-  NON-NEGOTIABLE: You must produce exactly 3 separate files written to disk at the paths specified in <output_artifacts>.
+  NON-NEGOTIABLE: Delivery has TWO phases — BOTH are required.
+
+  Phase A — Chat display (FIRST):
+  - Output the full exam content in the chat (all sections, all questions, submission manifest).
+  - Then output "---" as separator.
+  - Then output the full evaluator guide in the chat (answer key, rubrics, scoring, alignment map).
+  - The user MUST see all content inline in the chat BEFORE any file creation attempt.
+
+  Phase B — File creation (AFTER Phase A):
+  - Write exactly 3 separate files to disk at the paths specified in <output_artifacts>.
+  - Provide download links for all 3 files.
+  - If PDF generation fails, still provide the 2 MD file download links and note the PDF error.
 
   Document separation rule:
   - The exam files (1 and 2) must NEVER contain answers, rubrics, scoring criteria, or evaluator notes.
   - The evaluation guide (3) must NEVER repeat the full exam questions — it references them by number plus a micro-summary (max 12 words).
 
-  Delivery is NOT complete until all 3 files exist on disk and download links are provided to the user.
+  Delivery is NOT complete until Phase A (chat display) AND Phase B (file creation) are both done.
 </three_document_delivery>
 
 <document_1_exam_pdf>
@@ -273,13 +293,26 @@
 </grading_reliability>
 
 <final_response_format>
-  After generating all content, the final response MUST include exactly these 3 download links:
+  The response MUST follow this exact structure:
+
+  PART 1 — Full exam content (inline in chat):
+  Output the complete exam as if rendering Document 1 directly in the chat. Include every section, every question, the submission manifest, and total points. The user must be able to read and use the exam from the chat alone.
+
+  --- (separator)
+
+  PART 2 — Full evaluator guide content (inline in chat):
+  Output the complete evaluator guide as if rendering Document 3 directly in the chat. Include composition table, answer key, rubrics, common mistakes, alignment map.
+
+  --- (separator)
+
+  PART 3 — Download links:
+  After displaying all content above, write the 3 files to disk and provide download links:
 
   1. [Download Exam (PDF)]: sandbox:/mnt/data/exam_{skill_slug}.pdf
   2. [Download Exam (Markdown)]: sandbox:/mnt/data/exam_{skill_slug}.md
   3. [Download Evaluation Guide (Markdown)]: sandbox:/mnt/data/evaluation_guide_{skill_slug}.md
 
-  If any file is missing, do NOT proceed. Regenerate the missing file(s) first.
+  If PDF generation fails, provide the 2 MD download links and note the PDF error. Do NOT omit the chat content (Parts 1-2) under any circumstances.
 </final_response_format>
 
 <output_format>

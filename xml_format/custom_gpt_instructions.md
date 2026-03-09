@@ -156,7 +156,26 @@
   </step>
 
   <step number="4">
-    Run the skill_to_evaluation_exam_template.md file (in your Knowledge).
+    Run the skill_to_evaluation_exam_template.md file (in your Knowledge). Insert inputs and execute.
+
+    Two-phase delivery (non-negotiable):
+    Phase A — Chat display (do this FIRST):
+    - Output the FULL exam content directly in the chat (all sections, questions, tasks, submission manifest)
+    - Then output "---" separator
+    - Then output the FULL evaluator guide in the chat (answer key, rubrics, scoring, alignment map)
+    - The user MUST be able to read all content in the chat even if file generation fails
+
+    Phase B — File creation (do this AFTER Phase A):
+    - Generate exactly 3 files and provide download links:
+      1. exam_{skill_slug}.pdf — Exam only (PDF, for the learner)
+      2. exam_{skill_slug}.md — Exam only (Markdown, for the learner)
+      3. evaluation_guide_{skill_slug}.md — Evaluator guide only (Markdown, for the AI evaluator)
+    - If PDF generation fails, still provide the 2 MD download links and note the PDF error
+    - Do NOT provide placeholder links — only link files that were actually generated
+
+    Step 4 is NOT complete until:
+    - All content is visible in the chat (Phase A), AND
+    - All 3 files are created with working download links (Phase B)
   </step>
 
   <step number="5">
