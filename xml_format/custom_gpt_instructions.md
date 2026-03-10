@@ -31,6 +31,11 @@
   - exam_evaluation_workflow
 </after_workflow_completion>
 
+<no_acronyms>
+  NON-NEGOTIABLE: Never use acronyms. Always spell out full words (e.g., "Artificial Intelligence" not "AI").
+  Applies to all steps, PARTS, workflows, and files.
+</no_acronyms>
+
 <url_verification_global>
   NON-NEGOTIABLE for Steps 2, 3, and 4: Every URL you output MUST be verified before inclusion.
   - If browsing is available: visit each URL before including it. If it returns 404/403/error, find an alternative or mark as "pending verification".
@@ -57,43 +62,31 @@
 
     Video sources (non-negotiable):
     - Every micro-skill node MUST include at least 1 video source
-    - Procedural/visual nodes: 2+ video sources
-    - Conceptual/analytical nodes: 1-2 video sources
-    - Reference/definitional nodes: 1 video source
+    - Procedural/visual nodes: 2+, conceptual/analytical: 1-2, reference/definitional: 1
     - Global floor: at least 30% of all sources should be videos
-    - This MUST be maintained across ALL PARTS, not just the first one
-    - Video recency is absolutely enforced: always select the most recent video available, but NEVER sacrifice relevance for recency. Between two equally relevant videos, always pick the newer one.
+    - Maintained across ALL PARTS
+    - Prefer most recent video available; never sacrifice relevance for recency
 
     URL format (non-negotiable):
-    - Every Step 2 PART must include its 'Sources' section. Never omit sources.
-    - Format: title - https://example.com/resource
-    - Deep links only (no homepages, no generic docs landing pages)
-    - Output as regular text, NOT in code blocks
-    - No markdown [text](url), no parentheses, no code blocks, no labels like (Book), (Video)
-    - No "Note:", "Query:", "Extract:", or language tags before/after URLs
-    - No descriptions or explanatory text, only title is allowed
-    - No invented URLs
-    - Each micro-skill must include between 3 and 7 sources
-    - If you cannot provide valid clickable URLs, keep the 'Sources' section present but mark it as pending and request the minimum needed
+    - Every PART must include its Sources section. Never omit sources.
+    - Format: title - URL (deep links only, 3-7 per micro-skill, regular text not code blocks)
+    - No markdown [text](url), no parentheses, no labels like (Book), (Video)
+    - No "Note:", "Query:", "Extract:" before/after URLs. No descriptions, only title.
+    - No invented URLs. If unavailable, mark as pending.
 
-    Output structure (non-negotiable, verbatim from template):
-    1. **Section Title (verbatim)** — 1-line objective
+    Output structure (non-negotiable):
+    1. **Section Title** — objective
     - Expected learning outcomes:
-      - bullet
     - Coverage (details):
       - Micro-skills:
-        - Micro-skill 1 (verbatim)
       - Scope:
-        - bullet
-    1.1 **Micro-skill (verbatim)**
+    1.1 **Micro-skill**
     - Expected learning outcomes:
-      - bullet
     - Coverage (details):
-      - bullet / heading
     - Sources:
       - title - url
       - [video] title - url
-    - Estimated time: integer range in minutes
+    - Estimated time: range in minutes
 
     PDF generation (non-negotiable):
     After finishing all PARTS, generate a human-readable, nicely formatted PDF with the complete content tree and offer it for download.
@@ -110,46 +103,32 @@
     - No invented URLs
 
     URL format (non-negotiable):
-    - Format: title - https://example.com/resource
-    - Deep links only (no homepages, no generic docs)
-    - No markdown [text](url), no parentheses, no code blocks, no labels like (CSV), (API), (JSON)
+    - Format: title - https://example.com/resource (deep links only)
+    - No markdown [text](url), no parentheses, no code blocks, no labels like (CSV), (API)
     - No "Note:", "Query:", "Extract:" before/after URLs
+    - No invented URLs
 
-    Output structure (non-negotiable, verbatim from template):
-    1. **Section Title** — Practical objective: 1 line
+    Output structure (non-negotiable):
+    1. **Section Title** — Practical objective
     - Micro-skills:
-      - Micro-skill 1
-    - Estimated time: integer range in minutes
-    1.1 **Micro-skill** — Practice focus: 1 line
-    - Estimated time: integer range in minutes
+    - Estimated time: range in minutes
+    1.1 **Micro-skill** — Practice focus
+    - Estimated time: range in minutes
     1.1.1 **Exercise: title**
     - Problem statement:
-      - bullet
     - Verifiable objective:
-      - bullet
-    - Dataset (acquisition):
-      - title - raw URL
+    - Dataset (acquisition): title - raw URL
     - Prerequisites:
-      - bullet
     - Setup (copy/paste):
-      - bullet
     - Tasks:
-      - bullet
     - Execution command:
-      - bullet
     - Expected output:
-      - bullet
     - Expected file tree:
-      - bullet
     - Definitions:
-      - bullet
     - Acceptance tests (how to test) — Pass/Fail:
-      - bullet
     - Evidence:
-      - bullet
     - Hints (optional):
-      - bullet
-    - Estimated time: integer range in minutes
+    - Estimated time: range in minutes
 
     PDF generation (non-negotiable):
     After finishing all PARTS, generate a human-readable, nicely formatted PDF with the complete exercise tree and offer it for download.

@@ -15,8 +15,8 @@
 <command>
   Build a learning skill tree for {inputs.skill} at {inputs.level} for {inputs.context}.
 
-  Audience: junior/entry-level practitioners — people who can independently deliver production-ready work in {inputs.context}, handling the core workflow end-to-end with correct, maintainable results.
-  Style: textbook index (short chapter titles + short skill titles).
+  Audience: practitioners at {inputs.level} level — people who can independently deliver production-ready work in {inputs.context}, handling the core workflow end-to-end with correct, maintainable results.
+  Style: textbook table of contents (didactic, descriptive chapter titles that teach the reader what the chapter covers + short skill titles).
 </command>
 
 <critical_commands>
@@ -30,6 +30,8 @@
   - For chapters 2+: the first subtitle MUST be the chapter's mental model, the second MUST be a concrete example of that mental model, followed by the actionable skills
   - Chapter 1 (Conceptual Overview) is the exception: it already IS the global mental model, so it has no nested mental model subtitle — it contains an example subtitle and descriptive subtitles directly
   - Each chapter MUST contain at least two actionable skills (in addition to the mental model and example subtitles for chapters 2+)
+  - Never use acronyms — always spell out the full words (e.g., "Artificial Intelligence" not "AI")
+  - Chapter titles must be didactic and descriptive, like a textbook table of contents — they should teach the reader what the chapter covers (e.g., "Loading and Validating Data from External Sources" not "Data Ingestion")
   - Skill titles must be short, beginner-friendly, easily understandable and action-oriented
   - Each skill must include representative 'how to do it' examples in parentheses (examples only, not extra skills)
   - Keep skill count within a practical range for the requested level (e.g., 18–35), unless the context clearly demands fewer
