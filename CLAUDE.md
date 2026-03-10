@@ -234,7 +234,7 @@ The orchestrator defines:
 Before considering templates "done":
 
 1. **Skill tree validation**:
-   - Run with conceptual skill (e.g., "Mental model of Data Engineering")
+   - Run with conceptual skill (e.g., "Conceptual foundation of Data Engineering")
    - Run with technical skill (e.g., "Python web scraping")
    - Verify: weights sum to 100, 2 levels, assessable nodes
 

@@ -25,7 +25,7 @@
 
 2 Data sources and connectivity
 
-2.1 Mental model: data contract (schema, credentials) — Impact: High
+2.1 Conceptual foundation: data contract (schema, credentials) — Impact: High
 
 2.2 Example: consolidate logistics shipments (SQL Server, SharePoint folder) — Impact: High
 
@@ -37,7 +37,7 @@
 
 3 Data cleaning and transformation
 
-3.1 Mental model: from raw data to trusted data (correct types, rules) — Impact: Critical
+3.1 Conceptual foundation: from raw data to trusted data (correct types, rules) — Impact: Critical
 
 3.2 Example: clean production orders (dates, keys) — Impact: High
 
@@ -53,7 +53,7 @@
 
 4 Combining and preparing for the model
 
-4.1 Mental model: keys and granularity before combining (SKU, batch/lot) — Impact: Critical
+4.1 Conceptual foundation: keys and granularity before combining (SKU, batch/lot) — Impact: Critical
 
 4.2 Example: join inventory and movements (Merge, Expand) — Impact: High
 
@@ -65,7 +65,7 @@
 
 5 Reuse, parameters, and basic M
 
-5.1 Mental model: reuse without duplicating logic (parameters, functions) — Impact: High
+5.1 Conceptual foundation: reuse without duplicating logic (parameters, functions) — Impact: High
 
 5.2 Example: country/plant parameter for multinationals (MX, DE) — Impact: High
 
@@ -77,7 +77,7 @@
 
 6 Performance, quality, and delivery
 
-6.1 Mental model: reliable refresh at scale (folding, governance) — Impact: Critical
+6.1 Conceptual foundation: reliable refresh at scale (folding, governance) — Impact: Critical
 
 6.2 Example: optimize daily logistics refresh (filter early, folding) — Impact: High
 

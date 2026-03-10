@@ -179,7 +179,7 @@ The CTO inspires confidence in their role, reinforcing trust in architectural de
 2.1 High Complexity in Transferred Code
 The code shared by the CTO often contains high abstraction density and implicit assumptions. This increases onboarding time, raises cognitive load, and creates reliance on the CTO for future modifications or debugging.
 2.2 Excessive Abstraction in Training Explanations
-Training explanations frequently begin at a high conceptual level, omitting intermediate layers necessary for accurate mental model construction. This can result in partial understanding that does not translate into execution.
+Training explanations frequently begin at a high conceptual level, omitting intermediate layers necessary for accurate conceptual foundation construction. This can result in partial understanding that does not translate into execution.
 2.3 Length and Cognitive Overload in Trainings
 Training sessions tend to be lengthy and information-dense. Extended exposure without segmentation or pauses leads to attention decay and lower retention across the team.
 2.4 Declining Training Frequency
@@ -193,7 +193,7 @@ Critical architectural context and reasoning remain implicit or embedded in code
 Trainings and explanations are optimized for technical accuracy rather than for pedagogical progression and retention.
 ## 4.⁠ ⁠High-Leverage Improvement Directions
 4.1 Code Transfer Discipline
-Each non-trivial module should include a brief mental model, a clear input–transformation–output description, and explicit notes on failure modes. This reduces dependency on the CTO.
+Each non-trivial module should include a brief conceptual foundation, a clear input–transformation–output description, and explicit notes on failure modes. This reduces dependency on the CTO.
 4.2 Layered Training Structure
 Trainings should follow a strict progression: concrete example first, pattern second, abstraction last. Starting at abstraction should be avoided.
 4.3 Attention-Bounded Training Design
@@ -250,7 +250,7 @@ People inside the company tend to see the CEO as:
 
 ## 6.⁠ ⁠Systems Thinking Beyond Technology
 
-The same mental model appears across domains:
+The same conceptual foundation appears across domains:
 •	BI systems
 •	company processes
 •	mentoring

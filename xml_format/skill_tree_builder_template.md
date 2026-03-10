@@ -20,54 +20,59 @@
 </command>
 
 <critical_commands>
-  Ordering is learning progression. Impact is a categorical level (Low, Moderate, High, Very High, Critical) — it does not affect ordering.
+  Order MUST follow a learning progression (what to learn first → later). Impact is a categorical level (Low, Moderate, High, Very High, Critical) — it does not affect ordering.
 </critical_commands>
 
-<non_negotiable>
-  - Order MUST follow a learning progression (what to learn first → later)
+<non_negotiable>  
   - Each concrete skill MUST include an Impact level (one of: Low, Moderate, High, Very High, Critical), but Impact MUST NOT affect ordering
-  - Two levels: Level 1 = Chapter titles (### headings), Level 2 = Subtitles (mental model, example, and skills as numbered lines)
-  - For chapters 2+: the first subtitle MUST be the chapter's mental model, the second MUST be a concrete example of that mental model, followed by the actionable skills
-  - Chapter 1 (Conceptual Overview) is the exception: it already IS the global mental model, so it has no nested mental model subtitle — it contains an example subtitle and descriptive subtitles directly
-  - Each chapter MUST contain at least two actionable skills (in addition to the mental model and example subtitles for chapters 2+)
+  - Two levels: Level 1 = Chapter titles (### headings), Level 2 = Subtitles (conceptual foundation, example, and skills as numbered lines)
+  - For chapters 2+: the first subtitle MUST be the chapter's conceptual foundation, the second MUST be a concrete example of that conceptual foundation, followed by the actionable skills
+  - Chapter 1 (Conceptual Overview) is the exception: it already IS the global conceptual foundation, so it has no nested conceptual foundation subtitle — it contains an example subtitle and descriptive subtitles directly
+  - Each chapter MUST contain at least two actionable skills (in addition to the conceptual foundation and example subtitles for chapters 2+)
   - Never use acronyms — always spell out the full words (e.g., "Artificial Intelligence" not "AI")
-  - Chapter titles must be didactic and descriptive, like a textbook table of contents — they should teach the reader what the chapter covers (e.g., "Loading and Validating Data from External Sources" not "Data Ingestion")
+  - Maintain terminology consistency across the entire tree: once a governing term is chosen from the skill name, reuse that same term throughout the tree instead of alternating with near-synonyms unless a genuinely different concept is intended
+  - Chose one term to represent and concept and reuse such term every time you want to refer to that concept
+  - Do not force a fixed subtitle count; include only the number of subtitles needed to fully explain the chapter for the requested level
+  - If a chapter title or subtitle mentions multiple concepts, each concept MUST be made explicit through separate subtitles rather than being bundled implicitly
+  - The final chapter MUST be a grouped chapter titled "Advanced and Related Topics for {inputs.skill}"
   - Skill titles must be short, beginner-friendly, easily understandable and action-oriented
   - Each skill must include representative 'how to do it' examples in parentheses (examples only, not extra skills)
-  - Keep skill count within a practical range for the requested level (e.g., 18–35), unless the context clearly demands fewer
-  - FIRST CHAPTER MUST be "Conceptual Overview" with learning order 1, containing foundational understanding before practical skills
+  - Keep skill count within a practical range for the requested level (e.g., 15–35), unless the context clearly demands fewer
+  - FIRST CHAPTER MUST be "Conceptual Foundations of {inputs.skill}" with learning order 1, containing foundational understanding before practical skills
 </non_negotiable>
 
 <chapter_structure>
   <purpose>
-    Every chapter frames its skills with a mental model (the key idea) and a concrete example before listing actionable skills. This helps learners understand WHY before HOW.
+    Every chapter frames its content with a conceptual foundation and a concrete example before listing actionable or explanatory subtitles. This helps learners understand the governing concept before the practical breakdown.
   </purpose>
 
   <chapters_2_and_beyond>
-    Each chapter (2, 3, 4, ...) MUST follow this internal order:
-    1. Mental model subtitle — a short sentence describing the key idea or principle of this chapter (e.g., "How data flows from source to storage")
-    2. Example subtitle — a concrete, relatable scenario that illustrates the mental model (e.g., "Example: Loading a CSV file into a database table")
-    3. Actionable skills — the specific skills the learner must acquire, each with Impact level and examples in parentheses
+    Each chapter (1, 2, 3, 4, ...) MUST follow this internal order:
+    1. Conceptual foundation subtitle — a short sentence describing the key idea or principle of the chapter
+    2. Example subtitle — a concrete, relatable scenario that illustrates the conceptual foundation
+    3. Remaining subtitles — explicit explanatory subtitles or actionable skills, depending on the chapter purpose
 
-    The mental model and example subtitles also receive an Impact level like any other subtitle.
+    The conceptual foundation and example subtitles also receive an Impact level like any other subtitle.
+
+    If any remaining subtitle mentions multiple ideas, split them into separate subtitles so each idea is explicit.
   </chapters_2_and_beyond>
 
   <chapter_1_exception>
-    Chapter 1 (Conceptual Overview) already serves as the mental model for the entire skill.
-    It does NOT need a nested mental model subtitle.
+    Chapter 1 (Conceptual Overview) already serves as the conceptual foundation for the entire skill.
+    It does NOT need a nested conceptual foundation subtitle.
     It DOES include an example subtitle and the descriptive subtitles defined in conceptual_overview_requirements.
   </chapter_1_exception>
 </chapter_structure>
 
 <conceptual_overview_requirements>
   <purpose>
-    Chapter 1 is the conceptual overview — it IS the mental model for the entire skill.
-    Unlike chapters 2+, it does NOT have a nested mental model subtitle.
-    It DOES include an example subtitle and descriptive subtitles that explain the global mental model.
+    Chapter 1 is the conceptual overview — it IS the conceptual foundation for the entire skill.
+    Unlike chapters 2+, it does NOT have a nested conceptual foundation subtitle.
+    It DOES include an example subtitle and descriptive subtitles that explain the global conceptual foundation.
   </purpose>
 
   <chapter_title_output>
-    Conceptual Overview
+    Conceptual Foundations of {inputs.skill}
   </chapter_title_output>
 
   <learning_order>
@@ -78,7 +83,7 @@
     <beginner_entry>
       Include 2-3 foundational understanding subtitles in this chapter:
       - What is {skill} and why it matters (core definition, practical value in context, key use cases)
-      - Basic mental model (simplified workflow, key analogies, fundamental concepts)
+      - Basic conceptual foundation (simplified workflow, key analogies, fundamental concepts)
       - Essential terminology (3-5 key terms with simple definitions)
 
       Each subtitle gets its own Impact level.
@@ -87,7 +92,7 @@
     <intermediate>
       Include 3-4 foundational understanding subtitles in this chapter:
       - What is {skill} and strategic value (definition with distinctions, strategic value, common use cases)
-      - Mental model and workflow (conceptual framework, workflow diagram, key principles)
+      - Conceptual foundation and workflow (conceptual framework, workflow diagram, key principles)
       - Key terminology and concepts (5-8 terms including advanced concepts)
       - Common conceptual mistakes (2-3 misconceptions that learners often have)
 
@@ -97,7 +102,7 @@
     <expert_advanced>
       Include 4-5 foundational understanding subtitles in this chapter:
       - What is {skill}, scope and boundaries (definition, scope, boundaries, tradeoffs)
-      - Advanced mental model (system-level view, architectural principles, design patterns)
+      - Advanced conceptual foundation (system-level view, architectural principles, design patterns)
       - Expert terminology and concepts (8-12 terms including expert-level concepts)
       - Subtle errors and pitfalls (3-4 common misconceptions and subtle pitfalls)
       - Connections to adjacent domains (how this skill relates to and integrates with adjacent areas)
@@ -108,10 +113,20 @@
 
   <examples_in_parentheses>
     Conceptual subtitles should also include examples in parentheses showing how to apply understanding:
-    - Example: "Basic mental model (data flow diagrams, component interaction maps, simplified architecture)"
+    - Example: "Basic conceptual foundation (data flow diagrams, component interaction maps, simplified architecture)"
     - Example: "Essential terminology (define: pipeline, transformation, orchestration)"
   </examples_in_parentheses>
 </conceptual_overview_requirements>
+
+<final_chapter_requirements>
+  <purpose>
+    The skill tree must end with a grouped final chapter that shows what comes after the core learning path and what adjacent areas connect to the skill.
+  </purpose>
+
+  <title>
+    Advanced and Related Topics for {inputs.skill}
+  </title>
+</final_chapter_requirements>
 
 <baseline_sustainability>
   This is what "junior/entry-level production readiness" means — the minimum bar where a worker can deliver real, usable output:
@@ -162,14 +177,4 @@
 
     List markers: Numbers like 1. or 1.1 or 1.1.1
   </formatting>
-
-  <requirements>
-    - Two levels: Level 1 = Chapters as ### headings with number, Level 2 = Subtitles as plain text lines with decimal number
-    - For chapters 2+: first subtitle = mental model, second subtitle = example, remaining subtitles = actionable skills
-    - Chapter 1 (Conceptual Overview): no mental model subtitle (the chapter itself is the mental model); includes example subtitle + descriptive subtitles
-    - Ordered by learning progression
-    - Impact level (Low, Moderate, High, Very High, Critical) shown per subtitle
-    - No table, no justifications, no "Why this matters" — just the tree
-  </requirements>
-
 </output_format>
