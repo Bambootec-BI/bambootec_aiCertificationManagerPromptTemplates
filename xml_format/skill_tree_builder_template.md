@@ -47,7 +47,7 @@
   </purpose>
 
   <chapters_2_and_beyond>
-    Each chapter (1, 2, 3, 4, ...) MUST follow this internal order:
+    Each chapter (2, 3, 4, ...) MUST follow this internal order:
     1. Conceptual foundation subtitle — a short sentence describing the key idea or principle of the chapter
     2. Example subtitle — a concrete, relatable scenario that illustrates the conceptual foundation
     3. Remaining subtitles — explicit explanatory subtitles or actionable skills, depending on the chapter purpose
@@ -90,7 +90,7 @@
     </beginner_entry>
 
     <intermediate>
-      Include 3-4 foundational understanding subtitles in this chapter:
+      Include at least 4 foundational understanding subtitles in this chapter:
       - What is {skill} and strategic value (definition with distinctions, strategic value, common use cases)
       - Conceptual foundation and workflow (conceptual framework, workflow diagram, key principles)
       - Key terminology and concepts (5-8 terms including advanced concepts)
